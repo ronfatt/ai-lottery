@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Menu, X, ArrowUpRight } from 'lucide-react';
+import { ChevronRight, Menu, X, ArrowUpRight, Sparkles, LogIn } from 'lucide-react';
+import { useDemo } from '../context/DemoContext';
 
 interface NavbarProps {
   onOpenDeckModal: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
+  const { navigate } = useDemo();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('concept');
@@ -80,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
                   </span>
                   <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-lime-400/10 text-lime-400 border border-lime-400/20">
                     <span className="w-1.5 h-1.5 rounded-full bg-lime-400 inline-block mr-1 animate-pulse" />
-                    主网模拟环境
+                    主网环境
                   </span>
                 </div>
                 <span className="text-[10px] font-mono text-metal-300 tracking-widest hidden md:block">
@@ -120,29 +122,31 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
             <div className="hidden md:flex items-center gap-3">
               <button
                 onClick={onOpenDeckModal}
-                className="px-3.5 py-2 rounded-lg text-xs font-mono text-metal-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-1.5"
+                className="px-3 py-2 rounded-lg text-xs font-mono text-metal-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-1.5"
               >
                 <span>投资人商业计划书</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-metal-300" />
               </button>
 
-              <a
-                href="#live-demo"
-                className="relative group px-4 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider bg-lime-400 hover:bg-lime-300 text-black transition-all shadow-[0_0_20px_rgba(0,255,102,0.35)] hover:shadow-[0_0_30px_rgba(0,255,102,0.6)] flex items-center gap-1.5"
+              {/* ENTER DEMO Button */}
+              <button
+                onClick={() => navigate('/login')}
+                className="relative group px-4 py-2 rounded-xl text-xs font-mono font-black uppercase tracking-wider bg-lime-400 hover:bg-lime-300 text-black transition-all shadow-[0_0_25px_rgba(0,255,102,0.45)] hover:shadow-[0_0_35px_rgba(0,255,102,0.7)] flex items-center gap-1.5"
               >
-                <span>体验交互演示</span>
+                <Sparkles className="w-3.5 h-3.5 text-black" />
+                <span>进入演示平台 (ENTER DEMO)</span>
                 <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-              </a>
+              </button>
             </div>
 
             {/* Mobile Menu Toggle */}
             <div className="flex md:hidden items-center gap-2">
-              <a
-                href="#live-demo"
-                className="px-3 py-1.5 rounded-md text-xs font-mono font-bold bg-lime-400 text-black"
+              <button
+                onClick={() => navigate('/login')}
+                className="px-3 py-1.5 rounded-lg text-xs font-mono font-black bg-lime-400 text-black shadow-glow-lime"
               >
-                试玩演示
-              </a>
+                进入 DEMO
+              </button>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 rounded-lg bg-surface-100 border border-white/10 text-metal-200 hover:text-white"
@@ -188,13 +192,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
                   <span>索取投资人商业计划书</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
-                <a
-                  href="#live-demo"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-3 rounded-lg text-xs font-mono font-bold bg-lime-400 text-black text-center"
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    navigate('/login');
+                  }}
+                  className="w-full py-3 rounded-lg text-xs font-mono font-black bg-lime-400 text-black text-center shadow-glow-lime flex items-center justify-center gap-2"
                 >
-                  进入核心玩法测试
-                </a>
+                  <Sparkles className="w-4 h-4" />
+                  <span>进入完整会员演示控制台</span>
+                </button>
               </div>
             </div>
           </motion.div>

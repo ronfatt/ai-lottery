@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { DemoProvider, useDemo } from './context/DemoContext';
+import { DemoLogin } from './components/auth/DemoLogin';
+import { AppLayout } from './components/app/AppLayout';
+
+// Landing Page Components
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ProblemOpportunity } from './components/ProblemOpportunity';
@@ -21,9 +26,21 @@ import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { InvestorDeckModal } from './components/InvestorDeckModal';
 
-export const App: React.FC = () => {
+const AppContent: React.FC = () => {
+  const { currentPath } = useDemo();
   const [isDeckModalOpen, setIsDeckModalOpen] = useState(false);
 
+  // If on login route
+  if (currentPath === '/login') {
+    return <DemoLogin />;
+  }
+
+  // If on app platform route
+  if (currentPath.startsWith('/app')) {
+    return <AppLayout />;
+  }
+
+  // Otherwise render Public Landing Page
   return (
     <div className="min-h-screen bg-[#06080B] text-[#E6EDF3] relative selection:bg-[#00FF66] selection:text-[#06080B]">
       {/* Global subtle scanline overlay */}
@@ -98,6 +115,14 @@ export const App: React.FC = () => {
         onClose={() => setIsDeckModalOpen(false)}
       />
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <DemoProvider>
+      <AppContent />
+    </DemoProvider>
   );
 };
 
