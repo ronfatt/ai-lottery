@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Flag, Trophy, Sparkles, CheckCircle2, ArrowRight, Zap } from 'lucide-react';
+import { Flag, CheckCircle2 } from 'lucide-react';
 
 export const SponsoredCampaign: React.FC = () => {
-  const [selectedDriver, setSelectedDriver] = useState<string>('VERSTAPPEN');
+  const [selectedDriver, setSelectedDriver] = useState<string>('维斯塔潘 (VERSTAPPEN)');
 
   const drivers = [
-    { name: 'VERSTAPPEN', team: 'Red Bull Racing', oddsConfidence: '48%', color: '#00E5FF' },
-    { name: 'NORRIS', team: 'McLaren F1', oddsConfidence: '32%', color: '#F59E0B' },
-    { name: 'LECLERC', team: 'Scuderia Ferrari', oddsConfidence: '14%', color: '#F43F5E' },
-    { name: 'RUSSELL', team: 'Mercedes-AMG', oddsConfidence: '6%', color: '#00FF66' },
+    { name: '维斯塔潘 (VERSTAPPEN)', team: '红牛车队 (Red Bull Racing)', oddsConfidence: '48% 支持率', color: '#00E5FF' },
+    { name: '诺里斯 (NORRIS)', team: '迈凯伦车队 (McLaren F1)', oddsConfidence: '32% 支持率', color: '#F59E0B' },
+    { name: '勒克莱尔 (LECLERC)', team: '法拉利车队 (Scuderia Ferrari)', oddsConfidence: '14% 支持率', color: '#F43F5E' },
+    { name: '拉塞尔 (RUSSELL)', team: '梅赛德斯车队 (Mercedes-AMG)', oddsConfidence: '6% 支持率', color: '#00FF66' },
   ];
 
   return (
@@ -23,18 +22,18 @@ export const SponsoredCampaign: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-white/10 text-xs font-mono text-cyber-amber">
             <Flag className="w-3.5 h-3.5" />
-            <span>ENTERPRISE BRAND ENGINE</span>
+            <span>企业级品牌营销引擎</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase leading-tight">
-            PREDICTION AS A <br />
+            预测即营销产品 <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyber-amber via-lime-400 to-cyber-blue">
-              MARKETING PRODUCT.
+              (PREDICTION AS A MARKETING PRODUCT)
             </span>
           </h2>
 
           <p className="text-metal-200 text-sm sm:text-base">
-            Brands fund rewards. Players bring viral engagement. ORACLE 49 provides the verifiable prediction infrastructure.
+            品牌赞助方出资设立真实奖品与资金奖池，玩家带来极高频的用户活跃与社交裂变，ORACLE 49 则提供底层可验证的预测基础设施。
           </p>
         </div>
 
@@ -49,16 +48,16 @@ export const SponsoredCampaign: React.FC = () => {
               </div>
               <div>
                 <span className="text-[10px] font-mono text-cyber-amber font-bold uppercase tracking-widest block">
-                  BRAND PARTNER ACTIVATION
+                  品牌官方赞助联合企划
                 </span>
                 <h3 className="font-display font-black text-xl sm:text-2xl text-white">
-                  F1 MONZA GRAND PRIX PREDICTION WEEK
+                  F1 意大利蒙扎大奖赛 · 官方预测周
                 </h3>
               </div>
             </div>
 
             <div className="px-3 py-1.5 rounded-xl bg-cyber-amber/15 border border-cyber-amber/40 text-cyber-amber font-mono text-xs font-bold">
-              SPONSORED PRIZE POOL: $25,000 USD + VIP PASSES
+              赞助总奖池：$25,000 美金 + VIP 围场观赛通行证
             </div>
           </div>
 
@@ -66,10 +65,10 @@ export const SponsoredCampaign: React.FC = () => {
           <div className="my-8 space-y-4">
             <div className="text-center space-y-1">
               <span className="text-xs font-mono text-metal-400 uppercase tracking-widest">
-                OFFICIAL RACE QUESTION
+                本期官方竞猜题目
               </span>
               <h4 className="font-display font-black text-2xl sm:text-3xl text-white">
-                WHO TAKES POLE POSITION IN QUALIFYING?
+                谁将在周六排位赛中夺得杆位 (POLE POSITION)？
               </h4>
             </div>
 
@@ -89,12 +88,12 @@ export const SponsoredCampaign: React.FC = () => {
                     }`}
                   >
                     <div className="flex justify-between items-start mb-4">
-                      <span className="text-[10px] font-mono text-metal-400 uppercase">
+                      <span className="text-[10px] font-mono text-metal-400">
                         {driver.team}
                       </span>
                       {isSelected && (
                         <span className="px-2 py-0.5 rounded text-[9px] font-mono bg-lime-400 text-black font-black">
-                          MY PICK
+                          我的选择
                         </span>
                       )}
                     </div>
@@ -104,7 +103,7 @@ export const SponsoredCampaign: React.FC = () => {
                     </div>
 
                     <div className="pt-2 border-t border-white/10 flex justify-between text-xs font-mono">
-                      <span className="text-metal-400">Crowd Pick:</span>
+                      <span className="text-metal-400">大众支持度：</span>
                       <span className="font-bold text-lime-400">{driver.oddsConfidence}</span>
                     </div>
                   </button>
@@ -117,11 +116,11 @@ export const SponsoredCampaign: React.FC = () => {
           <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
             <div className="flex items-center gap-2 text-metal-300">
               <CheckCircle2 className="w-4 h-4 text-lime-400" />
-              <span>Verified On-Chain Timestamp closes 10 min prior to Q1</span>
+              <span>所有预测将于 Q1 排位赛开始前 10 分钟自动在区块链时间戳截止封存</span>
             </div>
 
             <div className="text-lime-400 font-bold">
-              34,819 Race Fans Locked In
+              当前已有 34,819 位赛车迷完成上链锁定
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, Cpu, ChevronRight, Menu, X, ArrowUpRight, Activity } from 'lucide-react';
+import { ChevronRight, Menu, X, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onOpenDeckModal: () => void;
@@ -44,13 +44,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
   }, []);
 
   const navItems = [
-    { label: 'Concept', href: '#concept', id: 'concept' },
-    { label: 'How It Works', href: '#how-it-works', id: 'how-it-works' },
-    { label: 'Game Modes', href: '#game-modes', id: 'game-modes' },
-    { label: 'Prediction IQ', href: '#prediction-iq', id: 'prediction-iq' },
-    { label: 'Technology', href: '#technology', id: 'technology' },
-    { label: 'Business Model', href: '#business-model', id: 'business-model' },
-    { label: 'Roadmap', href: '#roadmap', id: 'roadmap' },
+    { label: '核心概念', href: '#concept', id: 'concept' },
+    { label: '运行机制', href: '#how-it-works', id: 'how-it-works' },
+    { label: '游戏玩法', href: '#game-modes', id: 'game-modes' },
+    { label: '预测智商', href: '#prediction-iq', id: 'prediction-iq' },
+    { label: '链上技术', href: '#technology', id: 'technology' },
+    { label: '商业模型', href: '#business-model', id: 'business-model' },
+    { label: '发展路线', href: '#roadmap', id: 'roadmap' },
   ];
 
   return (
@@ -80,11 +80,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
                   </span>
                   <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-lime-400/10 text-lime-400 border border-lime-400/20">
                     <span className="w-1.5 h-1.5 rounded-full bg-lime-400 inline-block mr-1 animate-pulse" />
-                    MAINNET SIM
+                    主网模拟环境
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-metal-300 uppercase tracking-widest hidden md:block">
-                  Verifiable Prediction Network
+                <span className="text-[10px] font-mono text-metal-300 tracking-widest hidden md:block">
+                  全球可验证数字预测竞技平台
                 </span>
               </div>
             </a>
@@ -122,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
                 onClick={onOpenDeckModal}
                 className="px-3.5 py-2 rounded-lg text-xs font-mono text-metal-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-1.5"
               >
-                <span>Investor Deck</span>
+                <span>投资人商业计划书</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-metal-300" />
               </button>
 
@@ -130,7 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
                 href="#live-demo"
                 className="relative group px-4 py-2 rounded-lg text-xs font-mono font-bold uppercase tracking-wider bg-lime-400 hover:bg-lime-300 text-black transition-all shadow-[0_0_20px_rgba(0,255,102,0.35)] hover:shadow-[0_0_30px_rgba(0,255,102,0.6)] flex items-center gap-1.5"
               >
-                <span>View Live Concept</span>
+                <span>体验交互演示</span>
                 <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
@@ -139,14 +139,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
             <div className="flex md:hidden items-center gap-2">
               <a
                 href="#live-demo"
-                className="px-3 py-1.5 rounded-md text-xs font-mono font-bold bg-lime-400 text-black uppercase"
+                className="px-3 py-1.5 rounded-md text-xs font-mono font-bold bg-lime-400 text-black"
               >
-                Play Demo
+                试玩演示
               </a>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-2 rounded-lg bg-surface-100 border border-white/10 text-metal-200 hover:text-white"
-                aria-label="Toggle menu"
+                aria-label="切换菜单"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -185,15 +185,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenDeckModal }) => {
                   }}
                   className="w-full py-3 rounded-lg text-xs font-mono font-bold bg-white/10 text-white border border-white/15 text-center flex items-center justify-center gap-2"
                 >
-                  <span>Investor Presentation Deck</span>
+                  <span>索取投资人商业计划书</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </button>
                 <a
                   href="#live-demo"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-3 rounded-lg text-xs font-mono font-bold uppercase bg-lime-400 text-black text-center"
+                  className="w-full py-3 rounded-lg text-xs font-mono font-bold bg-lime-400 text-black text-center"
                 >
-                  Test Interactive Engine
+                  进入核心玩法测试
                 </a>
               </div>
             </div>

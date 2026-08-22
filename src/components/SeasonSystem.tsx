@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Flame, Crown, Gift, Sparkles, ChevronRight, Zap, Award } from 'lucide-react';
+import { Crown } from 'lucide-react';
 
 export const SeasonSystem: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'leaderboard' | 'pass'>('leaderboard');
-
   const leaders = [
     { rank: '01', name: 'NOVA77', score: '28,420', iq: '842', badge: '👑', isTop: true },
-    { rank: '02', name: 'RON', score: '26,870', iq: '782', badge: '⚡', isUser: true },
-    { rank: '03', name: 'ORBIT', score: '25,940', iq: '768', badge: '🔥' },
-    { rank: '04', name: 'DAVID', score: '24,680', iq: '741', badge: '🎯' },
-    { rank: '05', name: 'VALKYRIE', score: '23,190', iq: '735', badge: '🛡️' },
-    { rank: '06', name: 'CYBER_K', score: '22,400', iq: '719', badge: '💫' },
+    { rank: '02', name: 'RON (我)', score: '26,870', iq: '782', badge: '⚡', isUser: true },
+    { rank: '03', name: 'ORBIT (极轨)', score: '25,940', iq: '768', badge: '🔥' },
+    { rank: '04', name: 'DAVID (大卫)', score: '24,680', iq: '741', badge: '🎯' },
+    { rank: '05', name: 'VALKYRIE (女武神)', score: '23,190', iq: '735', badge: '🛡️' },
+    { rank: '06', name: 'CYBER_K (赛博K)', score: '22,400', iq: '719', badge: '💫' },
   ];
 
   return (
@@ -25,16 +23,15 @@ export const SeasonSystem: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-white/10 text-xs font-mono text-lime-400">
             <Crown className="w-3.5 h-3.5" />
-            <span>SEASONAL TOURNAMENT & BATTLE PASS</span>
+            <span>季度锦标赛与战斗通行证</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase">
-            EVERY PREDICTION COUNTS.
+            每一次预测都至关重要。
           </h2>
 
           <p className="text-metal-200 text-sm sm:text-base">
-            Compete across quarterly 90-day competitive seasons. 
-            Level up your Battle Pass, unlock rare cryptographic badges, and claim sponsored prize pools.
+            参与为期 90 天的季度天梯赛季。升级战斗通行证，解锁稀有链上灵魂绑定勋章，瓜分品牌企业赞助的实物与现金奖池。
           </p>
         </div>
 
@@ -47,14 +44,14 @@ export const SeasonSystem: React.FC = () => {
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-[10px] font-mono text-lime-400 uppercase tracking-widest font-bold">
-                  ACTIVE TOURNAMENT
+                  当前进行中锦标赛
                 </span>
-                <h3 className="font-display font-black text-2xl text-white">SEASON 08: APEX</h3>
+                <h3 className="font-display font-black text-2xl text-white">第 08 赛季：巅峰对决 (APEX)</h3>
               </div>
 
               <div className="text-right">
-                <span className="text-[10px] font-mono text-metal-400 block uppercase">Season Clock</span>
-                <span className="text-xs font-mono font-bold text-lime-400">23 Days Remaining</span>
+                <span className="text-[10px] font-mono text-metal-400 block uppercase">赛季结算倒计时</span>
+                <span className="text-xs font-mono font-bold text-lime-400">剩余 23 天 14 小时</span>
               </div>
             </div>
 
@@ -66,13 +63,13 @@ export const SeasonSystem: React.FC = () => {
                     27
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-metal-400 uppercase block">Current Tier</span>
-                    <span className="font-display font-bold text-lg text-white">LEVEL 27 PASS</span>
+                    <span className="text-[10px] font-mono text-metal-400 uppercase block">当前等级</span>
+                    <span className="font-display font-bold text-lg text-white">通行证 第 27 级</span>
                   </div>
                 </div>
 
                 <div className="text-right font-mono">
-                  <span className="text-[10px] text-metal-400 block">Season XP</span>
+                  <span className="text-[10px] text-metal-400 block">赛季累计经验值</span>
                   <span className="text-xs font-bold text-white">12,480 / 15,000 XP</span>
                 </div>
               </div>
@@ -89,8 +86,8 @@ export const SeasonSystem: React.FC = () => {
                   />
                 </div>
                 <div className="flex justify-between text-[10px] font-mono text-metal-400">
-                  <span>83.2% Complete</span>
-                  <span>2,520 XP to Next Tier</span>
+                  <span>已完成 83.2% 进度</span>
+                  <span>距解锁下一阶还需 2,520 XP</span>
                 </div>
               </div>
             </div>
@@ -103,15 +100,15 @@ export const SeasonSystem: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-[10px] font-mono text-cyber-violet uppercase font-bold block">
-                    NEXT LEVEL 28 REWARD
+                    第 28 级解锁专属奖励
                   </span>
                   <span className="font-mono font-bold text-sm text-white">
-                    ORACLE MASTER BADGE + 500 CREDITS
+                    神谕大师徽章 (SBT) + 500 游戏积分
                   </span>
                 </div>
               </div>
               <span className="px-2.5 py-1 rounded-lg text-xs font-mono bg-cyber-violet text-white font-bold">
-                Level 28
+                28 级解锁
               </span>
             </div>
 
@@ -123,12 +120,12 @@ export const SeasonSystem: React.FC = () => {
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-[10px] font-mono text-metal-400 uppercase tracking-widest">
-                  GLOBAL RANKING
+                  全球实时排名
                 </span>
-                <h3 className="font-display font-black text-2xl text-white">SEASON LEADERBOARD</h3>
+                <h3 className="font-display font-black text-2xl text-white">赛季天梯排行榜</h3>
               </div>
               <span className="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-surface-200 text-lime-400 border border-lime-400/30">
-                LIVE ON-CHAIN
+                链上实时同步
               </span>
             </div>
 
@@ -156,7 +153,7 @@ export const SeasonSystem: React.FC = () => {
                       <span className="font-bold text-white">{leader.name}</span>
                       {leader.isUser && (
                         <span className="px-1.5 py-0.2 rounded text-[8px] font-bold bg-lime-400 text-black">
-                          YOU
+                          你
                         </span>
                       )}
                     </div>
@@ -164,7 +161,7 @@ export const SeasonSystem: React.FC = () => {
 
                   <div className="flex items-center gap-4">
                     <span className="text-[10px] text-metal-400 hidden sm:inline">
-                      IQ: <strong className="text-metal-200">{leader.iq}</strong>
+                      智商: <strong className="text-metal-200">{leader.iq}</strong>
                     </span>
                     <span className="font-bold text-lime-400 text-sm">{leader.score} XP</span>
                   </div>
@@ -174,7 +171,7 @@ export const SeasonSystem: React.FC = () => {
 
             <div className="pt-2 text-center">
               <span className="text-[11px] font-mono text-metal-400">
-                Top 100 Players Qualify for Sponsored Championship Tournament
+                赛季前 100 强选手直接晋级年度品牌企业赞助大师赛
               </span>
             </div>
 

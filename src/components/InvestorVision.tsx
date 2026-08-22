@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, ShieldCheck, Activity } from 'lucide-react';
 
 export const InvestorVision: React.FC = () => {
   const [visionStage, setVisionStage] = useState<'matrix' | 'focal49' | 'expanding'>('matrix');
@@ -47,7 +46,7 @@ export const InvestorVision: React.FC = () => {
               49
             </span>
             <span className="text-[9px] font-mono text-metal-300 uppercase tracking-widest mt-1">
-              ORACLE CORE
+              神谕底层核心
             </span>
           </motion.div>
 
@@ -62,22 +61,22 @@ export const InvestorVision: React.FC = () => {
           >
             {/* Top: SPORT */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-surface-200 border border-cyber-blue/60 text-cyber-blue font-mono font-bold text-xs shadow-glow-blue">
-              SPORT ORACLE
+              体育神谕 (SPORT)
             </div>
 
             {/* Right: MARKET */}
             <div className="absolute top-1/2 -right-12 -translate-y-1/2 px-3 py-1 rounded-full bg-surface-200 border border-cyber-violet/60 text-cyber-violet font-mono font-bold text-xs shadow-glow-violet">
-              MARKET ORACLE
+              金融神谕 (MARKET)
             </div>
 
             {/* Bottom: WORLD */}
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-surface-200 border border-cyber-amber/60 text-cyber-amber font-mono font-bold text-xs">
-              WORLD ORACLE
+              世界大事件 (WORLD)
             </div>
 
             {/* Left: CULTURE */}
             <div className="absolute top-1/2 -left-12 -translate-y-1/2 px-3 py-1 rounded-full bg-surface-200 border border-lime-400/60 text-lime-400 font-mono font-bold text-xs">
-              CULTURE ORACLE
+              文娱神谕 (CULTURE)
             </div>
           </motion.div>
 
@@ -92,8 +91,8 @@ export const InvestorVision: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="font-display font-black text-3xl sm:text-5xl md:text-6xl text-metal-400 uppercase tracking-tight"
           >
-            WE ARE NOT BUILDING <br />
-            <span className="text-white">A NUMBER GAME.</span>
+            我们所构建的， <br />
+            <span className="text-white">绝非一款单纯的数字游戏。</span>
           </motion.h2>
 
           <motion.div
@@ -103,10 +102,10 @@ export const InvestorVision: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="pt-2"
           >
-            <h3 className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-cyber-blue to-white text-glow-lime uppercase tracking-tighter leading-none">
-              WE ARE BUILDING <br />
-              THE INFRASTRUCTURE <br />
-              FOR PREDICTION.
+            <h3 className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-cyber-blue to-white text-glow-lime uppercase tracking-tighter leading-tight">
+              我们正在构建—— <br />
+              面向未来的全球预测网络 <br />
+              核心基础设施。
             </h3>
           </motion.div>
 
@@ -115,15 +114,15 @@ export const InvestorVision: React.FC = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="pt-6 flex justify-center items-center gap-4 text-xs sm:text-sm font-mono text-lime-400 tracking-widest uppercase font-bold"
+            className="pt-6 flex flex-wrap justify-center items-center gap-3 sm:gap-4 text-xs sm:text-sm font-mono text-lime-400 tracking-widest uppercase font-bold"
           >
-            <span>PREDICT</span>
+            <span>预测 (PREDICT)</span>
             <span className="text-metal-400">•</span>
-            <span>PROVE</span>
+            <span>存证 (PROVE)</span>
             <span className="text-metal-400">•</span>
-            <span>RANK</span>
+            <span>排名 (RANK)</span>
             <span className="text-metal-400">•</span>
-            <span>COMPETE</span>
+            <span>竞技 (COMPETE)</span>
           </motion.div>
         </div>
 

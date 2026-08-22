@@ -1,90 +1,77 @@
 # ORACLE 49
 
-### The Verifiable Number Prediction Network
-> **"Predict the Numbers. Prove Your Instinct."**  
-> *全球可验证数字预测竞技平台*
+### 全球可验证数字预测竞技平台 (The Verifiable Number Prediction Network)
+> **“预测数字 · 证明你的直觉与推演”**  
+> *Predict the Numbers. Prove Your Instinct.*
 
 ---
 
-## 💎 Project Overview
-**ORACLE 49** is a desktop-first (16:9) & mobile-optimized Web3 investor landing page and interactive prediction testbed. 
+## 💎 项目核心定位
+**ORACLE 49** 是一座 16:9 Desktop-First 且全面适配 Mobile 的高端投资人展示 Landing Page 与交互式预测测试网络。
 
-It is designed around a core paradigm:
-> **Real-World Public Results + Prediction Game + Blockchain Proof + Reputation Ranking + Social Competition**
+项目的核心底层逻辑是：
+> **真实世界公开开奖数据 + 预测竞技游戏 + 区块链密码学存证 + Prediction IQ 智商声誉 + 社交对决**
 
-It decouples prediction entertainment from predatory gambling by removing the house edge, betting odds, and deposit-loss loops — replacing them with on-chain cryptographic commitment hashes, verifiable Oracle settlement, a **Prediction IQ** reputation index, 1v1 social battle challenges, quarterly season passes, and enterprise brand sponsorship campaigns.
-
----
-
-## 🎨 Visual Identity & Aesthetics
-* **Palette**: Carbon Black (`#06080B`), Metallic Silver (`#E6EDF3`), Acid Green / Electric Lime (`#00FF66`), Cyber Blue (`#00E5FF`), Electric Violet (`#A855F7`), Amber (`#F59E0B`).
-* **Design Language**: 2026 Premium Web3 × Motorsport UI × Fintech Dashboard × Gaming Interface.
-* **Key Components**: Glassmorphism, HUD telemetry lines, interactive 7×7 number matrix, real-time cryptographic hash simulator, crowd intelligence heatmap, 1v1 battle arena, and live blockchain proof explorer.
+彻底将预测娱乐从传统掠夺性博彩中解耦——剔除庄家优势、黑箱赔率与出金亏损循环，替换为链上 SHA-256 承诺哈希、去中心化预言机核验、**Prediction IQ** 声誉积分、1v1 社交挑战、季度通行证天梯锦标赛以及企业品牌营销赞助引擎。
 
 ---
 
-## 🕹️ Interactive Features
-1. **Interactive 01–49 Number Matrix**: Parallax magnetic reaction, laser scanline number locking, SHA-256 seal animation.
-2. **Number Hunt Live Game Demo**: Select 5 numbers, trigger cryptographic hashing, seal on-chain, and simulate public draw #260822 with XP & IQ reward feedback.
-3. **7 Interactive Game Modes**:
-   - `01 Number Hunt` (Call the Five)
-   - `02 Hot Number` (One Number. One Call. High Conviction)
-   - `03 Number Zone` (Territory & Distribution Bars)
-   - `04 Odd / Even` (Parity Split)
-   - `05 High / Low` (Territory Duel)
-   - `06 Total Sum` (Aggregation Bracket)
-   - `07 Pattern Prediction` (Structural Behavioral IQ)
-4. **Crowd Intelligence Heatmap**: 49-number consensus sentiment and post-draw resolution.
-5. **Prediction IQ Reputation Profile**: Score 782 (Top 4.8%), streak multipliers, and 5 soulbound reputation badges.
-6. **1v1 Social Battle Arena**: R.ON vs DAVID with 1-click WhatsApp, Telegram & X invite links.
-7. **Season 08 Battle Pass & Global Leaderboard**: Level 27 progression, quarterly prize pools.
-8. **Blockchain Verification Explorer**: Merkle proof tree and decentralized oracle consensus inspection.
-9. **Sustainable Business Model**: Free, Pro (RM19.90/mo), and Enterprise Brand Sponsorships.
-10. **Sponsored F1 Motorsport Campaign**: Monza Grand Prix pole prediction activation.
-11. **Oracle Universe TAM Expansion**: 49 Numbers → Sports → Markets → Culture → World Events.
-12. **Growth Flywheel & Strategic Roadmap**: 4 phases from MVP to Universal Prediction Protocol.
+## 🎨 视觉设计风格
+* **色彩体系**：深石墨碳黑 (`#06080B`)、金属银白 (`#E6EDF3`)、电光酸性绿 (`#00FF66`)、赛博电光蓝 (`#00E5FF`)、电光紫 (`#A855F7`)、琥珀金 (`#F59E0B`)。
+* **设计语言**：2026 Web3 × 赛车运动 UI × Fintech 金融数据大屏 × 电竞竞技界面。
+* **核心组件**：玻璃拟态、HUD 遥测边框、交互式 7×7 悬浮数字矩阵、实时哈希生成器、群体热力图、1v1 对战房间、链上 Merkle 证明查看器。
 
 ---
 
-## 🚀 Getting Started
+## 🕹️ 核心交互功能
+1. **01–49 交互式数字矩阵**：支持鼠标磁性视差响应、激光扫描线锁定、SHA-256 链上盖戳封存。
+2. **数字猎手 (Number Hunt) 互动 Demo**：自选 5 个号码，触发密码学哈希计算与链上时间戳封存，模拟公开开奖并获得 XP 与 IQ 晋升反馈。
+3. **7 大核心预测玩法沙盒**：
+   - `01 数字猎手`（49 选 5 定向狙击）
+   - `02 焦点单码`（高信念单码压测与全网置信度）
+   - `03 数字领地`（五大区间分布柱状图）
+   - `04 奇偶天平`（单双均势形态推演）
+   - `05 高低半区`（高低极值割裂博弈）
+   - `06 总和区间`（六码总和计算与区间仪表盘）
+   - `07 规律预测`（连号、相同尾数等形态结构题卡）
+4. **群体智慧情绪热力图**：49 码置信度分布与开奖后共识验证。
+5. **Prediction IQ 个人声誉档案**：评级 782（前 4.8%）、连胜倍率、5 枚灵魂绑定成就勋章。
+6. **1v1 社交对战竞技场**：R.ON 对决 DAVID，支持一键生成微信/Telegram/X 挑战邀请。
+7. **第 08 赛季通行证与排行榜**：27 级通行证进度条、全球天梯名次实时展示。
+8. **区块链密码学验证浏览器**：公开透明查验区块高度、预言机 9/9 节点签名与 Merkle 证明。
+9. **可持续商业模式**：免费版、PRO 专业版（RM19.90/月）、企业品牌冠名赞助。
+10. **F1 蒙扎大奖赛官方赞助展示**：杆位竞猜与品牌赞助大奖池。
+11. **神谕预测宇宙 (TAM) 扩展**：从 49 数字 MVP 扩展至体育、金融市场、文娱与全球大事件。
+12. **自增强网络效应飞轮与 4 阶段发展路线图**。
 
-### 1. Install Dependencies
+---
+
+## 🚀 本地运行指南
+
+### 1. 安装依赖
 ```bash
 npm install
 ```
 
-### 2. Run Local Development Server
+### 2. 启动本地开发服务
 ```bash
 npm run dev
 ```
 
-### 3. Build for Production
+### 3. 生成生产环境静态构建
 ```bash
 npm run build
 ```
 
-### 4. Preview Production Build
-```bash
-npm run preview
-```
+---
+
+## 🛠️ 技术栈
+- **核心框架**：React 18 + TypeScript + Vite
+- **样式与设计系统**：Tailwind CSS (玻璃拟态、HUD 遥测、赛博霓虹微光)
+- **动效库**：Framer Motion
+- **图标库**：Lucide React
+- **动效粒子与胜利礼花**：Canvas Confetti
 
 ---
 
-## 🛠️ Tech Stack
-- **Framework**: React 18 + TypeScript + Vite
-- **Styling**: Tailwind CSS (Glassmorphism, HUD telemetry, Neon Glow)
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Celebration Feedback**: Canvas Confetti
-
----
-
-## ⚖️ Compliance & Risk Architecture
-- **Zero House Advantage**: Operates as a neutral cryptographic verification protocol.
-- **Zero Betting Odds**: Scoring is strictly skill and accuracy based.
-- **No Cash Wagering Loop**: Focuses on XP, on-chain reputation, and tournament prestige.
-- **No Speculative Token in V1**: Maximizes regulatory compliance and sustainable utility.
-
----
-
-© 2026 ORACLE 49 Protocol. All rights reserved.
+© 2026 ORACLE 49 预测协议版权所有。

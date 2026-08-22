@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 interface FinalCTAProps {
   onOpenDeckModal: () => void;
@@ -25,7 +25,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenDeckModal }) => {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-lime-400/30 text-xs font-mono text-lime-400">
             <span className="w-2 h-2 rounded-full bg-lime-400 animate-ping" />
-            <span>GLOBAL PREDICTION NETWORK</span>
+            <span>全球可验证预测网络基础设施</span>
           </div>
 
           <h2 className="font-display font-black text-6xl sm:text-8xl md:text-9xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-metal-200 to-metal-400 uppercase leading-none">
@@ -33,11 +33,11 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenDeckModal }) => {
           </h2>
 
           <p className="font-mono text-lg sm:text-2xl text-lime-400 font-bold tracking-wide">
-            Predict the Numbers. Prove Your Instinct.
+            预测数字 · 证明你的直觉与推演
           </p>
 
           <p className="text-metal-300 text-xs sm:text-sm font-mono max-w-xl mx-auto">
-            A blockchain-verified prediction ecosystem built around public real-world results.
+            围绕真实世界公开开奖结果构建的区块链可验证预测生态网络。
           </p>
         </motion.div>
 
@@ -53,7 +53,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenDeckModal }) => {
             href="#live-demo"
             className="px-8 py-4 rounded-xl font-mono text-sm font-bold uppercase tracking-wider bg-lime-400 hover:bg-lime-300 text-black shadow-glow-lime-lg transition-all flex items-center gap-2 group"
           >
-            <span>EXPLORE THE PRODUCT</span>
+            <span>立即体验产品交互</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
 
@@ -61,14 +61,14 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenDeckModal }) => {
             onClick={onOpenDeckModal}
             className="px-8 py-4 rounded-xl font-mono text-sm font-bold uppercase tracking-wider bg-surface-100 hover:bg-surface-200 text-white border border-white/15 transition-all flex items-center gap-2"
           >
-            <span>INVESTOR DECK</span>
+            <span>索取投资人商业计划书</span>
             <ArrowUpRight className="w-4 h-4 text-metal-400" />
           </button>
         </motion.div>
 
         {/* Footer Sub-text */}
         <div className="pt-8 text-[11px] font-mono text-metal-400">
-          Verifiable Prediction Network · 2026 Concept · Powered by Public Consensus
+          全球可验证预测竞技网络 · 2026 全新范式概念 · 由区块链共识驱动
         </div>
 
       </div>

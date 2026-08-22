@@ -26,46 +26,10 @@ export interface PredictionRecord {
   drawId: string;
 }
 
-export interface DrawResult {
-  drawId: string;
-  drawTime: string;
-  winningNumbers: number[];
-  specialNumber?: number;
-  totalSum: number;
-  oddCount: number;
-  evenCount: number;
-  highCount: number;
-  lowCount: number;
-  zones: {
-    zone1: number; // 1-10
-    zone2: number; // 11-20
-    zone3: number; // 21-30
-    zone4: number; // 31-40
-    zone5: number; // 41-49
-  };
-  hasConsecutive: boolean;
-  hasRepeatedEnding: boolean;
-  under10Count: number;
-}
-
 export interface HeatmapNumberData {
   number: number;
-  confidence: number; // percentage e.g. 74
+  confidence: number;
   predictionsCount: number;
   rank: number;
   isHot?: boolean;
-}
-
-export interface PlayerProfile {
-  username: string;
-  predictionIQ: number;
-  percentile: number;
-  globalRank: number;
-  streak: number;
-  hitRate: number;
-  patternAccuracy: number;
-  oddEvenAccuracy: number;
-  highLowAccuracy: number;
-  totalPredictions: number;
-  seasonXP: number;
 }

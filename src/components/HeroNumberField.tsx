@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ShieldCheck, Lock, Hash, Sparkles } from 'lucide-react';
 
 export const HeroNumberField: React.FC = () => {
@@ -72,11 +72,13 @@ export const HeroNumberField: React.FC = () => {
       <div className="relative z-10 flex items-center justify-between pb-3 border-b border-white/5 text-[10px] font-mono text-metal-300">
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
-          <span className="tracking-widest uppercase text-white font-bold">ORACLE PROTOCOL MATRIX 01–49</span>
+          <span className="tracking-widest uppercase text-white font-bold">神谕协议矩阵 01–49 实时网格</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="hidden sm:inline text-metal-400">EPOCH #8849</span>
-          <span className="text-lime-400">STATE: {lockStage.toUpperCase()}</span>
+          <span className="hidden sm:inline text-metal-400">区块纪元 #8849</span>
+          <span className="text-lime-400">
+            状态：{lockStage === 'verified' ? '哈希已验证' : lockStage === 'locked' ? '预测已锁定' : '扫描节点中'}
+          </span>
         </div>
       </div>
 
@@ -144,17 +146,17 @@ export const HeroNumberField: React.FC = () => {
             {lockStage === 'verified' ? (
               <>
                 <ShieldCheck className="w-3.5 h-3.5 text-lime-400" />
-                <span className="font-bold">HASH VERIFIED</span>
+                <span className="font-bold">哈希已验证 (HASH VERIFIED)</span>
               </>
             ) : lockStage === 'locked' ? (
               <>
                 <Lock className="w-3.5 h-3.5 text-lime-400" />
-                <span className="font-bold">PREDICTION LOCKED</span>
+                <span className="font-bold">预测已锁定 (LOCKED)</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-3.5 h-3.5 text-cyber-blue animate-spin" />
-                <span className="font-bold">SCANNING NODES...</span>
+                <span className="font-bold">共识扫描中...</span>
               </>
             )}
           </div>
@@ -168,7 +170,7 @@ export const HeroNumberField: React.FC = () => {
         </div>
 
         <div className="text-right">
-          <span className="text-[10px] text-metal-300">SEALED ON-CHAIN: </span>
+          <span className="text-[10px] text-metal-300">链上封存号码：</span>
           <span className="text-lime-400 font-bold">
             [{lockedNumbers.map((n) => (n < 10 ? `0${n}` : `${n}`)).join(' · ')}]
           </span>

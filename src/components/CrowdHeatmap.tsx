@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Users, TrendingUp, Sparkles, CheckCircle2, AlertCircle, BarChart3 } from 'lucide-react';
+import { Brain, CheckCircle2, AlertCircle } from 'lucide-react';
 import { HeatmapNumberData } from '../types';
 
 export const CrowdHeatmap: React.FC = () => {
@@ -48,16 +47,16 @@ export const CrowdHeatmap: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-blue/10 border border-cyber-blue/30 text-xs font-mono text-cyber-blue">
             <Brain className="w-3.5 h-3.5" />
-            <span>COLLECTIVE INTELLIGENCE ENGINE</span>
+            <span>群体智慧共识引擎</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase">
-            WHAT DOES THE CROWD BELIEVE?
+            全网大众究竟相信哪些数字？
           </h2>
 
           <p className="text-metal-200 text-sm sm:text-base">
-            Every user prediction is aggregated into real-time consensus sentiment.
-            Prediction behavior becomes high-value analytical intelligence.
+            每位用户的锁票预测都将实时汇聚为去中心化共识情绪热力图。
+            预测行为本身即可沉淀为极具商业价值的概率数据资产。
           </p>
 
           {/* Toggle state */}
@@ -71,7 +70,7 @@ export const CrowdHeatmap: React.FC = () => {
                     : 'text-metal-300 hover:text-white'
                 }`}
               >
-                PRE-DRAW HEATMAP
+                开奖前情绪热力图
               </button>
               <button
                 onClick={() => setViewState('post-draw')}
@@ -81,7 +80,7 @@ export const CrowdHeatmap: React.FC = () => {
                     : 'text-metal-300 hover:text-white'
                 }`}
               >
-                POST-DRAW VERIFICATION
+                开奖后共识验证
               </button>
             </div>
           </div>
@@ -93,16 +92,16 @@ export const CrowdHeatmap: React.FC = () => {
           {/* Left 49 Heatmap Grid */}
           <div className="lg:col-span-8 bg-surface-100/90 border border-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-xl">
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/5 text-xs font-mono">
-              <span className="text-metal-300">CONFIDENCE INTENSITY (49 NODES)</span>
+              <span className="text-metal-300">置信度热力强度 (49 节点)</span>
               <div className="flex items-center gap-3">
                 <span className="flex items-center gap-1 text-metal-400">
-                  <span className="w-2.5 h-2.5 rounded bg-surface-300 inline-block" /> Low
+                  <span className="w-2.5 h-2.5 rounded bg-surface-300 inline-block" /> 低热度
                 </span>
                 <span className="flex items-center gap-1 text-cyber-blue">
-                  <span className="w-2.5 h-2.5 rounded bg-cyber-blue/60 inline-block" /> Med
+                  <span className="w-2.5 h-2.5 rounded bg-cyber-blue/60 inline-block" /> 中热度
                 </span>
                 <span className="flex items-center gap-1 text-lime-400">
-                  <span className="w-2.5 h-2.5 rounded bg-lime-400 inline-block" /> Hot (70%+)
+                  <span className="w-2.5 h-2.5 rounded bg-lime-400 inline-block" /> 极高共识 (70%+)
                 </span>
               </div>
             </div>
@@ -160,33 +159,33 @@ export const CrowdHeatmap: React.FC = () => {
             <div className="p-6 rounded-2xl bg-surface-100/95 border border-white/15 backdrop-blur-xl shadow-glass-card space-y-4">
               <div className="flex items-center justify-between pb-4 border-b border-white/10">
                 <div>
-                  <span className="text-[10px] font-mono text-metal-400 uppercase">NODE TELEMETRY</span>
+                  <span className="text-[10px] font-mono text-metal-400">单码节点遥测</span>
                   <div className="font-mono font-black text-4xl text-white">
                     #{selectedNum < 10 ? `0${selectedNum}` : selectedNum}
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-[10px] font-mono text-metal-400 uppercase">CROWD RANK</span>
+                  <span className="text-[10px] font-mono text-metal-400">全网热度排名</span>
                   <div className="font-mono font-bold text-xl text-lime-400">
-                    #{currentData.rank} OF 49
+                    第 #{currentData.rank} 名 / 49 码
                   </div>
                 </div>
               </div>
 
               <div className="space-y-3 font-mono text-xs">
                 <div className="flex justify-between items-center p-2.5 rounded-lg bg-surface-200/90 border border-white/5">
-                  <span className="text-metal-300">Total User Locks:</span>
-                  <span className="text-white font-bold">{currentData.predictionsCount.toLocaleString()}</span>
+                  <span className="text-metal-300">锁定该码总人数：</span>
+                  <span className="text-white font-bold">{currentData.predictionsCount.toLocaleString()} 位</span>
                 </div>
 
                 <div className="flex justify-between items-center p-2.5 rounded-lg bg-surface-200/90 border border-white/5">
-                  <span className="text-metal-300">Confidence Score:</span>
+                  <span className="text-metal-300">大众置信度指数：</span>
                   <span className="text-cyber-blue font-bold">{currentData.confidence}%</span>
                 </div>
 
                 <div className="flex justify-between items-center p-2.5 rounded-lg bg-surface-200/90 border border-white/5">
-                  <span className="text-metal-300">Sentiment Velocity:</span>
-                  <span className="text-lime-400 font-bold">▲ +14.2% (24h)</span>
+                  <span className="text-metal-300">24小时共识增速：</span>
+                  <span className="text-lime-400 font-bold">▲ +14.2% (急速攀升)</span>
                 </div>
               </div>
 
@@ -201,19 +200,19 @@ export const CrowdHeatmap: React.FC = () => {
                     {isCrowdWinner ? (
                       <>
                         <CheckCircle2 className="w-4 h-4" />
-                        <span>THE CROWD CALLED IT!</span>
+                        <span>大众集体预判成功！(THE CROWD CALLED IT)</span>
                       </>
                     ) : (
                       <>
                         <AlertCircle className="w-4 h-4" />
-                        <span>THE CROWD WAS WRONG.</span>
+                        <span>大众共识出现偏差 (THE CROWD WAS WRONG)</span>
                       </>
                     )}
                   </div>
                   <p className="text-[11px] text-metal-300 mt-1">
                     {isCrowdWinner 
-                      ? 'Consensus successfully identified this winning digit on-chain.' 
-                      : 'Contrarian predictors gained heavy ranking multipliers.'}
+                      ? '全网高置信度共识成功捕获了本期开出的中奖号码。' 
+                      : '反共识小众预判者在本期获得了超额排名称号加成。'}
                   </p>
                 </div>
               )}
@@ -221,8 +220,8 @@ export const CrowdHeatmap: React.FC = () => {
 
             {/* B2B Insight Note */}
             <div className="p-4 rounded-xl bg-surface-50 border border-white/5 text-[11px] font-mono text-metal-300">
-              <span className="text-white font-bold block mb-1">DATA MONETIZATION ASSET</span>
-              Crowd prediction distributions create valuable proprietary probability datasets and user engagement sentiment.
+              <span className="text-white font-bold block mb-1">数据商业变现资产</span>
+              群体预测分布形成了极具商业价值的专属概率数据集与高粘性用户情绪晴雨表。
             </div>
 
           </div>

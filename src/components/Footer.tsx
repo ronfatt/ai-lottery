@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Github, Twitter, Send, Activity } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -16,45 +16,45 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-[11px] text-metal-400 leading-relaxed">
-              The Verifiable Number Prediction Network. 
-              Real-World Public Results + Prediction Game + Blockchain Proof + Social Ranking.
+              全球可验证数字预测竞技平台。
+              真实世界公开开奖 + 预测竞技 + 区块链存证 + 天梯排名 + 社交竞技。
             </p>
             <div className="flex items-center gap-2 text-[10px] text-lime-400">
               <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
-              <span>MAINNET NETWORK ACTIVE</span>
+              <span>主网运行环境：实时正常</span>
             </div>
           </div>
 
           {/* Col 2: Navigation */}
           <div className="space-y-2">
             <span className="text-white font-bold text-xs uppercase tracking-wider block">
-              Ecosystem
+              生态产品
             </span>
             <ul className="space-y-1.5 text-[11px]">
-              <li><a href="#live-demo" className="hover:text-lime-400 transition-colors">Interactive Live Demo</a></li>
-              <li><a href="#game-modes" className="hover:text-lime-400 transition-colors">7 Game Modes</a></li>
-              <li><a href="#prediction-iq" className="hover:text-lime-400 transition-colors">Prediction IQ Score</a></li>
-              <li><a href="#technology" className="hover:text-lime-400 transition-colors">Blockchain Architecture</a></li>
+              <li><a href="#live-demo" className="hover:text-lime-400 transition-colors">核心玩法交互测试</a></li>
+              <li><a href="#game-modes" className="hover:text-lime-400 transition-colors">7 大预测玩法沙盒</a></li>
+              <li><a href="#prediction-iq" className="hover:text-lime-400 transition-colors">Prediction IQ 声誉分</a></li>
+              <li><a href="#technology" className="hover:text-lime-400 transition-colors">区块链密码学架构</a></li>
             </ul>
           </div>
 
           {/* Col 3: Economics */}
           <div className="space-y-2">
             <span className="text-white font-bold text-xs uppercase tracking-wider block">
-              Commercial
+              商业与合规
             </span>
             <ul className="space-y-1.5 text-[11px]">
-              <li><a href="#business-model" className="hover:text-lime-400 transition-colors">Business Model</a></li>
-              <li><a href="#business-model" className="hover:text-lime-400 transition-colors">Brand Engine</a></li>
-              <li><a href="#roadmap" className="hover:text-lime-400 transition-colors">Roadmap & Vision</a></li>
-              <li><a href="#concept" className="hover:text-lime-400 transition-colors">Non-Gambling Philosophy</a></li>
+              <li><a href="#business-model" className="hover:text-lime-400 transition-colors">商业变现模型</a></li>
+              <li><a href="#business-model" className="hover:text-lime-400 transition-colors">品牌赞助引擎</a></li>
+              <li><a href="#roadmap" className="hover:text-lime-400 transition-colors">战略发展路线图</a></li>
+              <li><a href="#concept" className="hover:text-lime-400 transition-colors">非博彩合规哲学</a></li>
             </ul>
           </div>
 
           {/* Col 4: Links & GitHub */}
           <div className="space-y-2">
             <span className="text-white font-bold text-xs uppercase tracking-wider block">
-              Repository & Protocol
+              开源代码与技术协议
             </span>
             <div className="space-y-2 text-[11px]">
               <a
@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
                 <span>github.com/ronfatt/ai-lottery</span>
               </a>
               <p className="text-[10px] text-metal-400">
-                Official protocol codebase and verified prediction engine contracts.
+                官方协议代码库与开源可验证智能合约。
               </p>
             </div>
           </div>
@@ -77,13 +77,13 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-metal-400">
           <div>
-            © 2026 ORACLE 49 Protocol. All rights reserved. Designed for Global Web3 & Prediction Enthusiasts.
+            © 2026 ORACLE 49 预测协议版权所有。专为全球 Web3 与数字预测竞技爱好者设计。
           </div>
 
           <div className="flex items-center gap-4">
-            <span>SHA-256 Verified</span>
-            <span>Zero House Edge</span>
-            <span>Reputation Centric</span>
+            <span>SHA-256 密码学存证</span>
+            <span>零庄家对抗优势</span>
+            <span>以智力声誉为核心</span>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, ShieldCheck, Hash, Cpu, Sparkles, CheckCircle2, RotateCcw, Award, Zap, Trophy } from 'lucide-react';
+import { Lock, ShieldCheck, Hash, Cpu, Sparkles, RotateCcw, Zap, Trophy } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export const LiveGameDemo: React.FC = () => {
@@ -61,7 +61,6 @@ export const LiveGameDemo: React.FC = () => {
       
       setTimeout(() => {
         // Generate simulated SHA-256 hash
-        const numsStr = selectedNumbers.join('-');
         const mockHash = `0x782C91A${Math.floor(Math.random() * 89999 + 10000)}E921B7C4F`;
         setGeneratedHash(mockHash);
         setLockStage('sealed');
@@ -125,18 +124,18 @@ export const LiveGameDemo: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-400/10 border border-lime-400/30 text-xs font-mono text-lime-400">
             <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse" />
-            <span>INTERACTIVE PRODUCT TESTBED</span>
+            <span>核心产品交互式体验区</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase leading-tight">
-            ONE PUBLIC RESULT. <br />
+            单期公开开奖结果 <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-lime-300 to-cyber-blue">
-              ENDLESS WAYS TO PREDICT.
+              衍生无穷预测竞技宇宙
             </span>
           </h2>
 
           <p className="text-metal-200 text-sm sm:text-base">
-            Every draw becomes a game universe. Experience the core <strong className="text-white">Number Hunt</strong> prediction locking protocol below.
+            每一期公开开奖都是一个庞大的预测宇宙。请亲自体验下方的 <strong className="text-white">数字猎手 (Number Hunt)</strong> 链上封存与结算流程。
           </p>
         </div>
 
@@ -151,13 +150,13 @@ export const LiveGameDemo: React.FC = () => {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-display font-bold text-lg text-white">NUMBER HUNT</h3>
+                  <h3 className="font-display font-bold text-lg text-white">玩法一：数字猎手 (Number Hunt)</h3>
                   <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-cyber-blue/10 text-cyber-blue border border-cyber-blue/20">
-                    5 OF 49 CALL
+                    49 选 5 定向狙击
                   </span>
                 </div>
                 <p className="text-xs text-metal-300 font-mono">
-                  Choose 5 numbers you believe will appear in the upcoming draw.
+                  从 01–49 中挑选您认为即将出现的 5 个幸运数字。
                 </p>
               </div>
             </div>
@@ -165,12 +164,12 @@ export const LiveGameDemo: React.FC = () => {
             {/* Countdown HUD */}
             <div className="flex items-center gap-4 bg-surface-200/90 px-4 py-2 rounded-xl border border-white/10 self-stretch sm:self-auto justify-between">
               <div>
-                <span className="text-[10px] font-mono text-metal-400 block uppercase">Draw ID</span>
-                <span className="text-xs font-mono font-bold text-white">#260822</span>
+                <span className="text-[10px] font-mono text-metal-400 block uppercase">当前公开期数</span>
+                <span className="text-xs font-mono font-bold text-white">#260822 期</span>
               </div>
               <div className="h-6 w-px bg-white/10" />
               <div>
-                <span className="text-[10px] font-mono text-metal-400 block uppercase">Closes In</span>
+                <span className="text-[10px] font-mono text-metal-400 block uppercase">封存倒计时</span>
                 <span className="text-xs font-mono font-bold text-lime-400">
                   {String(timeLeft.hours).padStart(2, '0')} : {String(timeLeft.minutes).padStart(2, '0')} : {String(timeLeft.seconds).padStart(2, '0')}
                 </span>
@@ -181,13 +180,13 @@ export const LiveGameDemo: React.FC = () => {
           {/* Selector Progress & Helper */}
           <div className="flex items-center justify-between py-4 text-xs font-mono">
             <div className="flex items-center gap-2">
-              <span className="text-metal-300">SELECTION STATUS:</span>
+              <span className="text-metal-300">当前选择状态：</span>
               <span className={`font-bold px-2 py-0.5 rounded ${
                 selectedNumbers.length === 5 
                   ? 'bg-lime-400/20 text-lime-400 border border-lime-400/40' 
                   : 'bg-surface-200 text-metal-200'
               }`}>
-                {selectedNumbers.length} / 5 SELECTED
+                已选择 {selectedNumbers.length} / 5 个号码
               </span>
             </div>
 
@@ -198,7 +197,7 @@ export const LiveGameDemo: React.FC = () => {
                   className="text-[11px] text-metal-300 hover:text-white flex items-center gap-1 hover:underline"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>Reset Demo</span>
+                  <span>重置演示</span>
                 </button>
               )}
             </div>
@@ -261,29 +260,29 @@ export const LiveGameDemo: React.FC = () => {
                   }`}
                 >
                   <Lock className="w-4 h-4" />
-                  <span>LOCK MY PREDICTION (5/5)</span>
+                  <span>锁定我的预测 (5/5 已选满)</span>
                 </button>
               ) : lockStage === 'hashing' ? (
                 <div className="px-6 py-3.5 rounded-xl bg-surface-200 border border-lime-400/30 text-lime-400 font-mono text-xs flex items-center gap-3">
                   <Cpu className="w-4 h-4 animate-spin text-lime-400" />
-                  <span>STEP 01: Creating SHA-256 Prediction Hash...</span>
+                  <span>第 01 步：正在生成 SHA-256 预测哈希值...</span>
                 </div>
               ) : lockStage === 'timestamping' ? (
                 <div className="px-6 py-3.5 rounded-xl bg-surface-200 border border-cyber-blue/40 text-cyber-blue font-mono text-xs flex items-center gap-3">
                   <Hash className="w-4 h-4 animate-pulse text-cyber-blue" />
-                  <span>STEP 02: Timestamping On-Chain (Block #28482913)...</span>
+                  <span>第 02 步：正在区块链上链时间戳盖戳 (区块 #28482913)...</span>
                 </div>
               ) : (
                 <div className="flex flex-col gap-2">
                   <div className="px-4 py-2 rounded-xl bg-lime-400/15 border border-lime-400/40 text-lime-400 font-mono text-xs flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-lime-400" />
-                    <span className="font-bold">✓ PREDICTION LOCKED & SEALED</span>
+                    <span className="font-bold">✓ 预测已完成链上封存与不可篡改锁定</span>
                   </div>
                   <div className="text-[10px] font-mono text-metal-300">
-                    Hash: <span className="text-white font-bold">{generatedHash}</span>
+                    哈希存证：<span className="text-white font-bold">{generatedHash}</span>
                   </div>
                   <div className="text-[10px] font-mono text-lime-400/80">
-                    • No Admin Can Change Your Prediction
+                    • 没有任何管理员或平台特权能够修改您的预测记录
                   </div>
                 </div>
               )}
@@ -302,12 +301,12 @@ export const LiveGameDemo: React.FC = () => {
                   {isSimulatingDraw ? (
                     <>
                       <Sparkles className="w-4 h-4 animate-spin" />
-                      <span>Resolving Draw Via Oracle...</span>
+                      <span>正在通过预言机拉取并验证开奖...</span>
                     </>
                   ) : (
                     <>
                       <Zap className="w-4 h-4" />
-                      <span>SIMULATE PUBLIC DRAW #260822</span>
+                      <span>模拟公开开奖 #260822 期</span>
                     </>
                   )}
                 </motion.button>
@@ -331,34 +330,34 @@ export const LiveGameDemo: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Trophy className="w-6 h-6 text-lime-400" />
                       <span className="font-display font-black text-2xl sm:text-3xl text-white">
-                        {drawOutcome.matches.length} / 5 HIT
+                        精准命中 {drawOutcome.matches.length} / 5 个号码
                       </span>
                       <span className="px-2 py-0.5 rounded text-xs font-mono font-bold bg-lime-400 text-black">
-                        PROVED ON-CHAIN
+                        链上数学证明已确认
                       </span>
                     </div>
 
                     <p className="text-xs sm:text-sm font-mono text-metal-200">
-                      Official Public Numbers: <strong className="text-white">[07 · 11 · 18 · 26 · 36 · 45]</strong>
+                      官方公开开奖号码：<strong className="text-white">[07 · 11 · 18 · 26 · 36 · 45]</strong>
                     </p>
                   </div>
 
                   {/* Gamified Rewards Telemetry */}
                   <div className="grid grid-cols-3 gap-4 w-full lg:w-auto text-center">
                     <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                      <div className="text-[10px] font-mono text-metal-400 uppercase">Season XP</div>
+                      <div className="text-[10px] font-mono text-metal-400 uppercase">赛季经验值</div>
                       <div className="text-lg font-mono font-black text-lime-400">+{drawOutcome.xpGained} XP</div>
                     </div>
 
                     <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                      <div className="text-[10px] font-mono text-metal-400 uppercase">Prediction IQ</div>
+                      <div className="text-[10px] font-mono text-metal-400 uppercase">预测智商 (IQ)</div>
                       <div className="text-lg font-mono font-black text-cyber-blue">+{drawOutcome.iqGained}</div>
                     </div>
 
                     <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                      <div className="text-[10px] font-mono text-metal-400 uppercase">Global Rank</div>
+                      <div className="text-[10px] font-mono text-metal-400 uppercase">全球天梯排名</div>
                       <div className="text-lg font-mono font-black text-white flex items-center justify-center gap-1">
-                        <span>↑ {drawOutcome.rankDelta}</span>
+                        <span>↑ 跃升 {drawOutcome.rankDelta} 名</span>
                       </div>
                     </div>
                   </div>

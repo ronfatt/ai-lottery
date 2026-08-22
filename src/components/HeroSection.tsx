@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { HeroNumberField } from './HeroNumberField';
-import { ShieldCheck, Play, ArrowRight, Activity, Zap, Users, Lock, ChevronDown } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Activity, Zap, Lock } from 'lucide-react';
 
 export const HeroSection: React.FC = () => {
   // Count-up animated state
@@ -46,9 +46,9 @@ export const HeroSection: React.FC = () => {
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-100/90 border border-lime-400/30 text-xs font-mono text-metal-200 w-fit backdrop-blur-md shadow-glow-lime/20"
             >
               <span className="w-2 h-2 rounded-full bg-lime-400 animate-ping" />
-              <span className="text-lime-400 font-bold">NEXT-GEN PROTOCOL</span>
+              <span className="text-lime-400 font-bold">下一代预测协议</span>
               <span className="text-metal-400">|</span>
-              <span className="text-white">NOT A CASINO · VERIFIABLE SKILL</span>
+              <span className="text-white">非博彩 · 纯粹可验证竞技</span>
             </motion.div>
 
             {/* Giant High-Contrast Futuristic Typography */}
@@ -58,12 +58,12 @@ export const HeroSection: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-1 sm:space-y-2"
             >
-              <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-7xl tracking-tighter leading-[0.95] text-white">
-                CAN YOU <br />
+              <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-7xl tracking-tighter leading-[1.05] text-white">
+                你能在结果 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-lime-300 to-white text-glow-lime">
-                  CALL IT
+                  发生之前
                 </span> <br />
-                BEFORE IT HAPPENS?
+                洞见一切吗？
               </h1>
             </motion.div>
 
@@ -75,18 +75,18 @@ export const HeroSection: React.FC = () => {
               className="space-y-2 max-w-xl"
             >
               <p className="text-base sm:text-lg md:text-xl font-sans text-metal-200 leading-relaxed">
-                A blockchain-verified prediction ecosystem built around public real-world results.
+                围绕真实世界公开开奖数据构建的<strong>区块链可验证预测生态网络</strong>。
               </p>
-              <div className="flex items-center gap-3 text-xs sm:text-sm font-mono text-lime-400/90 tracking-wider">
-                <span>预测</span>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm font-mono text-lime-400/90 tracking-wider">
+                <span className="bg-lime-400/10 px-2 py-0.5 rounded border border-lime-400/20">预测</span>
                 <span className="text-metal-400">·</span>
-                <span>验证</span>
+                <span className="bg-lime-400/10 px-2 py-0.5 rounded border border-lime-400/20">验证</span>
                 <span className="text-metal-400">·</span>
-                <span>排名</span>
+                <span className="bg-lime-400/10 px-2 py-0.5 rounded border border-lime-400/20">排名</span>
                 <span className="text-metal-400">·</span>
-                <span>社交竞技</span>
+                <span className="bg-lime-400/10 px-2 py-0.5 rounded border border-lime-400/20">社交竞技</span>
                 <span className="hidden sm:inline-block text-metal-400">|</span>
-                <span className="hidden sm:inline-block text-metal-300">全球可验证数字预测竞技平台</span>
+                <span className="text-metal-300 font-bold">全球可验证数字预测竞技平台</span>
               </div>
             </motion.div>
 
@@ -101,7 +101,7 @@ export const HeroSection: React.FC = () => {
                 href="#live-demo"
                 className="px-6 py-3.5 rounded-xl font-mono text-sm font-bold uppercase tracking-wider bg-lime-400 hover:bg-lime-300 text-black shadow-[0_0_30px_rgba(0,255,102,0.4)] hover:shadow-[0_0_40px_rgba(0,255,102,0.7)] transition-all flex items-center gap-2 group"
               >
-                <span>EXPLORE THE GAME</span>
+                <span>探索游戏体验</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
 
@@ -110,7 +110,7 @@ export const HeroSection: React.FC = () => {
                 className="px-5 py-3.5 rounded-xl font-mono text-sm text-metal-200 hover:text-white bg-surface-100/80 hover:bg-surface-200/90 border border-white/10 hover:border-white/20 transition-all flex items-center gap-2"
               >
                 <Zap className="w-4 h-4 text-cyber-blue" />
-                <span>HOW IT WORKS</span>
+                <span>了解运行机制</span>
               </a>
             </motion.div>
 
@@ -123,15 +123,15 @@ export const HeroSection: React.FC = () => {
             >
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-lime-400 flex-shrink-0" />
-                <span>Zero House Edge</span>
+                <span>零庄家优势</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Lock className="w-3.5 h-3.5 text-cyber-blue flex-shrink-0" />
-                <span>On-Chain Sealed</span>
+                <span>区块链哈希封存</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-cyber-violet flex-shrink-0" />
-                <span>Prediction IQ</span>
+                <span>预测智商指数</span>
               </div>
             </motion.div>
           </div>
@@ -164,37 +164,37 @@ export const HeroSection: React.FC = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime-500" />
               </span>
-              <span className="text-white font-bold tracking-wider">LIVE NETWORK METRICS</span>
+              <span className="text-white font-bold tracking-wider">实时全网遥测数据</span>
             </div>
 
             {/* Metric counters */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 w-full sm:w-auto">
               <div>
-                <div className="text-[10px] font-mono text-metal-400 uppercase">Predictions</div>
+                <div className="text-[10px] font-mono text-metal-400 uppercase">全网预测总数</div>
                 <div className="text-base sm:text-lg font-mono font-bold text-lime-400">
-                  {predictionsCount.toLocaleString()}
+                  {predictionsCount.toLocaleString()} 笔
                 </div>
               </div>
 
               <div>
-                <div className="text-[10px] font-mono text-metal-400 uppercase">Active Players</div>
+                <div className="text-[10px] font-mono text-metal-400 uppercase">活跃预测玩家</div>
                 <div className="text-base sm:text-lg font-mono font-bold text-white">
-                  {playersCount.toLocaleString()}
+                  {playersCount.toLocaleString()} 人
                 </div>
               </div>
 
               <div>
-                <div className="text-[10px] font-mono text-metal-400 uppercase">Verification Rate</div>
+                <div className="text-[10px] font-mono text-metal-400 uppercase">链上验证率</div>
                 <div className="text-base sm:text-lg font-mono font-bold text-cyber-blue">
                   99.99%
                 </div>
               </div>
 
               <div>
-                <div className="text-[10px] font-mono text-metal-400 uppercase">Post-Lock Mod</div>
+                <div className="text-[10px] font-mono text-metal-400 uppercase">封存后篡改记录</div>
                 <div className="text-base sm:text-lg font-mono font-bold text-lime-400 flex items-center gap-1">
-                  <span>0</span>
-                  <span className="text-[10px] text-metal-400 font-normal">(Tamper Proof)</span>
+                  <span>0 次</span>
+                  <span className="text-[10px] text-metal-400 font-normal">(数学防篡改)</span>
                 </div>
               </div>
             </div>

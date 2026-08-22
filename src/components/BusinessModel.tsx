@@ -1,68 +1,67 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Check, Zap, Sparkles, Building2, Crown, Shield, ArrowRight } from 'lucide-react';
+import { Check, Zap, Building2 } from 'lucide-react';
 
 export const BusinessModel: React.FC = () => {
   const tiers = [
     {
-      name: 'FREE',
-      tagline: 'Casual Prediction Player',
-      price: '$0',
-      period: 'forever',
+      name: 'FREE 基础版',
+      tagline: '大众直觉预测玩家',
+      price: '¥0 / RM 0',
+      period: '永久免费',
       highlight: false,
       features: [
-        '3 Daily Draw Predictions',
-        'Global Leaderboard Access',
-        'Basic Prediction IQ Profile',
-        'Standard Season Badges',
-        'Community Heatmap View',
+        '每日 3 笔免费公开预测额度',
+        '全球公共排行榜访问权限',
+        '基础 Prediction IQ 个人主页',
+        '标准赛季成就勋章解锁',
+        '全网群体热力图基础查看',
       ],
-      cta: 'Start Predicting',
+      cta: '立即免费开始预测',
       buttonStyle: 'bg-surface-200 hover:bg-surface-300 text-white border border-white/10',
     },
     {
-      name: 'PRO',
-      tagline: 'Serious Competitive Predictor',
+      name: 'PRO 专业版',
+      tagline: '严肃数据型竞技高手',
       price: 'RM 19.90',
-      period: '/ month',
+      period: '/ 每月',
       highlight: true,
-      badge: 'MOST POPULAR',
+      badge: '最受欢迎方案',
       features: [
-        'Unlimited Daily Predictions',
-        'Full Analytical Probability Engine',
-        'Prediction AI Assistant & Trend Signals',
-        'Create & Host Private Leagues',
-        'Complete Historical Draw Archive',
-        'Gold Verified Profile & IQ Flare',
+        '每日无限次预测与锁票',
+        '完整高级概率分析引擎',
+        'Prediction AI 智能趋势推演辅助',
+        '创建与管理专属好友私域联赛',
+        '全量历史开奖数据检索与回测',
+        '专属金色认证标识与 IQ 闪光特效',
       ],
-      cta: 'Upgrade to Pro',
+      cta: '升级至 PRO 专业版',
       buttonStyle: 'bg-lime-400 hover:bg-lime-300 text-black font-black shadow-glow-lime',
     },
     {
-      name: 'BRAND & ENTERPRISE',
-      tagline: 'Custom Sponsored Campaigns',
-      price: 'CUSTOM',
-      period: '/ campaign',
+      name: 'BRAND 品牌定制',
+      tagline: '企业级品牌营销活动',
+      price: '定制费用',
+      period: '/ 单场活动',
       highlight: false,
       features: [
-        'Branded Prediction Tournaments',
-        'Custom Real-World Prize Pools',
-        'High-Engagement Social Activations',
-        'Sports & F1 Co-Branded Seasons',
-        'B2B Consumer Sentiment Telemetry',
-        'Dedicated Enterprise Smart Contract',
+        '品牌冠名预测锦标赛',
+        '自定义专属实物/现金奖池配置',
+        '极高社交裂变与品牌曝光',
+        'F1 与体育赛事联合冠名赛季',
+        'B2B 消费者情绪深度分析数据',
+        '专属企业级链上智能合约部署',
       ],
-      cta: 'Partner With Us',
+      cta: '洽谈品牌合作',
       buttonStyle: 'bg-cyber-blue hover:bg-cyber-blue/90 text-black font-bold shadow-glow-blue',
     },
   ];
 
   const revenueStreams = [
-    { title: 'B2C Subscriptions', desc: 'Recurring monthly PRO memberships for analytical tools & private leagues' },
-    { title: 'Brand Sponsorships', desc: 'Enterprise brands funding tournament prize pools for viral engagement' },
-    { title: 'Campaign Platform Fees', desc: 'Setup & infrastructure licensing fees for custom corporate prediction events' },
-    { title: 'Market Sentiment Data', desc: 'Aggregated, anonymized probability distribution data for commercial intelligence' },
-    { title: 'Ecosystem Integrations', desc: 'API access for third-party gaming, sports media, and Web3 apps' },
+    { title: 'B2C 会员订阅', desc: '高级玩家为 AI 辅助、无限预测与私域联赛支付的月度 PRO 订阅费' },
+    { title: '品牌赞助与广告', desc: '企业品牌为获取用户高频注意力赞助专属预测赛事与奖池' },
+    { title: '营销活动平台费', desc: '为大型品牌、体育俱乐部定制专属预测活动收取的部署服务费' },
+    { title: '市场情绪数据授权', desc: '基于去中心化群体预测沉淀的高价值商业概率与情绪数据资产' },
+    { title: '生态开发者 API', desc: '为第三方游戏、体育媒体和 Web3 应用提供开箱即用的预测协议接入' },
   ];
 
   return (
@@ -76,19 +75,18 @@ export const BusinessModel: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-white/10 text-xs font-mono text-lime-400">
             <Zap className="w-3.5 h-3.5" />
-            <span>SUSTAINABLE MONETIZATION ARCHITECTURE</span>
+            <span>可持续平台商业化模型</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase leading-tight">
-            A PLATFORM BUILT TO SCALE, <br />
+            平台旨在无限扩展规模， <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-cyber-blue">
-              NOT TO WIN AGAINST ITS USERS.
+              绝非与用户对赌输赢。
             </span>
           </h2>
 
           <p className="text-metal-200 text-sm sm:text-base">
-            Unlike casinos that rely on player losses, ORACLE 49 monetizes through premium analytical subscriptions 
-            and high-value corporate brand sponsorship campaigns.
+            不同于依赖玩家输钱盈利的传统赌场，ORACLE 49 通过 <strong className="text-white">高价值 PRO 订阅、数据洞察以及企业品牌营销赞助</strong> 实现多方共赢的可持续商业闭环。
           </p>
         </div>
 
@@ -148,7 +146,7 @@ export const BusinessModel: React.FC = () => {
           <div className="flex items-center gap-2 mb-6">
             <Building2 className="w-5 h-5 text-lime-400" />
             <h3 className="font-display font-black text-xl text-white uppercase">
-              DIVERSIFIED PLATFORM REVENUE ENGINE
+              多元化平台商业变现引擎
             </h3>
           </div>
 
