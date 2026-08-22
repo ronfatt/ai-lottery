@@ -1,62 +1,131 @@
 import React, { useState } from 'react';
 import { useDemo } from '../../../context/DemoContext';
-import { ShieldCheck, Search, CheckCircle2, Lock, Cpu, Sparkles, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Search, CheckCircle2, Lock, Cpu, Sparkles, ExternalLink, Target, Flag, Flame } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const ProofView: React.FC = () => {
-  const [queryHash, setQueryHash] = useState('0x782C91AE921B7C4F182948123984712903847102938471029384710293847102');
+  const [selectedProofType, setSelectedProofType] = useState<'NUMBER' | 'F1' | 'HORSE_RACING'>('HORSE_RACING');
+  const [queryHash, setQueryHash] = useState('0x89A2F41D8B928E10938CBA391054AA9287BCAE19384756A1029384756C192837');
   const [isVerifying, setIsVerifying] = useState(false);
-  const [verifyResult, setVerifyResult] = useState<any>({
-    owner: 'R.ON',
-    round: '#260822',
-    prediction: [7, 18, 23, 36, 41],
-    timestamp: '22 AUG 2026 09:42:17 MYT',
-    hash: '0x782C91AE921B7C4F182948123984712903847102938471029384710293847102',
-    block: 28482913,
-    status: 'SEALED & VERIFIED',
-    modified: 'NO (不可篡改)',
-  });
+
+  const proofPresets = {
+    HORSE_RACING: {
+      type: 'HORSE_RACING',
+      event: '香港沙田赛马日 (HK Racing · Sha Tin)',
+      venue: '沙田马场 (Sha Tin Racecourse)',
+      race: '第 6 场 1600M',
+      selection: '独赢: #4 金牌王牌 (GOLDEN ACE · 骑师: 潘顿)',
+      timestamp: '22 AUG 2026 14:22:18 HKT',
+      hash: '0x89A2F41D8B928E10938CBA391054AA9287BCAE19384756A1029384756C192837',
+      block: 28483240,
+      resultRef: '香港公开赛马日官方赛果 (Public Race Result)',
+      status: 'VERIFIED',
+      modified: 'NO (不可篡改)',
+      xpGained: '+350 XP',
+    },
+    F1: {
+      type: 'F1',
+      event: '2026 F1 马来西亚雪邦大奖赛 (F1 Sepang)',
+      venue: '雪邦国际赛道 (Sepang International Circuit)',
+      race: '正赛 56 圈',
+      selection: '雪邦 SUPER 10: 冠军 维斯塔潘 · 杆位 维斯塔潘 · 雨战 YES',
+      timestamp: '22 AUG 2026 11:15:04 MYT',
+      hash: '0xF19934B8E19284756A1029384756C192837465F0918273645A0192837465B019',
+      block: 28483100,
+      resultRef: 'FIA 官方雪邦排位与正赛遥测结果',
+      status: 'SEALED (封存待正赛)',
+      modified: 'NO (不可篡改)',
+      xpGained: '+200 XP',
+    },
+    NUMBER: {
+      type: 'NUMBER',
+      event: '香港六合彩公开摇号参考 · 01-49 数字预测',
+      venue: '香港公开摇号直播 (HK Mark Six Reference)',
+      race: '第 #260822 期',
+      selection: '5 码猎手: [07 · 18 · 23 · 36 · 41]',
+      timestamp: '22 AUG 2026 09:42:17 HKT',
+      hash: '0x3F8A91B2C4D5E6F708192A3B4C5D6E7F8091A2B3C4D5E6F708192A3B4C5D6E7F',
+      block: 28482914,
+      resultRef: '香港公开电视/摇号数据参考 (6正码 + 1特别号)',
+      status: 'VERIFIED (命中 3 码)',
+      modified: 'NO (不可篡改)',
+      xpGained: '+600 XP',
+    },
+  };
+
+  const [verifyResult, setVerifyResult] = useState<any>(proofPresets.HORSE_RACING);
+
+  const handleSelectPreset = (key: 'NUMBER' | 'F1' | 'HORSE_RACING') => {
+    setSelectedProofType(key);
+    const p = proofPresets[key];
+    setQueryHash(p.hash);
+    setVerifyResult(p);
+  };
 
   const handleSearchVerify = (e: React.FormEvent) => {
     e.preventDefault();
     setIsVerifying(true);
     setTimeout(() => {
       setIsVerifying(false);
-      setVerifyResult({
-        owner: 'R.ON',
-        round: '#260822',
-        prediction: [7, 18, 23, 36, 41],
-        timestamp: '22 AUG 2026 09:42:17 MYT',
-        hash: queryHash,
-        block: 28482913,
-        status: 'SEALED & VERIFIED',
-        modified: 'NO (不可篡改)',
-      });
-    }, 800);
+      setVerifyResult(proofPresets[selectedProofType]);
+    }, 600);
   };
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-12">
+    <div className="space-y-8 max-w-7xl mx-auto pb-12 font-sans">
       
       {/* Header */}
       <div className="pb-4 border-b border-white/10 space-y-1">
         <div className="flex items-center gap-2 text-xs font-mono text-lime-400 font-bold">
           <ShieldCheck className="w-4 h-4" />
-          <span>CRYPTOGRAPHIC VERIFICATION // 密码学存证浏览器</span>
+          <span>CRYPTOGRAPHIC PROOF EXPLORER // 全账本密码学存证浏览器</span>
         </div>
         <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
-          VERIFY EVERYTHING. 验证一切存证
+          VERIFY EVERYTHING. 验证一切多品类存证
         </h2>
         <p className="text-xs font-mono text-metal-300">
-          公开全账本检索 · 基于 SHA-256 承诺哈希与 Merkle 树 · 没有任何管理员能篡改过去
+          全面支持数字预测、F1 赛车与香港赛马日推演 · 基于 SHA-256 承诺哈希与 Merkle 树全量可溯
         </p>
+      </div>
+
+      {/* Preset Category Switcher */}
+      <div className="flex flex-wrap gap-2 font-mono text-xs">
+        <button
+          onClick={() => handleSelectPreset('HORSE_RACING')}
+          className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
+            selectedProofType === 'HORSE_RACING' ? 'bg-emerald-500 text-black shadow-glow-lime' : 'bg-surface-100 text-metal-300 border border-white/10'
+          }`}
+        >
+          <Flame className="w-3.5 h-3.5" />
+          <span>香港赛马日存证 (HK Racing)</span>
+        </button>
+
+        <button
+          onClick={() => handleSelectPreset('F1')}
+          className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
+            selectedProofType === 'F1' ? 'bg-cyber-amber text-black shadow-sm' : 'bg-surface-100 text-metal-300 border border-white/10'
+          }`}
+        >
+          <Flag className="w-3.5 h-3.5" />
+          <span>F1 雪邦赛车存证 (Motorsport)</span>
+        </button>
+
+        <button
+          onClick={() => handleSelectPreset('NUMBER')}
+          className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
+            selectedProofType === 'NUMBER' ? 'bg-lime-400 text-black shadow-glow-lime' : 'bg-surface-100 text-metal-300 border border-white/10'
+          }`}
+        >
+          <Target className="w-3.5 h-3.5" />
+          <span>数字预测存证 (Numbers)</span>
+        </button>
       </div>
 
       {/* Interactive Search Bar Card */}
       <div className="p-6 sm:p-8 rounded-3xl bg-surface-100/90 border border-white/15 backdrop-blur-xl shadow-glass-card space-y-4">
         <form onSubmit={handleSearchVerify} className="space-y-2">
           <label className="text-xs font-mono text-metal-300 block">
-            输入任意预测哈希 (Commit Hash) 或 期数 ID 查验密码学证明：
+            输入任意预测承诺哈希 (Commit Hash) 查验密码学存证与预言机签名：
           </label>
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
@@ -65,7 +134,7 @@ export const ProofView: React.FC = () => {
                 type="text"
                 value={queryHash}
                 onChange={(e) => setQueryHash(e.target.value)}
-                placeholder="0x782C91A..."
+                placeholder="0x89A2F..."
                 className="w-full bg-surface-200 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-xs font-mono text-white focus:outline-none focus:border-lime-400 select-all"
               />
             </div>
@@ -78,7 +147,7 @@ export const ProofView: React.FC = () => {
               {isVerifying ? (
                 <>
                   <Sparkles className="w-4 h-4 animate-spin" />
-                  <span>正在遍历默克尔树...</span>
+                  <span>遍历默克尔树中...</span>
                 </>
               ) : (
                 <>
@@ -91,7 +160,7 @@ export const ProofView: React.FC = () => {
         </form>
       </div>
 
-      {/* Verification Result Receipt Card */}
+      {/* Verification Result Receipt Card (Section 33) */}
       {verifyResult && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -105,26 +174,36 @@ export const ProofView: React.FC = () => {
               </div>
               <div>
                 <span className="text-[10px] font-mono text-lime-400 font-bold uppercase tracking-widest block">
-                  链上时间戳证明已成功核验 ✓
+                  链上时间戳证明已成功核验 ✓ (CRYPTOGRAPHIC VERIFIED)
                 </span>
                 <h3 className="font-display font-black text-xl text-white">
-                  预测归属所有者：{verifyResult.owner} (期数 {verifyResult.round})
+                  {verifyResult.event}
                 </h3>
               </div>
             </div>
 
             <span className="px-3 py-1 rounded-xl bg-lime-400 text-black font-mono font-black text-xs">
-              状态：SEALED (不可篡改)
+              状态：{verifyResult.status}
             </span>
           </div>
 
           {/* Details Table */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
             <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">锁票号码组合</span>
-              <span className="text-lime-400 font-black text-base">
-                [{verifyResult.prediction.map((n: number) => (n < 10 ? `0${n}` : n)).join(' · ')}]
+              <span className="text-metal-400 text-[10px] block uppercase">赛事场地 / 场次</span>
+              <span className="text-white font-bold text-sm">
+                {verifyResult.venue} · {verifyResult.race}
               </span>
+            </div>
+
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
+              <span className="text-metal-400 text-[10px] block uppercase">用户锁票推演选择</span>
+              <span className="text-lime-400 font-bold text-sm">{verifyResult.selection}</span>
+            </div>
+
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
+              <span className="text-metal-400 text-[10px] block uppercase">客观公共数据源参考</span>
+              <span className="text-metal-200 font-medium text-xs">{verifyResult.resultRef}</span>
             </div>
 
             <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
@@ -145,7 +224,7 @@ export const ProofView: React.FC = () => {
             </div>
 
             <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">历史是否有修改记录</span>
+              <span className="text-metal-400 text-[10px] block uppercase">历史是否有修改记录 (TAMPERED)</span>
               <span className="text-lime-400 font-black text-sm">{verifyResult.modified}</span>
             </div>
           </div>

@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   ChevronRight,
   Flag,
+  Flame,
   Gauge
 } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from 'recharts';
@@ -66,7 +67,7 @@ export const DashboardView: React.FC = () => {
             下午好，{user.name}。
           </h2>
           <p className="text-xs sm:text-sm font-mono text-metal-300">
-            数字预测网络正在稳步增长 · 结算单位：USDT (纯净无代币合规体系)
+            数字预测基本盘稳健增长 · 拓展 F1 赛车与香港赛马日推演 · 结算单位：USDT
           </p>
         </div>
 
@@ -98,7 +99,7 @@ export const DashboardView: React.FC = () => {
             <div className="font-mono font-black text-3xl sm:text-4xl text-lime-400 text-glow-lime">
               {user.predictionIQ}
             </div>
-            <span className="text-xs font-mono text-metal-300">位列全球前 4.8% · F1 IQ: {user.f1IQ}</span>
+            <span className="text-xs font-mono text-metal-300">F1 IQ: {user.f1IQ} · Racing IQ: {user.racingIQ}</span>
           </div>
           <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
             <span className="text-lime-400 font-bold">▲ 本周提升 +14 IQ</span>
@@ -334,13 +335,47 @@ export const DashboardView: React.FC = () => {
 
       </div>
 
+      {/* TRENDING NOW: Hong Kong Race Day Card (Section 26) */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-surface-100/95 border-2 border-emerald-500/50 backdrop-blur-xl shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col lg:flex-row items-center justify-between gap-6 overflow-hidden relative">
+        
+        <div className="flex items-center gap-5 w-full lg:w-auto">
+          <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border-2 border-emerald-500 flex items-center justify-center text-3xl shadow-glow-lime/30 flex-shrink-0">
+            🏇
+          </div>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-black bg-emerald-500 text-black uppercase flex items-center gap-1">
+                <Flame className="w-3 h-3" />
+                <span>🔥 TRENDING NOW // 热门体育推演</span>
+              </span>
+              <span className="text-xs font-mono text-emerald-400 font-bold">沙田日赛 · 第 6 场焦点赛</span>
+            </div>
+            <h3 className="font-display font-black text-xl sm:text-2xl text-white">
+              香港赛马日推演 (HONG KONG RACE DAY)
+            </h3>
+            <p className="text-xs font-mono text-metal-300">
+              已完成预测：4 / 8 维推演 · Racing IQ: <strong className="text-emerald-400">{user.racingIQ}</strong> · 沙田排名: <strong className="text-white">#{user.racingRankShaTin}</strong>
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => navigate('/app/events/hk-racing')}
+          className="w-full lg:w-auto px-6 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)] flex-shrink-0"
+        >
+          <span>继续赛马日预测 (CONTINUE RACE PREDICTIONS)</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+
+      </div>
+
       {/* Live Global Pool Banner (in USDT) */}
       <div className="p-6 sm:p-8 rounded-3xl bg-surface-100/90 border border-lime-400/40 backdrop-blur-2xl shadow-glass-card space-y-6">
         
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between pb-6 border-b border-white/10 gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs font-mono text-lime-400">
-              <span className="w-2 h-2 rounded-full bg-lime-400 animate-ping" />
+              <span className="w-2.5 h-2.5 rounded-full bg-lime-400 animate-ping" />
               <span className="font-bold uppercase tracking-widest">LIVE ORACLE GLOBAL POOL // 实时全球分红池 (USDT)</span>
               <span className="px-2 py-0.5 rounded text-[9px] bg-lime-400/20 text-lime-400 border border-lime-400/30">
                 本月累积 +18.4%

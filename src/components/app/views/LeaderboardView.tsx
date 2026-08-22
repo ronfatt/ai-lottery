@@ -8,7 +8,7 @@ export const LeaderboardView: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'PREDICTION' | 'COMMUNITY' | 'CREATOR' | 'SEASON'>('PREDICTION');
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-12">
+    <div className="space-y-8 max-w-7xl mx-auto pb-12 font-sans">
       
       {/* Header */}
       <div className="pb-4 border-b border-white/10 space-y-1">
@@ -20,7 +20,7 @@ export const LeaderboardView: React.FC = () => {
           全球天梯与荣誉殿堂
         </h2>
         <p className="text-xs font-mono text-metal-300">
-          全网 38,240 位玩家跨 4 大维度公开链上排名 · 实时刷新
+          全网 38,240 位玩家跨 4 大维度公开链上排名 · 实时共识同步
         </p>
       </div>
 
@@ -63,29 +63,29 @@ export const LeaderboardView: React.FC = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left font-mono text-xs">
-            <thead className="bg-surface-300/40 text-metal-400 text-[10px] uppercase border-b border-white/5">
+            <thead className="bg-surface-200/60 text-metal-400 text-[10px] uppercase border-b border-white/5">
               <tr>
                 <th className="py-3 px-4">名次</th>
-                <th className="py-3 px-4">玩家 / 战队</th>
+                <th className="py-3 px-4">玩家 / 组织</th>
                 {activeTab === 'PREDICTION' && (
                   <>
-                    <th className="py-3 px-4">预测智商 (IQ)</th>
-                    <th className="py-3 px-4">命中率</th>
+                    <th className="py-3 px-4">Prediction IQ</th>
+                    <th className="py-3 px-4">综合准确率</th>
                     <th className="py-3 px-4">当前连胜</th>
                   </>
                 )}
                 {activeTab === 'COMMUNITY' && (
                   <>
-                    <th className="py-3 px-4">社群总人数</th>
-                    <th className="py-3 px-4">直推人数</th>
-                    <th className="py-3 px-4">健康留存率</th>
+                    <th className="py-3 px-4">活跃成员规模</th>
+                    <th className="py-3 px-4">社群留存率</th>
+                    <th className="py-3 px-4">组织成长积分</th>
                   </>
                 )}
                 {activeTab === 'CREATOR' && (
                   <>
-                    <th className="py-3 px-4">联赛主办人</th>
-                    <th className="py-3 px-4">联赛活跃成员</th>
-                    <th className="py-3 px-4">社群参与度</th>
+                    <th className="py-3 px-4">主办联盟活跃度</th>
+                    <th className="py-3 px-4">创作者分红份额</th>
+                    <th className="py-3 px-4">头衔评级</th>
                   </>
                 )}
                 {activeTab === 'SEASON' && (
@@ -99,7 +99,7 @@ export const LeaderboardView: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {activeTab === 'PREDICTION' && MOCK_LEADERBOARDS.prediction.map((p) => (
+              {activeTab === 'PREDICTION' && MOCK_LEADERBOARDS.prediction.map((p: any) => (
                 <tr
                   key={p.name}
                   className={`transition-colors ${
@@ -108,7 +108,7 @@ export const LeaderboardView: React.FC = () => {
                 >
                   <td className="py-3.5 px-4 font-black">
                     <span className={`w-6 inline-block ${p.rank === 1 ? 'text-cyber-amber text-sm' : p.rank === 2 ? 'text-metal-200' : p.rank === 3 ? 'text-lime-400' : 'text-metal-400'}`}>
-                      0{p.rank}
+                      #{p.rank}
                     </span>
                   </td>
                   <td className="py-3.5 px-4 font-bold flex items-center gap-2">
@@ -120,66 +120,66 @@ export const LeaderboardView: React.FC = () => {
                     )}
                   </td>
                   <td className="py-3.5 px-4 font-black text-lime-400">{p.iq}</td>
-                  <td className="py-3.5 px-4">{p.hitRate}</td>
+                  <td className="py-3.5 px-4">{p.accuracy}</td>
                   <td className="py-3.5 px-4 text-lime-400">🔥 {p.streak} 连胜</td>
                   <td className="py-3.5 px-4 text-right text-base">{p.badge}</td>
                 </tr>
               ))}
 
-              {activeTab === 'COMMUNITY' && MOCK_LEADERBOARDS.community.map((c) => (
+              {activeTab === 'COMMUNITY' && MOCK_LEADERBOARDS.community.map((c: any) => (
                 <tr
                   key={c.name}
                   className={`transition-colors ${
                     c.isUser ? 'bg-lime-400/15 font-bold text-white' : 'text-metal-200 hover:bg-white/5'
                   }`}
                 >
-                  <td className="py-3.5 px-4 font-black">0{c.rank}</td>
+                  <td className="py-3.5 px-4 font-black">#{c.rank}</td>
                   <td className="py-3.5 px-4 font-bold flex items-center gap-2">
                     <span>{c.name}</span>
                     {c.isUser && <span className="px-1.5 py-0.2 rounded text-[8px] bg-lime-400 text-black font-black">YOU</span>}
                   </td>
-                  <td className="py-3.5 px-4 font-black text-cyber-violet">{c.size} 人</td>
-                  <td className="py-3.5 px-4">{c.direct} 人</td>
+                  <td className="py-3.5 px-4 font-black text-cyber-violet">{c.members} 人</td>
                   <td className="py-3.5 px-4 text-lime-400">{c.retention}</td>
-                  <td className="py-3.5 px-4 text-right text-base">{c.badge}</td>
+                  <td className="py-3.5 px-4 text-white font-bold">{c.points.toLocaleString()} pts</td>
+                  <td className="py-3.5 px-4 text-right text-base">🛡️</td>
                 </tr>
               ))}
 
-              {activeTab === 'CREATOR' && MOCK_LEADERBOARDS.creator.map((cr) => (
+              {activeTab === 'CREATOR' && MOCK_LEADERBOARDS.creator.map((cr: any) => (
                 <tr
                   key={cr.name}
                   className={`transition-colors ${
                     cr.isUser ? 'bg-lime-400/15 font-bold text-white' : 'text-metal-200 hover:bg-white/5'
                   }`}
                 >
-                  <td className="py-3.5 px-4 font-black">0{cr.rank}</td>
+                  <td className="py-3.5 px-4 font-black">#{cr.rank}</td>
                   <td className="py-3.5 px-4 font-bold flex items-center gap-2">
                     <span>{cr.name}</span>
                     {cr.isUser && <span className="px-1.5 py-0.2 rounded text-[8px] bg-lime-400 text-black font-black">YOU</span>}
                   </td>
-                  <td className="py-3.5 px-4 text-metal-300">{cr.host}</td>
-                  <td className="py-3.5 px-4 font-black text-cyber-blue">{cr.members} 成员</td>
-                  <td className="py-3.5 px-4 text-lime-400">{cr.engagement}</td>
+                  <td className="py-3.5 px-4 font-black text-cyber-blue">{cr.activeUsers} 活跃</td>
+                  <td className="py-3.5 px-4 text-lime-400">{cr.rewardShare}</td>
+                  <td className="py-3.5 px-4 text-white font-bold">{cr.title}</td>
                   <td className="py-3.5 px-4 text-right text-base">🏆</td>
                 </tr>
               ))}
 
-              {activeTab === 'SEASON' && MOCK_LEADERBOARDS.season.map((s) => (
+              {activeTab === 'SEASON' && MOCK_LEADERBOARDS.season.map((s: any) => (
                 <tr
                   key={s.name}
                   className={`transition-colors ${
                     s.isUser ? 'bg-lime-400/15 font-bold text-white' : 'text-metal-200 hover:bg-white/5'
                   }`}
                 >
-                  <td className="py-3.5 px-4 font-black">0{s.rank}</td>
+                  <td className="py-3.5 px-4 font-black">#{s.rank}</td>
                   <td className="py-3.5 px-4 font-bold flex items-center gap-2">
                     <span>{s.name}</span>
                     {s.isUser && <span className="px-1.5 py-0.2 rounded text-[8px] bg-lime-400 text-black font-black">YOU</span>}
                   </td>
                   <td className="py-3.5 px-4 font-black text-lime-400">{s.points.toLocaleString()} pts</td>
                   <td className="py-3.5 px-4 text-cyber-blue">Lv.{s.level}</td>
-                  <td className="py-3.5 px-4 text-white font-bold">{s.reward}</td>
-                  <td className="py-3.5 px-4 text-right text-base">🎖️</td>
+                  <td className="py-3.5 px-4 text-cyber-amber font-bold">{s.rewards}</td>
+                  <td className="py-3.5 px-4 text-right text-base">👑</td>
                 </tr>
               ))}
             </tbody>

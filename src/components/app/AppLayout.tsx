@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DashboardView } from './views/DashboardView';
 import { PredictView } from './views/PredictView';
 import { F1PredictView } from './views/F1PredictView';
+import { HKRacingView } from './views/HKRacingView';
 import { F1IQView } from './views/F1IQView';
 import { GamesHubView } from './views/GamesHubView';
 import { PredictionsView } from './views/PredictionsView';
@@ -40,6 +41,8 @@ export const AppLayout: React.FC = () => {
         return '数字预测 (NUMBER PREDICTION)';
       case '/app/events/f1-malaysia-2026':
         return '2026 F1 马来西亚雪邦预测 (F1 SEPANG 2026)';
+      case '/app/events/hk-racing':
+        return '香港赛马日推演 (HONG KONG RACE DAY)';
       case '/app/f1-iq':
         return 'F1 专属预测智商 (F1 MOTORSPORT IQ)';
       case '/app/games':
@@ -84,6 +87,8 @@ export const AppLayout: React.FC = () => {
         return <PredictView />;
       case '/app/events/f1-malaysia-2026':
         return <F1PredictView />;
+      case '/app/events/hk-racing':
+        return <HKRacingView />;
       case '/app/f1-iq':
         return <F1IQView />;
       case '/app/games':

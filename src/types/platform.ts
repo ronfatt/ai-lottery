@@ -8,7 +8,7 @@ export type MemberRankType =
 
 export type MembershipTier = 'FREE' | 'PRO' | 'ELITE' | 'BRAND';
 
-export type GameCategory = 'NUMBER' | 'F1' | 'FOOTBALL' | 'MARKET' | 'CULTURE' | 'WORLD';
+export type GameCategory = 'NUMBER' | 'F1' | 'HORSE_RACING' | 'FOOTBALL' | 'ESPORTS' | 'MARKET' | 'CULTURE' | 'WORLD';
 
 export interface NetworkMember {
   id: string;
@@ -28,6 +28,7 @@ export interface NetworkMember {
   parentId?: string;
   predictionIQ: number;
   f1IQ?: number;
+  racingIQ?: number;
   seasonPoints: number;
 }
 
@@ -36,7 +37,7 @@ export interface PredictionHistoryRound {
   gameCategory: GameCategory;
   roundId: string;
   eventTitle: string;
-  referenceSource: string; // e.g. "香港六合彩公开摇号数据参考" or "F1 官方排位/正赛结果"
+  referenceSource: string; // e.g. "香港六合彩公开摇号数据参考" or "香港赛马公开赛果参考" or "F1 官方排位/正赛结果"
   drawDate: string;
   closingTime: string;
   selectedNumbers?: number[];
@@ -54,6 +55,18 @@ export interface PredictionHistoryRound {
   status: 'VERIFIED' | 'SEALED' | 'PENDING';
   gameMode: string;
   accuracyRate?: string;
+}
+
+export interface HorseRunner {
+  number: number;
+  name: string;
+  jockey: string;
+  trainer: string;
+  barrier: number;
+  form: string;
+  communityPickRate: number; // e.g. 28%
+  silkColor: string;
+  tag?: string;
 }
 
 export interface WalletTransaction {
@@ -83,7 +96,7 @@ export interface NotificationItem {
   title: string;
   time: string;
   read: boolean;
-  type: 'streak' | 'rank' | 'pool' | 'member' | 'system' | 'f1';
+  type: 'streak' | 'rank' | 'pool' | 'member' | 'system' | 'f1' | 'racing';
 }
 
 export interface RankLevelInfo {

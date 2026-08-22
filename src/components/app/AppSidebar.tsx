@@ -22,7 +22,7 @@ import {
   LogOut, 
   Sparkles,
   Globe,
-  Gauge
+  Flame
 } from 'lucide-react';
 
 export const AppSidebar: React.FC = () => {
@@ -38,17 +38,17 @@ export const AppSidebar: React.FC = () => {
     {
       label: '预测玩法 PREDICT',
       items: [
-        { label: '数字预测 (核心核心)', path: '/app/predict', icon: Target, isPrimary: true },
-        { label: 'F1 赛车预测 ⭐', path: '/app/events/f1-malaysia-2026', icon: Flag, highlightTag: '🔥 推荐' },
-        { label: '预测游戏大厅', path: '/app/games', icon: Gamepad2 },
+        { label: '数字预测 (核心基本盘)', path: '/app/predict', icon: Target, isPrimary: true },
+        { label: 'F1 赛车预测 ⭐', path: '/app/events/f1-malaysia-2026', icon: Flag, highlightTag: '⭐ 推荐' },
+        { label: '香港赛马预测 🔥', path: '/app/events/hk-racing', icon: Flame, highlightTag: '🔥 热门' },
         { label: '我的预测记录', path: '/app/predictions', icon: History },
+        { label: '预测游戏大厅', path: '/app/games', icon: Gamepad2 },
       ],
     },
     {
       label: '竞技表现 PERFORMANCE',
       items: [
         { label: '综合预测智商 (IQ)', path: '/app/iq', icon: Trophy },
-        { label: 'F1 专属智商 (F1 IQ)', path: '/app/f1-iq', icon: Gauge },
         { label: '全球天梯榜', path: '/app/leaderboard', icon: Award },
         { label: '季度通行证 (Season 08)', path: '/app/season', icon: Crown },
       ],
@@ -103,7 +103,7 @@ export const AppSidebar: React.FC = () => {
               ORACLE <span className="text-lime-400">49</span>
             </span>
             <span className="text-[9px] font-mono text-metal-400 tracking-wider">
-              可验证预测竞技网络
+              可验证超级预测平台
             </span>
           </div>
         </button>
@@ -138,18 +138,29 @@ export const AppSidebar: React.FC = () => {
                         ? 'bg-lime-400 text-black font-bold shadow-glow-lime'
                         : item.highlight
                         ? 'text-lime-400 hover:bg-lime-400/10'
+                        : item.highlightTag?.includes('🔥')
+                        ? 'text-emerald-400 hover:bg-emerald-500/10'
                         : item.highlightTag
                         ? 'text-cyber-amber hover:bg-cyber-amber/10'
                         : 'text-metal-300 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-black' : item.highlight ? 'text-lime-400' : item.highlightTag ? 'text-cyber-amber' : 'text-metal-400'}`} />
+                      <Icon className={`w-4 h-4 ${
+                        isActive ? 'text-black' : 
+                        item.highlight ? 'text-lime-400' : 
+                        item.highlightTag?.includes('🔥') ? 'text-emerald-400' :
+                        item.highlightTag ? 'text-cyber-amber' : 'text-metal-400'
+                      }`} />
                       <span className="truncate">{item.label}</span>
                     </div>
 
                     {item.highlightTag && !isActive && (
-                      <span className="px-1.5 py-0.2 rounded text-[8px] font-bold bg-cyber-amber/20 text-cyber-amber border border-cyber-amber/30">
+                      <span className={`px-1.5 py-0.2 rounded text-[8px] font-bold border ${
+                        item.highlightTag.includes('🔥')
+                          ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                          : 'bg-cyber-amber/20 text-cyber-amber border-cyber-amber/30'
+                      }`}>
                         {item.highlightTag}
                       </span>
                     )}
@@ -171,10 +182,10 @@ export const AppSidebar: React.FC = () => {
         {/* Investor Tour Trigger */}
         <button
           onClick={startTour}
-          className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-lime-400/20 via-cyber-blue/20 to-cyber-violet/20 border border-lime-400/40 text-lime-400 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-glow-lime/10"
+          className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-lime-400/20 via-emerald-400/20 to-cyber-blue/20 border border-lime-400/40 text-lime-400 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-glow-lime/10"
         >
           <Sparkles className="w-3.5 h-3.5 text-lime-400" />
-          <span>10 步投资人全景导览 (TOUR)</span>
+          <span>10 步超级平台导览 (TOUR)</span>
         </button>
 
         {/* Current Rank Status Widget */}

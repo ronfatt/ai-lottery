@@ -30,6 +30,14 @@ interface DemoContextType {
     creatorShares: number;
     predictionIQ: number;
     f1IQ: number;
+    racingIQ: number;
+    racingRankShaTin: number;
+    racingRankGlobal: number;
+    racingWinAccuracy: string;
+    racingTop3Accuracy: string;
+    racingJockeyAccuracy: string;
+    racingBarrierAccuracy: string;
+    racingSuper8Accuracy: string;
     f1RankMalaysia: number;
     f1RankGlobal: number;
     f1Accuracy: number;
@@ -62,6 +70,7 @@ interface DemoContextType {
   // Actions
   addNewPrediction: (numbers: number[], gameMode?: string) => Promise<PredictionHistoryRound>;
   addF1Prediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
+  addHorseRacingPrediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
   
   // Toast system
   toast: { message: string; type: 'success' | 'info' | 'warning' } | null;
@@ -111,6 +120,14 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     creatorShares: 1,
     predictionIQ: 782,
     f1IQ: 824,
+    racingIQ: 768,
+    racingRankShaTin: 184,
+    racingRankGlobal: 742,
+    racingWinAccuracy: '31.2%',
+    racingTop3Accuracy: '58.4%',
+    racingJockeyAccuracy: '72.0%',
+    racingBarrierAccuracy: '61.0%',
+    racingSuper8Accuracy: '67.0%',
     f1RankMalaysia: 122,
     f1RankGlobal: 841,
     f1Accuracy: 74,
@@ -153,7 +170,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsTourActive(true);
     setTourStep(1);
     setCurrentPath('/app');
-    showToast('已开启 10 步投资人全景导览 (Investor Demo Tour)', 'info');
+    showToast('已开启 10 步超级预测平台导览 (Super App Tour)', 'info');
   };
 
   const nextTourStep = () => {
@@ -161,15 +178,16 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const next = tourStep + 1;
       setTourStep(next);
       // Auto routing matching the 10 tour steps
-      if (next === 1) setCurrentPath('/app');
-      else if (next === 2 || next === 3) setCurrentPath('/app/predict');
-      else if (next === 4) setCurrentPath('/app/iq');
-      else if (next === 5) setCurrentPath('/app/wallet');
-      else if (next === 6) setCurrentPath('/app/referral');
-      else if (next === 7) setCurrentPath('/app/pool');
-      else if (next === 8) setCurrentPath('/app/events/f1-malaysia-2026');
-      else if (next === 9) setCurrentPath('/app/proof');
-      else if (next === 10) setCurrentPath('/app/games');
+      if (next === 1) setCurrentPath('/app/predict');
+      else if (next === 2) setCurrentPath('/app/proof');
+      else if (next === 3) setCurrentPath('/app/iq');
+      else if (next === 4) setCurrentPath('/app/wallet');
+      else if (next === 5) setCurrentPath('/app/pool');
+      else if (next === 6) setCurrentPath('/app/events/f1-malaysia-2026');
+      else if (next === 7) setCurrentPath('/app/events/hk-racing');
+      else if (next === 8) setCurrentPath('/app/referral');
+      else if (next === 9) setCurrentPath('/app/games');
+      else if (next === 10) setCurrentPath('/app');
     } else {
       endTour();
     }
@@ -179,15 +197,16 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (tourStep > 1) {
       const prev = tourStep - 1;
       setTourStep(prev);
-      if (prev === 1) setCurrentPath('/app');
-      else if (prev === 2 || prev === 3) setCurrentPath('/app/predict');
-      else if (prev === 4) setCurrentPath('/app/iq');
-      else if (prev === 5) setCurrentPath('/app/wallet');
-      else if (prev === 6) setCurrentPath('/app/referral');
-      else if (prev === 7) setCurrentPath('/app/pool');
-      else if (prev === 8) setCurrentPath('/app/events/f1-malaysia-2026');
-      else if (prev === 9) setCurrentPath('/app/proof');
-      else if (prev === 10) setCurrentPath('/app/games');
+      if (prev === 1) setCurrentPath('/app/predict');
+      else if (prev === 2) setCurrentPath('/app/proof');
+      else if (prev === 3) setCurrentPath('/app/iq');
+      else if (prev === 4) setCurrentPath('/app/wallet');
+      else if (prev === 5) setCurrentPath('/app/pool');
+      else if (prev === 6) setCurrentPath('/app/events/f1-malaysia-2026');
+      else if (prev === 7) setCurrentPath('/app/events/hk-racing');
+      else if (prev === 8) setCurrentPath('/app/referral');
+      else if (prev === 9) setCurrentPath('/app/games');
+      else if (prev === 10) setCurrentPath('/app');
     }
   };
 
@@ -232,7 +251,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: `rnd-${Date.now()}`,
       gameCategory: 'NUMBER',
       roundId: `#${260823 + predictionRounds.length}`,
-      eventTitle: '香港六合彩公开开奖数据参考 · 01-49 数字预测',
+      eventTitle: '香港六合彩公开摇号数据参考 · 01-49 数字预测',
       referenceSource: '香港六合彩公开摇号数据参考 (HK Mark Six Result Reference)',
       drawDate: '2026-08-22 21:30 (封存待开奖)',
       closingTime: '2026-08-22 21:15',
@@ -291,6 +310,43 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return newRound;
   };
 
+  // Add Horse Racing prediction (Ref Sha Tin Race Day)
+  const addHorseRacingPrediction = async (selectionText: string, gameMode: string = 'RACE DAY SUPER 8'): Promise<PredictionHistoryRound> => {
+    const mockHash = `0x89A2F${Math.random().toString(16).slice(2)}${Math.random().toString(16).slice(2)}`;
+    const mockBlock = 28483300 + predictionRounds.length;
+
+    setUser((prev) => ({
+      ...prev,
+      predictionEnergy: Math.max(0, prev.predictionEnergy - 120),
+    }));
+
+    const newRound: PredictionHistoryRound = {
+      id: `rnd-hr-${Date.now()}`,
+      gameCategory: 'HORSE_RACING',
+      roundId: `HR-260822-R6-${Math.floor(Math.random()*800+100)}`,
+      eventTitle: '香港沙田赛马日 · 第 6 场 1600米 公开赛果参考',
+      referenceSource: '香港赛马公开赛果参考 (Sha Tin Race Day Public Reference)',
+      drawDate: '2026-08-22 16:30',
+      closingTime: '2026-08-22 16:15',
+      userSelectionText: selectionText,
+      officialResultText: '第1名: #4 金牌王牌 · 第2名: #7 疾速地平线 · 第3名: #1 银色风暴',
+      hits: 1,
+      score: '独赢命中 (WINNER CALLED) ✓',
+      xpGained: 350,
+      iqDelta: 12,
+      rewardUSDT: 25.0,
+      hash: mockHash,
+      blockNumber: mockBlock,
+      status: 'VERIFIED',
+      gameMode: gameMode,
+      accuracyRate: '100% 命中',
+    };
+
+    setPredictionRounds((prev) => [newRound, ...prev]);
+    showToast(`香港赛马日推演已成功在区块链封存！消耗 120 ⚡ 能量。`, 'success');
+    return newRound;
+  };
+
   return (
     <DemoContext.Provider
       value={{
@@ -309,6 +365,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         markAllNotificationsAsRead,
         addNewPrediction,
         addF1Prediction,
+        addHorseRacingPrediction,
         toast,
         showToast,
         isTourActive,

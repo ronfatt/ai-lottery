@@ -14,14 +14,15 @@ import {
   Trophy,
   Filter,
   Flag,
-  Target
+  Target,
+  Flame
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const PredictionsView: React.FC = () => {
   const { predictionRounds } = useDemo();
   const [searchTerm, setSearchTerm] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'NUMBER' | 'F1'>('ALL');
+  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'NUMBER' | 'F1' | 'HORSE_RACING'>('ALL');
   const [selectedRound, setSelectedRound] = useState<PredictionHistoryRound | null>(null);
 
   const filtered = predictionRounds.filter((r) => {
@@ -33,7 +34,7 @@ export const PredictionsView: React.FC = () => {
   });
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-12">
+    <div className="space-y-8 max-w-7xl mx-auto pb-12 font-sans">
       
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-white/10 gap-4">
@@ -43,33 +44,39 @@ export const PredictionsView: React.FC = () => {
             <span>MY PREDICTION ARCHIVE // 历史存证记录</span>
           </div>
           <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
-            我的历史预测与链上核验
+            我的历史预测与全账本核验
           </h2>
           <p className="text-xs font-mono text-metal-300 mt-1">
-            支持香港六合彩公开摇号数字预测与 F1 雪邦赛车遥测记录 · 历史全量可溯
+            支持香港六合彩数字预测、F1 雪邦赛车与香港赛马日推演 · 密码学确定性存证
           </p>
         </div>
 
         {/* Filter & Search */}
-        <div className="flex items-center gap-2 w-full sm:w-auto font-mono text-xs">
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-xs">
           <div className="flex bg-surface-100 p-1 rounded-xl border border-white/10">
             <button
               onClick={() => setCategoryFilter('ALL')}
-              className={`px-3 py-1 rounded-lg ${categoryFilter === 'ALL' ? 'bg-lime-400 text-black font-bold' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'ALL' ? 'bg-lime-400 text-black' : 'text-metal-400'}`}
             >
               全部
             </button>
             <button
               onClick={() => setCategoryFilter('NUMBER')}
-              className={`px-3 py-1 rounded-lg ${categoryFilter === 'NUMBER' ? 'bg-lime-400 text-black font-bold' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'NUMBER' ? 'bg-lime-400 text-black' : 'text-metal-400'}`}
             >
-              数字预测
+              数字
             </button>
             <button
               onClick={() => setCategoryFilter('F1')}
-              className={`px-3 py-1 rounded-lg ${categoryFilter === 'F1' ? 'bg-cyber-amber text-black font-bold' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'F1' ? 'bg-cyber-amber text-black' : 'text-metal-400'}`}
             >
               F1 赛车
+            </button>
+            <button
+              onClick={() => setCategoryFilter('HORSE_RACING')}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'HORSE_RACING' ? 'bg-emerald-500 text-black' : 'text-metal-400'}`}
+            >
+              香港赛马
             </button>
           </div>
 
@@ -92,9 +99,9 @@ export const PredictionsView: React.FC = () => {
           <table className="w-full text-left font-mono text-xs">
             <thead className="bg-surface-200/90 text-metal-400 text-[10px] uppercase border-b border-white/10">
               <tr>
-                <th className="py-3.5 px-4">类别</th>
+                <th className="py-3.5 px-4">品类</th>
                 <th className="py-3.5 px-4">期数 / 赛事</th>
-                <th className="py-3.5 px-4">模式</th>
+                <th className="py-3.5 px-4">推演模式</th>
                 <th className="py-3.5 px-4">用户推演选择</th>
                 <th className="py-3.5 px-4">官方开奖 / 成绩参考</th>
                 <th className="py-3.5 px-4">命中战绩</th>
@@ -114,9 +121,13 @@ export const PredictionsView: React.FC = () => {
                       <span className="px-2 py-0.5 rounded text-[9px] bg-lime-400/20 text-lime-400 border border-lime-400/30">
                         数字
                       </span>
-                    ) : (
+                    ) : item.gameCategory === 'F1' ? (
                       <span className="px-2 py-0.5 rounded text-[9px] bg-cyber-amber/20 text-cyber-amber border border-cyber-amber/30">
                         F1
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        赛马
                       </span>
                     )}
                   </td>
@@ -130,7 +141,7 @@ export const PredictionsView: React.FC = () => {
                     {item.selectedNumbers ? (
                       <span>[{item.selectedNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]</span>
                     ) : (
-                      <span className="text-cyber-amber truncate max-w-[200px] block">{item.userSelectionText}</span>
+                      <span className="text-white truncate max-w-[200px] block">{item.userSelectionText}</span>
                     )}
                   </td>
                   <td className="py-3.5 px-4 text-metal-300">
@@ -200,25 +211,25 @@ export const PredictionsView: React.FC = () => {
                   <span className="text-white font-bold">{selectedRound.referenceSource}</span>
                 </div>
 
-                {selectedRound.selectedNumbers && (
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="p-3 rounded-xl bg-surface-100 border border-white/5 space-y-1">
-                      <span className="text-metal-400 text-[10px] block">用户锁票号码</span>
-                      <span className="text-lime-400 font-bold text-sm">
-                        [{selectedRound.selectedNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]
-                      </span>
-                    </div>
-
-                    <div className="p-3 rounded-xl bg-surface-100 border border-white/5 space-y-1">
-                      <span className="text-metal-400 text-[10px] block">官方公开结果 (正码+特别号)</span>
-                      <span className="text-white font-bold text-sm">
-                        {selectedRound.officialNumbers 
-                          ? `[${selectedRound.officialNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}] + 特别号 ${selectedRound.specialNumber}`
-                          : '等待香港公开摇号'}
-                      </span>
-                    </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 rounded-xl bg-surface-100 border border-white/5 space-y-1">
+                    <span className="text-metal-400 text-[10px] block">用户锁票推演</span>
+                    <span className="text-lime-400 font-bold text-xs">
+                      {selectedRound.selectedNumbers 
+                        ? `[${selectedRound.selectedNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]`
+                        : selectedRound.userSelectionText}
+                    </span>
                   </div>
-                )}
+
+                  <div className="p-3 rounded-xl bg-surface-100 border border-white/5 space-y-1">
+                    <span className="text-metal-400 text-[10px] block">官方公开结果参考</span>
+                    <span className="text-white font-bold text-xs">
+                      {selectedRound.officialNumbers 
+                        ? `[${selectedRound.officialNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}] + 特别号 ${selectedRound.specialNumber}`
+                        : selectedRound.officialResultText || '等待开奖'}
+                    </span>
+                  </div>
+                </div>
 
                 <div className="p-3.5 rounded-xl bg-surface-100 border border-white/5 space-y-1">
                   <span className="text-metal-400 text-[10px] block uppercase">SHA-256 预测承诺存证哈希 (COMMIT HASH)</span>

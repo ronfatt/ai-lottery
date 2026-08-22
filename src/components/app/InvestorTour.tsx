@@ -11,80 +11,80 @@ export const InvestorTour: React.FC = () => {
   const tourStepsData = [
     {
       step: 1,
-      title: '第一站：核心基本盘 · 数字预测 (Core Number Prediction)',
+      title: '01 核心基本盘 · 01–49 数字预测 (Core Number Prediction)',
       highlight: 'ORACLE 49 主网核心玩法 · 60% 平台基石',
-      desc: '数字预测是 ORACLE 49 的立足之本与高频基础。我们绝不改变或削弱数字预测的根基，这是整个网络最高频的用户粘性来源。',
-      actionHint: '点击【下一步】查看客观公开的数据源机制。',
+      desc: '数字预测是 ORACLE 49 的立足之本与高频基础。参考客观中立的香港六合彩公开摇号数据（6正码 + 1特别号），提供 8 合 1 SUPER CALL 等 7 大玩法。',
+      actionHint: '点击【下一步】查看密码学时间戳与链上存证机制。',
     },
     {
       step: 2,
-      title: '第二站：香港六合彩公开开奖参考 (Public Result Oracle)',
-      highlight: '客观不可操纵的公共数据源 (HK Mark Six)',
-      desc: '平台自身不产生也不改变开奖结果。所有 01-49 预测均锚定公开电视/官方摇号的真实世界结果，彻底消除传统博彩的黑箱做庄与算法暗箱。',
-      actionHint: '点击【下一步】体验选号封存与超级组合卡。',
+      title: '02 密码学存证与公信力 (Prediction Proof)',
+      highlight: 'SHA-256 承诺哈希 · 9/9 节点多签 · 零黑箱篡改',
+      desc: '任何用户预测均在开奖前于链上打上毫秒级时间戳封存。没有任何管理员或庄家能在结果产生后篡改历史，彻底解决传统博彩黑箱。',
+      actionHint: '点击【下一步】查看玩家留存的核心资产：Prediction IQ。',
     },
     {
       step: 3,
-      title: '第三站：01-49 选号与超级卡 (Lock Prediction & Super Call)',
-      highlight: '8 合 1 超级推演卡 + SHA-256 密码学时间戳',
-      desc: '支持 5 码定向猎手、焦点单码、奇偶天平、高低半区等 7 大玩法，更有一键【ORACLE 49 SUPER CALL】将 8 大预测维度合一在链上封存。',
-      actionHint: '点击【下一步】查看玩家留存的核心：Prediction IQ。',
-    },
-    {
-      step: 4,
-      title: '第四站：多维预测智商体系 (Prediction IQ & F1 IQ)',
-      highlight: '综合 IQ 782 · F1 IQ 824 · 技能身份认证',
-      desc: '用户留存的核心是声誉与智商指数，而非短期赌博输赢。平台支持多品类细分智商认证，证明用户的专业直觉与推演实力。',
+      title: '03 多维预测技能智商体系 (Prediction IQ)',
+      highlight: '综合 IQ 782 · F1 IQ 824 · Racing IQ 768',
+      desc: '用户留存的核心是声誉与智商指数，而非短期赌博输赢。平台通过专属技能智商认证用户的专业直觉与推演实力，建立去中心化声誉网络。',
       actionHint: '点击【下一步】查看纯净的 USDT 钱包与清算模型。',
     },
     {
-      step: 5,
-      title: '第五站：纯净 USDT 资产钱包 (USDT Wallet)',
+      step: 4,
+      title: '04 纯净 USDT 奖金钱包 (USDT Wallet)',
       highlight: '1,842.60 USDT 可用余额 · 零代币合规体系',
       desc: '全面采用 USDT 作为数字结算单位。不发行高波动空气币，不搞质押理财 (APY)，所有资金收益完全来源于真实付费会员与品牌赞助。',
-      actionHint: '点击【下一步】查看清晰的 20% + 5% 会员裂变体系。',
+      actionHint: '点击【下一步】查看透明的三大全网分红池。',
+    },
+    {
+      step: 5,
+      title: '05 全网分红池共享机制 (Pool Sharing)',
+      highlight: '384,280 USDT 实时分红池 · 社群5% + 绩效3% + 创作者2%',
+      desc: '公式完全透明（单份 = 78.88 USDT）。用户通过培育健康组织与提高预测命中率获得更多加权 Shares，共享全网生态增长红利。',
+      actionHint: '点击【下一步】检视横向扩展的特色推荐：F1 赛车预测。',
     },
     {
       step: 6,
-      title: '第六站：推荐佣金与会员晋升 (Referral & Ranking)',
-      highlight: 'PRO (10 USDT) 享 2 USDT · ELITE (30 USDT) 享 6 USDT',
-      desc: '直推 20% + L2 间推 5% 持续月度分润。辅以 6 阶晋级天梯（见习至神谕至尊 20 份分红），激励团队长期健康经营。',
-      actionHint: '点击【下一步】查看最令投资人兴奋的 3 大全球分红池。',
+      title: '06 特色推荐赛事：F1 赛车极速预测 (F1 Expansion)',
+      highlight: '⭐ 特色赛事推荐 · 2026 雪邦大奖赛 50,000 USDT 奖池',
+      desc: '验证了预测引擎的无限扩展性！从 49 数字无缝扩展至 F1 分站冠军、杆位、领奖台、安全车与热带雨战等多达 10 项遥测推演。',
+      actionHint: '点击【下一步】检视最新热门体育：香港赛马日推演。',
     },
     {
       step: 7,
-      title: '第七站：三大全球分红池与透明公式 (Pool Sharing)',
-      highlight: '384,280 USDT 实时分红池 · 社群5% + 绩效3% + 创作者2%',
-      desc: '公式完全透明（单份 = 78.88 USDT）。用户通过培育健康组织与提高预测命中率获得更多 Shares，共享全网生态增长红利。',
-      actionHint: '点击【下一步】检视横向扩展的杀手级应用：F1 赛车预测。',
+      title: '07 热门体育拓展：香港赛马日推演 (Horse Racing Expansion)',
+      highlight: '🔥 热门体育 · 沙田/跑马地 RACE DAY SUPER 8',
+      desc: '基于公开赛马赛果参考，推演头马独赢、前三名次、骑师战术对抗、档位步速与全日 SUPER 8。完全摆脱博彩盘口，专注数据推演竞技。',
+      actionHint: '点击【下一步】查看健康的推荐佣金与组织天梯。',
     },
     {
       step: 8,
-      title: '第八站：特色推荐赛事 · 2026 F1 马来西亚雪邦 (F1 Prediction)',
-      highlight: '⭐ 特色赛事推荐 · 雪邦 SUPER 10 综合遥测',
-      desc: '验证了预测引擎的无限扩展性！从 49 数字无缝扩展至 F1 杆位、领奖台、安全车与雨战预测，打通顶级赛事与品牌赞助营销。',
-      actionHint: '点击【下一步】检验全账本区块链浏览器。',
+      title: '08 社群经济与健康分流 (Community Economy)',
+      highlight: 'PRO (10 USDT) 享 2 USDT · 全网分润封顶 ≤ 40%',
+      desc: '直推 20% + L2 间推 5% 持续月度分润。辅以 6 阶晋级天梯（见习至神谕至尊 20 份分红），平台净留存 60% 毛利，模型长期稳健。',
+      actionHint: '点击【下一步】查看多品类去中心化预测引擎矩阵。',
     },
     {
       step: 9,
-      title: '第九站：全账本区块链浏览器 (Proof Explorer)',
-      highlight: '默克尔树证明 · 9/9 节点多签 · 不可篡改',
-      desc: '没有任何管理员能够篡改过去。密码学确定性与开源智能合约构成了 ORACLE 49 坚不可摧的公信力护城河。',
-      actionHint: '点击【下一步】查看预测游戏大厅与全球生态远景。',
+      title: '09 全品类超级预测应用矩阵 (Multi-Event Prediction Engine)',
+      highlight: 'ONE RACE. MULTIPLE WAYS TO PREDICT.',
+      desc: '同一个底层去中心化预测引擎，无缝赋能数字、F1、赛马、足球、电竞、文娱与全球大事件，构建全球统一的可验证预测基础设施。',
+      actionHint: '点击【下一步】查看 ORACLE 49 的全球愿景。',
     },
     {
       step: 10,
-      title: '第十站：全品类预测生态宇宙 (Expansion Ecosystem)',
-      highlight: '始于数字，延展至体育、市场、文娱与全球大事件',
-      desc: '投资人请记住：数字预测是起点，预测基础设施是平台。我们正在构建全球最大的可验证预测竞技网络！',
-      actionHint: '恭喜！您已完整检视 ORACLE 49 的 10 大核心产品支柱。',
+      title: '10 全球预测生态宏伟愿景 (Global Prediction Vision)',
+      highlight: 'WHAT DO YOU THINK HAPPENS NEXT? // 洞见未来',
+      desc: '投资人请记住：数字预测是起点，预测基础设施是平台。我们正在构建全球最大的去中心化可验证预测竞技网络！',
+      actionHint: '恭喜！您已完整检视 ORACLE 49 预测超级应用体系。',
     },
   ];
 
   const current = tourStepsData[tourStep - 1] || tourStepsData[0];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 max-w-lg w-full px-4">
+    <div className="fixed bottom-6 right-6 z-50 max-w-lg w-full px-4 font-sans">
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -109,7 +109,7 @@ export const InvestorTour: React.FC = () => {
         </div>
 
         {/* Content */}
-        <div className="space-y-2">
+        <div className="space-y-2 font-mono">
           <h4 className="font-display font-black text-lg text-white">
             {current.title}
           </h4>
