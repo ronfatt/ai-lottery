@@ -32,11 +32,11 @@ export default {
           rose: "#F43F5E",
         },
         metal: {
-          100: "#F0F6FC",
-          200: "#C9D1D9",
-          300: "#8B949E",
-          400: "#484F58",
-          500: "#30363D",
+          100: "#FFFFFF",
+          200: "#F1F5F9",
+          300: "#CBD5E1",
+          400: "#94A3B8", // significantly brightened from #484F58 to high-contrast #94A3B8
+          500: "#64748B",
         }
       },
       fontFamily: {

@@ -126,40 +126,40 @@ export const DashboardView: React.FC = () => {
     <div className="space-y-6 max-w-7xl mx-auto pb-12 font-sans">
       
       {/* 1. Streamlined Top Greeting & Personal Status Bar */}
-      <div className="p-6 rounded-3xl bg-gradient-to-r from-[#0C111A] via-[#101726] to-[#0C111A] border border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-glass-card">
+      <div className="p-6 rounded-3xl bg-gradient-to-r from-[#0C111A] via-[#101726] to-[#0C111A] border border-white/15 backdrop-blur-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-glass-card">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-1">
             <span className="text-xs font-mono text-lime-400 font-bold uppercase tracking-wider">
               ORACLE COMMAND DASHBOARD
             </span>
             <span className="w-2 h-2 rounded-full bg-lime-400 animate-ping" />
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-lime-400/20 text-lime-400 font-bold border border-lime-400/30">
+            <span className="px-2.5 py-0.5 rounded text-xs font-mono bg-lime-400/20 text-lime-300 font-bold border border-lime-400/40">
               👑 神谕大师 (8 份分红)
             </span>
           </div>
           <h2 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">
             下午好，{user.name}。
           </h2>
-          <p className="text-xs font-mono text-metal-300">
+          <p className="text-xs font-mono text-slate-200 mt-0.5">
             全网可验证超级预测网络 · 香港六合彩数字基本盘 + F1 赛车 + 香港赛马日 + 科技新品发布
           </p>
         </div>
 
         {/* Quick Action Chips */}
-        <div className="flex flex-wrap items-center gap-2 font-mono text-xs">
-          <div className="px-3 py-1.5 rounded-xl bg-surface-200 border border-cyber-blue/30 text-metal-200">
-            <Zap className="w-3.5 h-3.5 text-cyber-blue inline mr-1" />
-            <span>能量：<strong className="text-white">{user.predictionEnergy}</strong> / {user.maxEnergy} ⚡</span>
+        <div className="flex flex-wrap items-center gap-2.5 font-mono text-xs">
+          <div className="px-3.5 py-2 rounded-xl bg-surface-200 border border-cyber-blue/40 text-slate-200 font-medium">
+            <Zap className="w-4 h-4 text-cyber-blue inline mr-1" />
+            <span>能量：<strong className="text-white font-bold">{user.predictionEnergy}</strong> / {user.maxEnergy} ⚡</span>
           </div>
 
-          <div className="px-3 py-1.5 rounded-xl bg-surface-200 border border-lime-400/30 text-metal-200">
-            <Flame className="w-3.5 h-3.5 text-lime-400 inline mr-1" />
-            <span>连胜：<strong className="text-lime-400">{user.streak}</strong> 场</span>
+          <div className="px-3.5 py-2 rounded-xl bg-surface-200 border border-lime-400/40 text-slate-200 font-medium">
+            <Flame className="w-4 h-4 text-lime-400 inline mr-1" />
+            <span>连胜：<strong className="text-lime-300 font-bold">{user.streak}</strong> 场</span>
           </div>
 
           <button
             onClick={() => navigate('/app/referral')}
-            className="px-3.5 py-1.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-bold uppercase flex items-center gap-1.5 transition-all shadow-glow-lime"
+            className="px-4 py-2 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-black uppercase flex items-center gap-1.5 transition-all shadow-glow-lime"
           >
             <Share2 className="w-3.5 h-3.5" />
             <span>邀请裂变 (20%)</span>
@@ -167,60 +167,60 @@ export const DashboardView: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Compact 4 KPI Overview Grid */}
+      {/* 2. Compact 4 KPI Overview Grid (High Contrast Text) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 font-mono text-xs">
         
         {/* KPI 1: Prediction IQ */}
         <div 
           onClick={() => navigate('/app/iq')}
-          className="p-4 rounded-2xl bg-surface-100/90 border border-white/10 hover:border-lime-400/40 transition-all cursor-pointer shadow-glass-card"
+          className="p-4 rounded-2xl bg-surface-100/90 border border-white/15 hover:border-lime-400/50 transition-all cursor-pointer shadow-glass-card"
         >
-          <div className="flex justify-between text-metal-400 text-[10px] uppercase">
+          <div className="flex justify-between text-slate-300 text-xs uppercase font-bold">
             <span>综合预测智商 (IQ)</span>
-            <Trophy className="w-3.5 h-3.5 text-lime-400" />
+            <Trophy className="w-4 h-4 text-lime-400" />
           </div>
-          <div className="my-2 font-black text-2xl sm:text-3xl text-lime-400 text-glow-lime">
+          <div className="my-2 font-black text-2xl sm:text-3xl text-lime-300 text-glow-lime">
             {user.predictionIQ}
           </div>
-          <div className="text-[10px] text-metal-300 flex justify-between">
-            <span>F1: {user.f1IQ} · 赛马: {user.racingIQ} · Tech: {user.techIQ}</span>
-            <span className="text-lime-400">▲ +14</span>
+          <div className="text-xs text-slate-200 flex justify-between">
+            <span>F1: {user.f1IQ} · 赛马: {user.racingIQ} · 科技: {user.techIQ}</span>
+            <span className="text-lime-400 font-bold">▲ +14</span>
           </div>
         </div>
 
         {/* KPI 2: Global Rank */}
         <div 
           onClick={() => navigate('/app/leaderboard')}
-          className="p-4 rounded-2xl bg-surface-100/90 border border-white/10 hover:border-cyber-blue/40 transition-all cursor-pointer shadow-glass-card"
+          className="p-4 rounded-2xl bg-surface-100/90 border border-white/15 hover:border-cyber-blue/50 transition-all cursor-pointer shadow-glass-card"
         >
-          <div className="flex justify-between text-metal-400 text-[10px] uppercase">
+          <div className="flex justify-between text-slate-300 text-xs uppercase font-bold">
             <span>全球天梯总榜</span>
-            <Award className="w-3.5 h-3.5 text-cyber-blue" />
+            <Award className="w-4 h-4 text-cyber-blue" />
           </div>
           <div className="my-2 font-black text-2xl sm:text-3xl text-white">
             #{user.globalRank}
           </div>
-          <div className="text-[10px] text-metal-300 flex justify-between">
+          <div className="text-xs text-slate-200 flex justify-between">
             <span>总计 38,240 位玩家</span>
-            <span className="text-cyber-blue">↑ 跃升 {user.rankDelta}</span>
+            <span className="text-cyber-blue font-bold">↑ 跃升 {user.rankDelta}</span>
           </div>
         </div>
 
         {/* KPI 3: Active Community */}
         <div 
           onClick={() => navigate('/app/network')}
-          className="p-4 rounded-2xl bg-surface-100/90 border border-white/10 hover:border-cyber-violet/40 transition-all cursor-pointer shadow-glass-card"
+          className="p-4 rounded-2xl bg-surface-100/90 border border-white/15 hover:border-cyber-violet/50 transition-all cursor-pointer shadow-glass-card"
         >
-          <div className="flex justify-between text-metal-400 text-[10px] uppercase">
+          <div className="flex justify-between text-slate-300 text-xs uppercase font-bold">
             <span>活跃社群组织</span>
-            <Users className="w-3.5 h-3.5 text-cyber-violet" />
+            <Users className="w-4 h-4 text-cyber-violet" />
           </div>
           <div className="my-2 font-black text-2xl sm:text-3xl text-cyber-violet">
             {user.activeCommunity.toLocaleString()}
           </div>
-          <div className="text-[10px] text-metal-300 flex justify-between">
+          <div className="text-xs text-slate-200 flex justify-between">
             <span>直推 50 · 间推 178 位</span>
-            <span className="text-cyber-violet">留存 68%</span>
+            <span className="text-cyan-300 font-bold">留存 68%</span>
           </div>
         </div>
 
@@ -229,16 +229,16 @@ export const DashboardView: React.FC = () => {
           onClick={() => navigate('/app/rewards')}
           className="p-4 rounded-2xl bg-surface-100/90 border border-lime-400/50 hover:border-lime-400 transition-all cursor-pointer shadow-glow-lime/20"
         >
-          <div className="flex justify-between text-lime-400 text-[10px] font-bold uppercase">
+          <div className="flex justify-between text-lime-400 text-xs font-bold uppercase">
             <span>本月预估总收益</span>
-            <Coins className="w-3.5 h-3.5 text-lime-400" />
+            <Coins className="w-4 h-4 text-lime-400" />
           </div>
           <div className="my-2 font-black text-2xl sm:text-3xl text-white">
             {user.monthlyRewardsUSDT.toFixed(2)} <span className="text-xs text-lime-400 font-normal">USDT</span>
           </div>
-          <div className="text-[10px] text-metal-300 flex justify-between">
+          <div className="text-xs text-slate-200 flex justify-between">
             <span>直推 + 间推 + 8 份分红</span>
-            <span className="text-lime-400">▲ +12.8%</span>
+            <span className="text-lime-400 font-bold">▲ +12.8%</span>
           </div>
         </div>
 
@@ -254,7 +254,7 @@ export const DashboardView: React.FC = () => {
               <span className="text-xs text-lime-400 font-bold uppercase tracking-wider">
                 QUICK PREDICTION STATION // 极速推演站
               </span>
-              <span className="px-2 py-0.2 rounded text-[9px] bg-surface-200 text-metal-300">
+              <span className="px-2 py-0.5 rounded text-[10px] bg-surface-200 text-slate-200 font-bold">
                 支持 4 大品类一键锁票
               </span>
             </div>
@@ -264,11 +264,11 @@ export const DashboardView: React.FC = () => {
           </div>
 
           {/* Tab Switcher */}
-          <div className="flex flex-wrap bg-surface-200 p-1 rounded-2xl border border-white/10 gap-1">
+          <div className="flex flex-wrap bg-surface-200 p-1 rounded-2xl border border-white/15 gap-1">
             <button
               onClick={() => setStationTab('NUMBER')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
-                stationTab === 'NUMBER' ? 'bg-lime-400 text-black shadow-glow-lime' : 'text-metal-300 hover:text-white'
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+                stationTab === 'NUMBER' ? 'bg-lime-400 text-black shadow-glow-lime' : 'text-slate-200 hover:text-white'
               }`}
             >
               <Target className="w-3.5 h-3.5" />
@@ -277,8 +277,8 @@ export const DashboardView: React.FC = () => {
 
             <button
               onClick={() => setStationTab('F1')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
-                stationTab === 'F1' ? 'bg-cyber-amber text-black shadow-sm' : 'text-metal-300 hover:text-white'
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+                stationTab === 'F1' ? 'bg-cyber-amber text-black shadow-sm' : 'text-slate-200 hover:text-white'
               }`}
             >
               <Flag className="w-3.5 h-3.5" />
@@ -287,8 +287,8 @@ export const DashboardView: React.FC = () => {
 
             <button
               onClick={() => setStationTab('RACING')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
-                stationTab === 'RACING' ? 'bg-emerald-500 text-black shadow-sm' : 'text-metal-300 hover:text-white'
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+                stationTab === 'RACING' ? 'bg-emerald-500 text-black shadow-sm' : 'text-slate-200 hover:text-white'
               }`}
             >
               <Flame className="w-3.5 h-3.5" />
@@ -297,8 +297,8 @@ export const DashboardView: React.FC = () => {
 
             <button
               onClick={() => setStationTab('TECH')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
-                stationTab === 'TECH' ? 'bg-cyan-400 text-black shadow-sm' : 'text-metal-300 hover:text-white'
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+                stationTab === 'TECH' ? 'bg-cyan-400 text-black shadow-sm' : 'text-slate-200 hover:text-white'
               }`}
             >
               <Smartphone className="w-3.5 h-3.5" />
@@ -310,13 +310,13 @@ export const DashboardView: React.FC = () => {
         {/* Tab 1: Number Prediction */}
         {stationTab === 'NUMBER' && (
           <div className="space-y-4 font-mono text-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-metal-300">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-200">
               <span>从 01–49 挑选中意的 5 码（参考：<strong>香港六合彩公开摇号</strong> 6正码+1特别号）：</span>
               <span className="text-lime-400 font-bold">第 #260822 期 · 封存倒计时 02:16:38</span>
             </div>
 
             {/* Compact 49 Number Grid */}
-            <div className="grid grid-cols-7 sm:grid-cols-14 gap-1.5 p-3 rounded-2xl bg-surface-50 border border-white/5">
+            <div className="grid grid-cols-7 sm:grid-cols-14 gap-1.5 p-3 rounded-2xl bg-surface-50 border border-white/10">
               {Array.from({ length: 49 }, (_, i) => i + 1).map((num) => {
                 const isSelected = quickNums.includes(num);
                 const numStr = num < 10 ? `0${num}` : `${num}`;
@@ -329,7 +329,7 @@ export const DashboardView: React.FC = () => {
                     className={`aspect-square rounded-lg flex items-center justify-center font-bold text-xs transition-all ${
                       isSelected
                         ? 'bg-lime-400 text-black border border-lime-300 shadow-glow-lime scale-105 font-black z-10'
-                        : 'bg-surface-200 text-metal-300 hover:bg-surface-300 hover:text-white border border-white/5'
+                        : 'bg-surface-200 text-slate-200 hover:bg-surface-300 hover:text-white border border-white/10'
                     }`}
                   >
                     {numStr}
@@ -341,17 +341,17 @@ export const DashboardView: React.FC = () => {
             {/* Action Bar */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div>
-                <span className="text-metal-400">已选 5 码：</span>
+                <span className="text-slate-300 font-medium">已选 5 码：</span>
                 <span className="text-lime-400 font-bold ml-1">
                   [{quickNums.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]
                 </span>
-                <span className="text-[10px] text-metal-400 block">奖励：+600 XP · Prediction IQ +14 · 消耗 100 ⚡</span>
+                <span className="text-xs text-slate-300 block mt-0.5">奖励：<strong className="text-lime-400">+600 XP</strong> · Prediction IQ +14 · 消耗 100 ⚡</span>
               </div>
 
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={() => navigate('/app/predict')}
-                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-metal-200 hover:text-white border border-white/10"
+                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-slate-200 hover:text-white border border-white/15 font-bold"
                 >
                   进入 8合1 SUPER CALL 专页 →
                 </button>
@@ -363,8 +363,8 @@ export const DashboardView: React.FC = () => {
                     numLocked
                       ? 'bg-lime-400/20 text-lime-400 border border-lime-400/40'
                       : quickNums.length === 5
-                      ? 'bg-lime-400 hover:bg-lime-300 text-black shadow-glow-lime'
-                      : 'bg-surface-300 text-metal-400 cursor-not-allowed'
+                      ? 'bg-lime-400 hover:bg-lime-300 text-black shadow-glow-lime font-black'
+                      : 'bg-surface-300 text-slate-400 cursor-not-allowed'
                   }`}
                 >
                   {numLocked ? (
@@ -389,7 +389,7 @@ export const DashboardView: React.FC = () => {
         {/* Tab 2: F1 Motorsport Quick Card */}
         {stationTab === 'F1' && (
           <div className="space-y-4 font-mono text-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-metal-300">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-200">
               <span>2026 F1 马来西亚雪邦大奖赛 · 遥测正赛冠军首选推演：</span>
               <span className="text-cyber-amber font-bold">50,000 USDT 赞助奖池 · 10月04日 正赛</span>
             </div>
@@ -405,30 +405,30 @@ export const DashboardView: React.FC = () => {
                   key={d.name}
                   disabled={f1Locked}
                   onClick={() => setQuickDriver(d.name)}
-                  className={`p-3 rounded-xl border text-left transition-all ${
+                  className={`p-3.5 rounded-xl border text-left transition-all ${
                     quickDriver === d.name
                       ? 'bg-cyber-amber text-black font-black border-cyber-amber shadow-sm'
-                      : 'bg-surface-200 text-metal-200 border-white/5 hover:border-white/20'
+                      : 'bg-surface-200 text-slate-200 border-white/10 hover:border-white/25'
                   }`}
                 >
-                  <span className="text-xs truncate block">{d.name.split(' ')[0]}</span>
-                  <span className={`text-[10px] block ${quickDriver === d.name ? 'text-black/80' : 'text-metal-400'}`}>{d.team}</span>
-                  <span className={`text-[9px] block mt-1 font-bold ${quickDriver === d.name ? 'text-black' : 'text-cyber-amber'}`}>{d.pick}</span>
+                  <span className="text-xs truncate block font-bold">{d.name.split(' ')[0]}</span>
+                  <span className={`text-xs block mt-0.5 ${quickDriver === d.name ? 'text-black/90 font-medium' : 'text-slate-300'}`}>{d.team}</span>
+                  <span className={`text-xs block mt-1 font-bold ${quickDriver === d.name ? 'text-black' : 'text-cyber-amber'}`}>{d.pick}</span>
                 </button>
               ))}
             </div>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div>
-                <span className="text-metal-400">当前选定冠军：</span>
+                <span className="text-slate-300 font-medium">当前选定冠军：</span>
                 <span className="text-cyber-amber font-bold ml-1">{quickDriver}</span>
-                <span className="text-[10px] text-metal-400 block">奖励：+200 XP · F1 IQ +10 · 消耗 150 ⚡</span>
+                <span className="text-xs text-slate-300 block mt-0.5">奖励：<strong className="text-lime-400">+200 XP</strong> · F1 IQ +10 · 消耗 150 ⚡</span>
               </div>
 
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={() => navigate('/app/events/f1-malaysia-2026')}
-                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-metal-200 hover:text-white border border-white/10"
+                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-slate-200 hover:text-white border border-white/15 font-bold"
                 >
                   完整雪邦 SUPER 10 遥测卡 →
                 </button>
@@ -439,7 +439,7 @@ export const DashboardView: React.FC = () => {
                   className={`flex-1 sm:flex-initial px-6 py-2.5 rounded-xl font-bold uppercase transition-all flex items-center justify-center gap-1.5 ${
                     f1Locked
                       ? 'bg-cyber-amber/20 text-cyber-amber border border-cyber-amber/40'
-                      : 'bg-cyber-amber hover:bg-amber-400 text-black shadow-sm'
+                      : 'bg-cyber-amber hover:bg-amber-400 text-black shadow-sm font-black'
                   }`}
                 >
                   {f1Locked ? <span>已锁定 F1 冠军 ✓</span> : <span>锁定 F1 预测</span>}
@@ -452,7 +452,7 @@ export const DashboardView: React.FC = () => {
         {/* Tab 3: Horse Racing Quick Card */}
         {stationTab === 'RACING' && (
           <div className="space-y-4 font-mono text-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-metal-300">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-200">
               <span>香港沙田赛马日 · 第 6 场 1600米 独赢头马推演：</span>
               <span className="text-emerald-400 font-bold">封存倒计时 12:48 · 8 匹参赛马</span>
             </div>
@@ -463,33 +463,33 @@ export const DashboardView: React.FC = () => {
                   key={h.number}
                   disabled={racingLocked}
                   onClick={() => setQuickHorse(h)}
-                  className={`p-3 rounded-xl border text-left transition-all ${
+                  className={`p-3.5 rounded-xl border text-left transition-all ${
                     quickHorse.number === h.number
                       ? 'bg-emerald-500 text-black font-black border-emerald-500 shadow-sm'
-                      : 'bg-surface-200 text-metal-200 border-white/5 hover:border-white/20'
+                      : 'bg-surface-200 text-slate-200 border-white/10 hover:border-white/25'
                   }`}
                 >
                   <div className="flex justify-between items-center">
-                    <span className="text-xs truncate block">#{h.number} {h.name.split(' ')[0]}</span>
-                    <span className="text-[9px] opacity-80">{h.barrier}档</span>
+                    <span className="text-xs truncate block font-bold">#{h.number} {h.name.split(' ')[0]}</span>
+                    <span className="text-xs opacity-90">{h.barrier}档</span>
                   </div>
-                  <span className={`text-[10px] block ${quickHorse.number === h.number ? 'text-black/80' : 'text-metal-400'}`}>骑师: {h.jockey.split(' ')[0]}</span>
-                  <span className={`text-[9px] block mt-1 font-bold ${quickHorse.number === h.number ? 'text-black' : 'text-emerald-400'}`}>{h.communityPickRate}% 支持</span>
+                  <span className={`text-xs block mt-0.5 ${quickHorse.number === h.number ? 'text-black/90 font-medium' : 'text-slate-300'}`}>骑师: {h.jockey.split(' ')[0]}</span>
+                  <span className={`text-xs block mt-1 font-bold ${quickHorse.number === h.number ? 'text-black' : 'text-emerald-400'}`}>{h.communityPickRate}% 支持</span>
                 </button>
               ))}
             </div>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div>
-                <span className="text-metal-400">当前选定独赢：</span>
+                <span className="text-slate-300 font-medium">当前选定独赢：</span>
                 <span className="text-emerald-400 font-bold ml-1">#{quickHorse.number} {quickHorse.name}</span>
-                <span className="text-[10px] text-metal-400 block">奖励：+350 XP · Racing IQ +12 · 消耗 120 ⚡</span>
+                <span className="text-xs text-slate-300 block mt-0.5">奖励：<strong className="text-lime-400">+350 XP</strong> · Racing IQ +12 · 消耗 120 ⚡</span>
               </div>
 
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={() => navigate('/app/events/hk-racing')}
-                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-metal-200 hover:text-white border border-white/10"
+                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-slate-200 hover:text-white border border-white/15 font-bold"
                 >
                   进入赛马日 SUPER 8 专页 →
                 </button>
@@ -500,7 +500,7 @@ export const DashboardView: React.FC = () => {
                   className={`flex-1 sm:flex-initial px-6 py-2.5 rounded-xl font-bold uppercase transition-all flex items-center justify-center gap-1.5 ${
                     racingLocked
                       ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                      : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-sm'
+                      : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-sm font-black'
                   }`}
                 >
                   {racingLocked ? <span>独赢已封存 ✓</span> : <span>锁定独赢推演</span>}
@@ -510,12 +510,12 @@ export const DashboardView: React.FC = () => {
           </div>
         )}
 
-        {/* Tab 4: Tech Launch Quick Card (Section 28) */}
+        {/* Tab 4: Tech Launch Quick Card */}
         {stationTab === 'TECH' && (
           <div className="space-y-4 font-mono text-xs">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-metal-300">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-200">
               <span>10月智能手机发布观象台 · 品牌发布周期推演：</span>
-              <span className="text-cyan-400 font-bold">12 大全球品牌 · 官方发布会/新闻稿核验</span>
+              <span className="text-cyan-300 font-bold">12 大全球品牌 · 官方发布会/新闻稿核验</span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -524,15 +524,15 @@ export const DashboardView: React.FC = () => {
                   key={b}
                   disabled={techLocked}
                   onClick={() => setQuickBrand(b)}
-                  className={`p-3 rounded-xl border text-left transition-all ${
+                  className={`p-3.5 rounded-xl border text-left transition-all ${
                     quickBrand === b
                       ? 'bg-cyan-400 text-black font-black border-cyan-400 shadow-sm'
-                      : 'bg-surface-200 text-metal-200 border-white/5 hover:border-white/20'
+                      : 'bg-surface-200 text-slate-200 border-white/10 hover:border-white/25'
                   }`}
                 >
                   <span className="text-xs font-bold block">{b}</span>
-                  <span className={`text-[10px] block ${quickBrand === b ? 'text-black/80' : 'text-metal-400'}`}>10月发布推演</span>
-                  <span className={`text-[9px] block mt-1 font-bold ${quickBrand === b ? 'text-black' : 'text-cyan-300'}`}>
+                  <span className={`text-xs block mt-0.5 ${quickBrand === b ? 'text-black/90 font-medium' : 'text-slate-300'}`}>10月发布推演</span>
+                  <span className={`text-xs block mt-1 font-bold ${quickBrand === b ? 'text-black' : 'text-cyan-300'}`}>
                     OCT 15–21 窗口
                   </span>
                 </button>
@@ -541,15 +541,15 @@ export const DashboardView: React.FC = () => {
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div>
-                <span className="text-metal-400">当前选定品牌与窗口：</span>
-                <span className="text-cyan-400 font-bold ml-1">{quickBrand} ({quickTechDate})</span>
-                <span className="text-[10px] text-metal-400 block">奖励：+400 XP · Tech IQ +14 · 消耗 110 ⚡</span>
+                <span className="text-slate-300 font-medium">当前选定品牌与窗口：</span>
+                <span className="text-cyan-300 font-bold ml-1">{quickBrand} ({quickTechDate})</span>
+                <span className="text-xs text-slate-300 block mt-0.5">奖励：<strong className="text-lime-400">+400 XP</strong> · Tech IQ +14 · 消耗 110 ⚡</span>
               </div>
 
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={() => navigate('/app/events/tech-october-2026')}
-                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-metal-200 hover:text-white border border-white/10"
+                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-slate-200 hover:text-white border border-white/15 font-bold"
                 >
                   进入 10月科技专属日历与 SUPER 8 →
                 </button>
@@ -560,7 +560,7 @@ export const DashboardView: React.FC = () => {
                   className={`flex-1 sm:flex-initial px-6 py-2.5 rounded-xl font-bold uppercase transition-all flex items-center justify-center gap-1.5 ${
                     techLocked
                       ? 'bg-cyan-400/20 text-cyan-300 border border-cyan-400/40'
-                      : 'bg-cyan-400 hover:bg-cyan-300 text-black shadow-sm'
+                      : 'bg-cyan-400 hover:bg-cyan-300 text-black shadow-sm font-black'
                   }`}
                 >
                   {techLocked ? <span>科技推演已封存 ✓</span> : <span>锁定科技推演</span>}
@@ -572,7 +572,7 @@ export const DashboardView: React.FC = () => {
 
       </div>
 
-      {/* NEW PREDICTION CARD: October Smartphone Watch Prompt (Section 28) */}
+      {/* NEW PREDICTION CARD: October Smartphone Watch Prompt */}
       <div className="p-6 sm:p-7 rounded-3xl bg-[#0A0F19] border-2 border-cyan-500/50 backdrop-blur-xl shadow-[0_0_40px_rgba(0,229,255,0.15)] flex flex-col lg:flex-row items-center justify-between gap-6 overflow-hidden relative font-mono text-xs">
         <div className="flex items-center gap-5 w-full lg:w-auto">
           <div className="w-16 h-16 rounded-2xl bg-cyan-400/20 border-2 border-cyan-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(0,229,255,0.3)] flex-shrink-0 text-cyan-400">
@@ -580,16 +580,16 @@ export const DashboardView: React.FC = () => {
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded text-[10px] font-black bg-cyan-400 text-black uppercase flex items-center gap-1">
+              <span className="px-3 py-0.5 rounded text-xs font-black bg-cyan-400 text-black uppercase flex items-center gap-1">
                 <span>🚀 NEW PREDICTION // 全新科技品类上线</span>
               </span>
-              <span className="text-xs text-cyan-300 font-bold">10月智能手机发布观象台</span>
+              <span className="text-xs text-cyan-200 font-bold">10月智能手机发布观象台</span>
             </div>
             <h3 className="font-display font-black text-xl sm:text-2xl text-white">
               OCTOBER SMARTPHONE WATCH 2026
             </h3>
-            <p className="text-xs text-metal-300">
-              已完成：<strong className="text-cyan-400">6 / 8</strong> Super Calls · Tech IQ: <strong className="text-cyan-400">{user.techIQ}</strong> · 全球科技排名: <strong className="text-white">#{user.globalTechRank}</strong>
+            <p className="text-xs text-slate-200">
+              已完成：<strong className="text-cyan-300">6 / 8</strong> Super Calls · Tech IQ: <strong className="text-cyan-300">{user.techIQ}</strong> · 全球科技排名: <strong className="text-white">#{user.globalTechRank}</strong>
             </p>
           </div>
         </div>
@@ -614,26 +614,26 @@ export const DashboardView: React.FC = () => {
                 <Wallet className="w-4 h-4 text-lime-400" />
                 <span className="font-bold text-white text-sm">USDT 奖金钱包 (WALLET)</span>
               </div>
-              <span className="px-2 py-0.5 rounded text-[10px] bg-lime-400/20 text-lime-400 font-bold">
+              <span className="px-2.5 py-0.5 rounded text-xs bg-lime-400/20 text-lime-300 font-bold border border-lime-400/30">
                 100% 纯净结算
               </span>
             </div>
 
             <div className="my-2">
-              <span className="text-[10px] text-metal-400 uppercase tracking-widest block">可支配奖励余额</span>
+              <span className="text-xs text-slate-300 uppercase tracking-widest block font-medium">可支配奖励余额</span>
               <div className="font-black text-3xl sm:text-4xl text-white text-glow-lime">
                 {user.walletBalanceUSDT.toFixed(2)} <span className="text-xl text-lime-400">USDT</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/5 text-[11px]">
+            <div className="grid grid-cols-2 gap-2 pt-2.5 border-t border-white/10 text-xs">
               <div>
-                <span className="text-metal-400 block text-[9px]">8月结算中 (PENDING)</span>
-                <span className="font-bold text-white">+{user.pendingRewardsUSDT.toFixed(2)} USDT</span>
+                <span className="text-slate-300 block text-xs">8月结算中 (PENDING)</span>
+                <span className="font-bold text-white text-sm mt-0.5 block">+{user.pendingRewardsUSDT.toFixed(2)} USDT</span>
               </div>
               <div>
-                <span className="text-metal-400 block text-[9px]">历史累计收益 (LIFETIME)</span>
-                <span className="font-bold text-lime-400">{user.lifetimeRewardsUSDT.toLocaleString()} USDT</span>
+                <span className="text-slate-300 block text-xs">历史累计收益 (LIFETIME)</span>
+                <span className="font-bold text-lime-300 text-sm mt-0.5 block">{user.lifetimeRewardsUSDT.toLocaleString()} USDT</span>
               </div>
             </div>
           </div>
@@ -641,14 +641,14 @@ export const DashboardView: React.FC = () => {
           <div className="pt-3 flex gap-2">
             <button
               onClick={() => navigate('/app/wallet')}
-              className="flex-1 py-3 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-bold uppercase flex items-center justify-center gap-1.5 shadow-glow-lime"
+              className="flex-1 py-3 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-black uppercase flex items-center justify-center gap-1.5 shadow-glow-lime text-xs"
             >
               <ArrowUpRight className="w-4 h-4" />
               <span>提领 / 钱包明细</span>
             </button>
             <button
               onClick={() => navigate('/app/referral')}
-              className="px-4 py-3 rounded-xl bg-surface-200 hover:bg-surface-300 text-white border border-white/10"
+              className="px-4 py-3 rounded-xl bg-surface-200 hover:bg-surface-300 text-white border border-white/15 font-bold text-xs"
             >
               推荐中心 (20%)
             </button>
@@ -663,30 +663,30 @@ export const DashboardView: React.FC = () => {
                 <Coins className="w-4 h-4 text-cyber-blue" />
                 <span className="font-bold text-white text-sm">实时全球分红池 (GLOBAL POOL)</span>
               </div>
-              <span className="text-[10px] text-lime-400 font-bold">
+              <span className="text-xs text-lime-400 font-bold">
                 今日增长 +{poolGrowthTodayUSDT.toFixed(2)} USDT
               </span>
             </div>
 
             <div className="my-2">
-              <span className="text-[10px] text-metal-400 uppercase tracking-widest block">8月全网总分红池</span>
+              <span className="text-xs text-slate-300 uppercase tracking-widest block font-medium">8月全网总分红池</span>
               <div className="font-black text-3xl sm:text-4xl text-white">
                 {globalPoolAmountUSDT.toLocaleString('en-US', { minimumFractionDigits: 2 })} <span className="text-xl text-cyber-blue">USDT</span>
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/5 text-[10px]">
+            <div className="grid grid-cols-3 gap-2 pt-2.5 border-t border-white/10 text-xs">
               <div>
-                <span className="text-metal-400 block">全网总份数</span>
-                <span className="font-bold text-white">4,871 Shares</span>
+                <span className="text-slate-300 block text-xs">全网总份数</span>
+                <span className="font-bold text-white text-sm mt-0.5 block">4,871 Shares</span>
               </div>
               <div>
-                <span className="text-metal-400 block">单份预估值</span>
-                <span className="font-bold text-cyber-blue">78.89 USDT</span>
+                <span className="text-slate-300 block text-xs">单份预估值</span>
+                <span className="font-bold text-cyber-blue text-sm mt-0.5 block">78.89 USDT</span>
               </div>
               <div>
-                <span className="text-metal-400 block">您持有份额</span>
-                <span className="font-bold text-lime-400">8 份 (631.12 USDT)</span>
+                <span className="text-slate-300 block text-xs">您持有份额</span>
+                <span className="font-bold text-lime-300 text-sm mt-0.5 block">8 份 (631.12 USDT)</span>
               </div>
             </div>
           </div>
@@ -694,7 +694,7 @@ export const DashboardView: React.FC = () => {
           <div className="pt-3">
             <button
               onClick={() => navigate('/app/pool')}
-              className="w-full py-3 rounded-xl bg-surface-200 hover:bg-surface-300 text-white border border-white/10 font-bold flex items-center justify-center gap-1.5"
+              className="w-full py-3 rounded-xl bg-surface-200 hover:bg-surface-300 text-white border border-white/15 font-bold flex items-center justify-center gap-1.5 text-xs"
             >
               <span>查看 3 大子分红池 (社群5% + 绩效3% + 创作者2%) →</span>
             </button>
@@ -706,52 +706,52 @@ export const DashboardView: React.FC = () => {
       {/* 5. 4 Specialist Skills Overview & Daily Mission Progress */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch font-mono text-xs">
         
-        {/* Left 7 Cols: Specialist Skills Trio + Tech */}
+        {/* Left 7 Cols: Specialist Skills */}
         <div className="lg:col-span-7 p-6 rounded-3xl bg-surface-100/90 border border-white/15 backdrop-blur-xl space-y-4 shadow-glass-card">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
             <span className="font-bold text-white text-sm">多品类专属技能智商 (SPECIALIST SKILLS)</span>
-            <span className="text-metal-400 text-[10px]">去中心化专业声誉</span>
+            <span className="text-slate-300 text-xs">去中心化专业声誉</span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div 
               onClick={() => navigate('/app/iq')}
-              className="p-3 rounded-2xl bg-surface-200 border border-lime-400/30 text-center cursor-pointer hover:border-lime-400"
+              className="p-3.5 rounded-2xl bg-surface-200 border border-lime-400/30 text-center cursor-pointer hover:border-lime-400"
             >
               <Target className="w-4 h-4 text-lime-400 mx-auto mb-1" />
-              <span className="text-[10px] text-metal-400 block">数字预测</span>
-              <span className="font-black text-lg text-lime-400">{user.predictionIQ}</span>
-              <span className="text-[9px] text-metal-400 block mt-0.5">胜率 60%</span>
+              <span className="text-xs text-slate-300 block font-medium">数字预测</span>
+              <span className="font-black text-lg text-lime-300 mt-0.5 block">{user.predictionIQ}</span>
+              <span className="text-xs text-slate-300 block mt-0.5">胜率 60%</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/f1-malaysia-2026')}
-              className="p-3 rounded-2xl bg-surface-200 border border-cyber-amber/30 text-center cursor-pointer hover:border-cyber-amber"
+              className="p-3.5 rounded-2xl bg-surface-200 border border-cyber-amber/30 text-center cursor-pointer hover:border-cyber-amber"
             >
               <Flag className="w-4 h-4 text-cyber-amber mx-auto mb-1" />
-              <span className="text-[10px] text-metal-400 block">F1 赛车</span>
-              <span className="font-black text-lg text-cyber-amber">{user.f1IQ}</span>
-              <span className="text-[9px] text-metal-400 block mt-0.5">全马 #{user.f1RankMalaysia}</span>
+              <span className="text-xs text-slate-300 block font-medium">F1 赛车</span>
+              <span className="font-black text-lg text-cyber-amber mt-0.5 block">{user.f1IQ}</span>
+              <span className="text-xs text-slate-300 block mt-0.5">全马 #{user.f1RankMalaysia}</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/hk-racing')}
-              className="p-3 rounded-2xl bg-surface-200 border border-emerald-500/30 text-center cursor-pointer hover:border-emerald-500"
+              className="p-3.5 rounded-2xl bg-surface-200 border border-emerald-500/30 text-center cursor-pointer hover:border-emerald-500"
             >
               <Flame className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
-              <span className="text-[10px] text-metal-400 block">香港赛马</span>
-              <span className="font-black text-lg text-emerald-400">{user.racingIQ}</span>
-              <span className="text-[9px] text-metal-400 block mt-0.5">沙田 #{user.racingRankShaTin}</span>
+              <span className="text-xs text-slate-300 block font-medium">香港赛马</span>
+              <span className="font-black text-lg text-emerald-400 mt-0.5 block">{user.racingIQ}</span>
+              <span className="text-xs text-slate-300 block mt-0.5">沙田 #{user.racingRankShaTin}</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/tech-october-2026')}
-              className="p-3 rounded-2xl bg-surface-200 border border-cyan-400/40 text-center cursor-pointer hover:border-cyan-400 shadow-sm"
+              className="p-3.5 rounded-2xl bg-surface-200 border border-cyan-400/40 text-center cursor-pointer hover:border-cyan-400 shadow-sm"
             >
               <Smartphone className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-              <span className="text-[10px] text-metal-400 block">科技发布</span>
-              <span className="font-black text-lg text-cyan-400">{user.techIQ}</span>
-              <span className="text-[9px] text-metal-400 block mt-0.5">全球 #{user.globalTechRank}</span>
+              <span className="text-xs text-slate-300 block font-medium">科技发布</span>
+              <span className="font-black text-lg text-cyan-300 mt-0.5 block">{user.techIQ}</span>
+              <span className="text-xs text-slate-300 block mt-0.5">全球 #{user.globalTechRank}</span>
             </div>
           </div>
         </div>
@@ -761,20 +761,20 @@ export const DashboardView: React.FC = () => {
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <span className="font-bold text-white text-sm">今日任务与晋级进度</span>
-              <span className="text-lime-400 font-bold text-[10px]">达成 3 / 4 项</span>
+              <span className="text-lime-400 font-bold text-xs">达成 3 / 4 项</span>
             </div>
 
             <div className="space-y-2 mt-3">
-              <div className="flex justify-between items-center p-2 rounded-xl bg-surface-200">
-                <span className="text-metal-200">1. 完成 1 笔数字预测</span>
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-surface-200 text-xs">
+                <span className="text-slate-100 font-medium">1. 完成 1 笔数字预测</span>
                 <span className="text-lime-400 font-bold">已达成 ✓</span>
               </div>
-              <div className="flex justify-between items-center p-2 rounded-xl bg-surface-200">
-                <span className="text-metal-200">2. 参与 10月科技发布推演</span>
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-surface-200 text-xs">
+                <span className="text-slate-100 font-medium">2. 参与 10月科技发布推演</span>
                 <span className="text-lime-400 font-bold">已达成 ✓</span>
               </div>
-              <div className="flex justify-between items-center p-2 rounded-xl bg-surface-200">
-                <span className="text-metal-200">3. 晋级【神谕至尊 (20份)】</span>
+              <div className="flex justify-between items-center p-2.5 rounded-xl bg-surface-200 text-xs">
+                <span className="text-slate-100 font-medium">3. 晋级【神谕至尊 (20份)】</span>
                 <span className="text-cyber-blue font-bold">72% 进行中</span>
               </div>
             </div>
@@ -783,7 +783,7 @@ export const DashboardView: React.FC = () => {
           <div className="pt-2">
             <button
               onClick={() => navigate('/app/ranking')}
-              className="w-full py-2.5 rounded-xl bg-surface-200 hover:bg-surface-300 text-metal-200 hover:text-white text-center font-bold text-[11px]"
+              className="w-full py-2.5 rounded-xl bg-surface-200 hover:bg-surface-300 text-slate-100 hover:text-white text-center font-bold text-xs border border-white/10"
             >
               查看 6 阶晋级天梯与考核详情 →
             </button>
