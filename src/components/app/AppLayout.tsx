@@ -13,6 +13,7 @@ import { PredictView } from './views/PredictView';
 import { F1PredictView } from './views/F1PredictView';
 import { HKRacingView } from './views/HKRacingView';
 import { TechLaunchView } from './views/TechLaunchView';
+import { CryptoPredictView } from './views/CryptoPredictView';
 import { F1IQView } from './views/F1IQView';
 import { GamesHubView } from './views/GamesHubView';
 import { PredictionsView } from './views/PredictionsView';
@@ -46,6 +47,8 @@ export const AppLayout: React.FC = () => {
         return '香港赛马日推演 (HONG KONG RACE DAY)';
       case '/app/events/tech-october-2026':
         return '10月智能手机发布观象台 (OCTOBER TECH WATCH)';
+      case '/app/events/crypto':
+        return '加密市场事件推演 (CRYPTO EVENT PREDICTION)';
       case '/app/f1-iq':
         return 'F1 专属预测智商 (F1 MOTORSPORT IQ)';
       case '/app/games':
@@ -94,6 +97,8 @@ export const AppLayout: React.FC = () => {
         return <HKRacingView />;
       case '/app/events/tech-october-2026':
         return <TechLaunchView />;
+      case '/app/events/crypto':
+        return <CryptoPredictView />;
       case '/app/f1-iq':
         return <F1IQView />;
       case '/app/games':

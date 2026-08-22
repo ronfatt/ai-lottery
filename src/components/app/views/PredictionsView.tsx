@@ -23,7 +23,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const PredictionsView: React.FC = () => {
   const { predictionRounds } = useDemo();
   const [searchTerm, setSearchTerm] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH'>('ALL');
+  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH' | 'CRYPTO'>('ALL');
   const [selectedRound, setSelectedRound] = useState<PredictionHistoryRound | null>(null);
 
   const filtered = predictionRounds.filter((r) => {
@@ -47,8 +47,8 @@ export const PredictionsView: React.FC = () => {
           <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
             我的历史预测与全账本核验
           </h2>
-          <p className="text-xs font-mono text-metal-300 mt-1">
-            支持香港六合彩数字预测、F1 雪邦赛车、香港赛马日与 10月科技新品发布 · 密码学确定性存证
+          <p className="text-xs font-mono text-slate-200 mt-1">
+            支持香港六合彩数字预测、F1 雪邦赛车、香港赛马日、10月科技新品与加密市场大关 · 密码学确定性存证
           </p>
         </div>
 
@@ -57,43 +57,49 @@ export const PredictionsView: React.FC = () => {
           <div className="flex flex-wrap bg-surface-100 p-1 rounded-xl border border-white/10 gap-1">
             <button
               onClick={() => setCategoryFilter('ALL')}
-              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'ALL' ? 'bg-lime-400 text-black' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'ALL' ? 'bg-lime-400 text-black' : 'text-slate-200'}`}
             >
               全部
             </button>
             <button
               onClick={() => setCategoryFilter('NUMBER')}
-              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'NUMBER' ? 'bg-lime-400 text-black' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'NUMBER' ? 'bg-lime-400 text-black' : 'text-slate-200'}`}
             >
               数字
             </button>
             <button
               onClick={() => setCategoryFilter('F1')}
-              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'F1' ? 'bg-cyber-amber text-black' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'F1' ? 'bg-cyber-amber text-black' : 'text-slate-200'}`}
             >
               F1 赛车
             </button>
             <button
               onClick={() => setCategoryFilter('HORSE_RACING')}
-              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'HORSE_RACING' ? 'bg-emerald-500 text-black' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'HORSE_RACING' ? 'bg-emerald-500 text-black' : 'text-slate-200'}`}
             >
               香港赛马
             </button>
             <button
               onClick={() => setCategoryFilter('TECH')}
-              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'TECH' ? 'bg-cyan-400 text-black' : 'text-metal-400'}`}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'TECH' ? 'bg-cyan-400 text-black' : 'text-slate-200'}`}
             >
               科技新品
+            </button>
+            <button
+              onClick={() => setCategoryFilter('CRYPTO')}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'CRYPTO' ? 'bg-amber-400 text-black font-black' : 'text-slate-200'}`}
+            >
+              加密市场
             </button>
           </div>
 
           <div className="relative flex-1 sm:w-56">
-            <Search className="w-4 h-4 text-metal-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-300 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="搜索期数 / 赛事 / 品牌..."
+              placeholder="搜索期数 / 赛事 / 资产..."
               className="w-full bg-surface-100 border border-white/10 rounded-xl py-2 pl-9 pr-3 text-xs font-mono text-white focus:outline-none focus:border-lime-400"
             />
           </div>
@@ -104,10 +110,10 @@ export const PredictionsView: React.FC = () => {
       <div className="bg-surface-100/90 border border-white/15 rounded-3xl overflow-hidden backdrop-blur-xl shadow-glass-card">
         <div className="overflow-x-auto">
           <table className="w-full text-left font-mono text-xs">
-            <thead className="bg-surface-200/90 text-metal-400 text-[10px] uppercase border-b border-white/10">
+            <thead className="bg-surface-200/90 text-slate-300 text-[10px] uppercase border-b border-white/10">
               <tr>
                 <th className="py-3.5 px-4">品类</th>
-                <th className="py-3.5 px-4">期数 / 赛事 / 品牌</th>
+                <th className="py-3.5 px-4">期数 / 赛事 / 标的</th>
                 <th className="py-3.5 px-4">推演模式</th>
                 <th className="py-3.5 px-4">用户推演选择</th>
                 <th className="py-3.5 px-4">官方开奖 / 成绩参考</th>
@@ -116,7 +122,7 @@ export const PredictionsView: React.FC = () => {
                 <th className="py-3.5 px-4 text-right">操作</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-metal-200">
+            <tbody className="divide-y divide-white/5 text-slate-200">
               {filtered.map((item) => (
                 <tr
                   key={item.id}
@@ -136,9 +142,13 @@ export const PredictionsView: React.FC = () => {
                       <span className="px-2 py-0.5 rounded text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                         赛马
                       </span>
-                    ) : (
+                    ) : item.gameCategory === 'TECH' ? (
                       <span className="px-2 py-0.5 rounded text-[9px] bg-cyan-400/20 text-cyan-300 border border-cyan-400/30">
                         科技
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded text-[9px] bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                        加密
                       </span>
                     )}
                   </td>

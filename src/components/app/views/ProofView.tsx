@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
 import { useDemo } from '../../../context/DemoContext';
-import { ShieldCheck, Search, CheckCircle2, Lock, Cpu, Sparkles, ExternalLink, Target, Flag, Flame, Smartphone } from 'lucide-react';
+import { ShieldCheck, Search, CheckCircle2, Lock, Cpu, Sparkles, ExternalLink, Target, Flag, Flame, Smartphone, LineChart } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const ProofView: React.FC = () => {
-  const [selectedProofType, setSelectedProofType] = useState<'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH'>('TECH');
-  const [queryHash, setQueryHash] = useState('0xA791C9284756A1029384756C192837465F0918273645A0192837465B01928374');
+  const [selectedProofType, setSelectedProofType] = useState<'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH' | 'CRYPTO'>('CRYPTO');
+  const [queryHash, setQueryHash] = useState('0xC829F84756A1029384756C192837465F0918273645A0192837465B0192837465');
   const [isVerifying, setIsVerifying] = useState(false);
 
   const proofPresets = {
+    CRYPTO: {
+      type: 'CRYPTO',
+      event: 'BTC 10万美元突破推演 (BTC $100K by Nov 30)',
+      venue: '全球加密现货市场 (Crypto Spot Oracle)',
+      race: 'BTC/USD 10万美元里程碑目标',
+      selection: '推演: YES (11月底前触及 $100,000.00)',
+      timestamp: '22 AUG 2026 18:24:12 UTC',
+      hash: '0xC829F84756A1029384756C192837465F0918273645A0192837465B0192837465',
+      block: 28484910,
+      resultRef: 'CoinMarketCap BTC/USD & Approved Market Data Oracle (数据源已锁定 ✓)',
+      status: 'SEALED & REFERENCE SOURCE LOCKED ✓',
+      modified: 'NO (不可篡改)',
+      xpGained: '+500 XP',
+    },
     TECH: {
       type: 'TECH',
       event: '10月智能手机发布观象台 (October Smartphone Watch)',
@@ -67,9 +81,9 @@ export const ProofView: React.FC = () => {
     },
   };
 
-  const [verifyResult, setVerifyResult] = useState<any>(proofPresets.TECH);
+  const [verifyResult, setVerifyResult] = useState<any>(proofPresets.CRYPTO);
 
-  const handleSelectPreset = (key: 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH') => {
+  const handleSelectPreset = (key: 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH' | 'CRYPTO') => {
     setSelectedProofType(key);
     const p = proofPresets[key];
     setQueryHash(p.hash);
@@ -97,17 +111,27 @@ export const ProofView: React.FC = () => {
         <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
           VERIFY EVERYTHING. 验证一切多品类存证
         </h2>
-        <p className="text-xs font-mono text-metal-300">
-          全面支持数字预测、F1 赛车、香港赛马日与 10月科技新品发布 · 基于 SHA-256 承诺哈希全量可溯
+        <p className="text-xs font-mono text-slate-200">
+          全面支持数字预测、F1 赛车、香港赛马日、科技新品发布与加密市场大关 · 基于 SHA-256 承诺哈希全量可溯
         </p>
       </div>
 
       {/* Preset Category Switcher */}
       <div className="flex flex-wrap gap-2 font-mono text-xs">
         <button
+          onClick={() => handleSelectPreset('CRYPTO')}
+          className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
+            selectedProofType === 'CRYPTO' ? 'bg-cyber-amber text-black shadow-[0_0_20px_rgba(245,158,11,0.4)] font-black' : 'bg-surface-100 text-slate-200 border border-white/15'
+          }`}
+        >
+          <LineChart className="w-3.5 h-3.5" />
+          <span>加密市场存证 (Crypto Market)</span>
+        </button>
+
+        <button
           onClick={() => handleSelectPreset('TECH')}
           className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
-            selectedProofType === 'TECH' ? 'bg-cyan-400 text-black shadow-[0_0_20px_rgba(0,229,255,0.4)]' : 'bg-surface-100 text-metal-300 border border-white/10'
+            selectedProofType === 'TECH' ? 'bg-cyan-400 text-black shadow-[0_0_20px_rgba(0,229,255,0.4)] font-black' : 'bg-surface-100 text-slate-200 border border-white/15'
           }`}
         >
           <Smartphone className="w-3.5 h-3.5" />
@@ -117,7 +141,7 @@ export const ProofView: React.FC = () => {
         <button
           onClick={() => handleSelectPreset('HORSE_RACING')}
           className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
-            selectedProofType === 'HORSE_RACING' ? 'bg-emerald-500 text-black shadow-glow-lime' : 'bg-surface-100 text-metal-300 border border-white/10'
+            selectedProofType === 'HORSE_RACING' ? 'bg-emerald-500 text-black shadow-glow-lime font-black' : 'bg-surface-100 text-slate-200 border border-white/15'
           }`}
         >
           <Flame className="w-3.5 h-3.5" />
@@ -127,7 +151,7 @@ export const ProofView: React.FC = () => {
         <button
           onClick={() => handleSelectPreset('F1')}
           className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
-            selectedProofType === 'F1' ? 'bg-cyber-amber text-black shadow-sm' : 'bg-surface-100 text-metal-300 border border-white/10'
+            selectedProofType === 'F1' ? 'bg-cyber-amber text-black shadow-sm font-black' : 'bg-surface-100 text-slate-200 border border-white/15'
           }`}
         >
           <Flag className="w-3.5 h-3.5" />
@@ -137,7 +161,7 @@ export const ProofView: React.FC = () => {
         <button
           onClick={() => handleSelectPreset('NUMBER')}
           className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
-            selectedProofType === 'NUMBER' ? 'bg-lime-400 text-black shadow-glow-lime' : 'bg-surface-100 text-metal-300 border border-white/10'
+            selectedProofType === 'NUMBER' ? 'bg-lime-400 text-black shadow-glow-lime font-black' : 'bg-surface-100 text-slate-200 border border-white/15'
           }`}
         >
           <Target className="w-3.5 h-3.5" />
@@ -148,18 +172,18 @@ export const ProofView: React.FC = () => {
       {/* Interactive Search Bar Card */}
       <div className="p-6 sm:p-8 rounded-3xl bg-surface-100/90 border border-white/15 backdrop-blur-xl shadow-glass-card space-y-4">
         <form onSubmit={handleSearchVerify} className="space-y-2">
-          <label className="text-xs font-mono text-metal-300 block">
+          <label className="text-xs font-mono text-slate-200 block font-medium">
             输入任意预测承诺哈希 (Commit Hash) 查验密码学存证与预言机签名：
           </label>
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-metal-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate-300 absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={queryHash}
                 onChange={(e) => setQueryHash(e.target.value)}
-                placeholder="0xA791C..."
-                className="w-full bg-surface-200 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-xs font-mono text-white focus:outline-none focus:border-lime-400 select-all"
+                placeholder="0xC829F..."
+                className="w-full bg-surface-200 border border-white/15 rounded-xl py-3 pl-10 pr-4 text-xs font-mono text-white focus:outline-none focus:border-lime-400 select-all"
               />
             </div>
 
@@ -197,7 +221,7 @@ export const ProofView: React.FC = () => {
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-[10px] font-mono text-lime-400 font-bold uppercase tracking-widest block">
+                <span className="text-xs font-mono text-lime-400 font-bold uppercase tracking-widest block">
                   链上时间戳证明已成功核验 ✓ (CRYPTOGRAPHIC VERIFIED)
                 </span>
                 <h3 className="font-display font-black text-xl text-white">
@@ -206,59 +230,59 @@ export const ProofView: React.FC = () => {
               </div>
             </div>
 
-            <span className="px-3 py-1 rounded-xl bg-lime-400 text-black font-mono font-black text-xs">
+            <span className="px-3 py-1.5 rounded-xl bg-lime-400 text-black font-mono font-black text-xs">
               状态：{verifyResult.status}
             </span>
           </div>
 
           {/* Details Table */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
-            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">发布会场地 / 场次</span>
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/10 space-y-1">
+              <span className="text-slate-300 text-xs block uppercase font-medium">数据源与市场</span>
               <span className="text-white font-bold text-sm">
                 {verifyResult.venue} · {verifyResult.race}
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">用户锁票推演选择</span>
-              <span className="text-cyan-400 font-bold text-sm">{verifyResult.selection}</span>
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/10 space-y-1">
+              <span className="text-slate-300 text-xs block uppercase font-medium">用户锁票推演选择</span>
+              <span className="text-amber-300 font-bold text-sm">{verifyResult.selection}</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">客观官方事实源 (OFFICIAL SOURCE)</span>
-              <span className="text-metal-200 font-medium text-xs">{verifyResult.resultRef}</span>
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/10 space-y-1">
+              <span className="text-slate-300 text-xs block uppercase font-medium">客观权威数据源核验</span>
+              <span className="text-slate-100 font-medium text-xs">{verifyResult.resultRef}</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">区块链不可篡改时间戳</span>
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/10 space-y-1">
+              <span className="text-slate-300 text-xs block uppercase font-medium">区块链不可篡改时间戳</span>
               <span className="text-white font-bold text-sm">{verifyResult.timestamp}</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1 md:col-span-2">
-              <span className="text-metal-400 text-[10px] block uppercase">SHA-256 密码学承诺哈希 (COMMITMENT HASH)</span>
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/10 space-y-1 md:col-span-2">
+              <span className="text-slate-300 text-xs block uppercase font-medium">SHA-256 密码学承诺哈希 (COMMITMENT HASH)</span>
               <span className="text-lime-400 break-all select-all font-bold text-xs">
                 {verifyResult.hash}
               </span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">主网区块高度</span>
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/10 space-y-1">
+              <span className="text-slate-300 text-xs block uppercase font-medium">主网区块高度</span>
               <span className="text-white font-bold text-sm">#{verifyResult.block}</span>
             </div>
 
-            <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">历史是否有修改记录 (TAMPERED)</span>
+            <div className="p-4 rounded-xl bg-surface-200 border border-white/10 space-y-1">
+              <span className="text-slate-300 text-xs block uppercase font-medium">历史是否有修改记录 (TAMPERED)</span>
               <span className="text-lime-400 font-black text-sm">{verifyResult.modified}</span>
             </div>
           </div>
 
           {/* Slogan */}
-          <div className="p-4 rounded-2xl bg-surface-50 border border-white/5 text-center font-mono">
+          <div className="p-4 rounded-2xl bg-surface-50 border border-white/10 text-center font-mono">
             <h4 className="font-display font-black text-base text-white">
               NO ADMIN CAN CHANGE THE PAST.
             </h4>
-            <span className="text-xs text-lime-400">
+            <span className="text-xs text-lime-400 font-bold">
               没有任何管理员或中心化服务器能够篡改已封存的预测历史。
             </span>
           </div>

@@ -7,7 +7,8 @@ import {
   RankLevelInfo,
   HorseRunner,
   TechBrand,
-  TechPredictionMonth
+  TechPredictionMonth,
+  CryptoPredictionEvent
 } from '../types/platform';
 
 // Exact 6-Tier Member Rank Ladder
@@ -313,6 +314,79 @@ export const MOCK_OCTOBER_TECH_DATA: TechPredictionMonth = {
   verificationRule: '仅以官方新闻稿 (Newsroom)、官网公告、官方发布会或官方社交蓝V认证公告为准。传闻、渲染图及认证入网不计入结果。',
 };
 
+// Mock Crypto November Event (Hero Bitcoin $100K Challenge - Reusable Model)
+export const MOCK_CRYPTO_NOVEMBER_EVENT: CryptoPredictionEvent = {
+  id: 'crypto-btc-100k-nov26',
+  asset: 'BTC/USD',
+  title: 'WILL BITCOIN HIT $100K BEFORE NOVEMBER ENDS? // 10万美元里程碑推演',
+  eventType: 'PRICE_MILESTONE',
+  targetPrice: 100000.00,
+  currentReferencePrice: 77422.50,
+  startDate: '2026-08-01 00:00:00 UTC',
+  settlementDate: '2026-11-30 23:59:59 UTC',
+  referenceSource: 'CoinMarketCap BTC/USD & Approved Market Data Oracle (客观现货参考价)',
+  selectionOptions: ['YES', 'NO'],
+  communitySelectionRates: {
+    'YES': 64,
+    'NO': 36,
+  },
+  status: 'OPEN',
+};
+
+// Mock Crypto News Events (Section 18 & 19)
+export const MOCK_CRYPTO_NEWS_EVENTS = [
+  {
+    id: 'cne-01',
+    title: '本月内是否会有新的主权国家或顶级基金提交官方 BTC ETF/储备法案？',
+    category: 'ETF / REGULATION',
+    source: 'SEC / 主权国家官方公报 (Official Filing)',
+    options: ['YES (62%)', 'NO (38%)'],
+    participants: 14280,
+  },
+  {
+    id: 'cne-02',
+    title: 'BTC 是否会在 11 月 15 日前刷新历史历史新高 (ATH)？',
+    category: 'PRICE ATH',
+    source: '全网聚合权威现货公价 (All-Time-High Reference)',
+    options: ['YES (54%)', 'NO (46%)'],
+    participants: 18920,
+  },
+  {
+    id: 'cne-03',
+    title: '以太坊 ETH 11 月全月相对收益率是否跑赢 BTC？',
+    category: 'ETH VS BTC',
+    source: 'CMC 11月1日00:00 - 11月30日23:59 相对涨跌幅',
+    options: ['BTC 跑赢 (58%)', 'ETH 跑赢 (42%)'],
+    participants: 12400,
+  },
+  {
+    id: 'cne-04',
+    title: 'BTC 全网市值统治率 (Dominance) 11 月底是否突破 60%？',
+    category: 'DOMINANCE',
+    source: 'CoinMarketCap / TradingView BTC.D 官方收盘读数',
+    options: ['YES (48%)', 'NO (52%)'],
+    participants: 9840,
+  },
+  {
+    id: 'cne-05',
+    title: '全球前 10 市值加密资产名次在 11 月底是否发生位次更迭？',
+    category: 'TOP 10 RANKING',
+    source: 'CoinMarketCap 30 NOV 23:59:59 UTC 市值官方排名',
+    options: ['发生变动 (68%)', '保持不变 (32%)'],
+    participants: 11200,
+  },
+];
+
+// Mock Crypto Calendar (Section 20)
+export const MOCK_CRYPTO_CALENDAR = [
+  { date: '10月 31日', event: '10月 月度现货收盘定盘 (Monthly Close)', type: 'PRICE', impact: 'HIGH' },
+  { date: '11月 05日', event: '以太坊主网 Pectra 升级主网激活窗口', type: 'PROTOCOL', impact: 'HIGH' },
+  { date: '11月 08日', event: '美联储 FOMC 议息决议与流动性指引', type: 'MACRO', impact: 'CRITICAL' },
+  { date: '11月 15日', event: 'Solana 核心生态 2.4 亿美元解锁窗口', type: 'TOKEN_UNLOCK', impact: 'MEDIUM' },
+  { date: '11月 20日', event: 'SEC 现货 Solana ETF 关键审查答复节点', type: 'ETF', impact: 'HIGH' },
+  { date: '11月 30日', event: 'BTC 10万美元里程碑最终结算截止时刻', type: 'PRICE', impact: 'CRITICAL' },
+];
+
 // Mock Network Members under R.ON
 export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
   {
@@ -509,6 +583,27 @@ export const MOCK_PREDICTION_ROUNDS: PredictionHistoryRound[] = [
     accuracyRate: '等待结算',
   },
   {
+    id: 'rnd-crypto-001',
+    gameCategory: 'CRYPTO',
+    roundId: 'BTC-100K-NOV26',
+    eventTitle: 'BTC 10万美元突破推演 (BTC $100K by Nov 30)',
+    referenceSource: 'CoinMarketCap BTC/USD & Approved Market Oracle',
+    drawDate: '2026-11-30 23:59',
+    closingTime: '2026-11-30 23:00',
+    userSelectionText: '10月前突破 $100K: YES | 11月收盘区间: $100K–109K | BTC跑赢ETH: YES',
+    officialResultText: '等待 11月30日 23:59 UTC 权威客观现货定盘',
+    hits: 0,
+    score: '已在链上盖戳封存 · 等待 11月30日 定盘',
+    xpGained: 500,
+    iqDelta: 0,
+    rewardUSDT: 50.0,
+    hash: '0xC829F84756A1029384756C192837465F0918273645A0192837465B0192837465',
+    blockNumber: 28484910,
+    status: 'SEALED',
+    gameMode: 'NOVEMBER CRYPTO SUPER 8',
+    accuracyRate: '进行中',
+  },
+  {
     id: 'rnd-num-001',
     gameCategory: 'NUMBER',
     roundId: '#260822',
@@ -585,6 +680,13 @@ export const MOCK_LEADERBOARDS = {
     { rank: 3, name: 'Sophia_HK', techIQ: 840, correctLaunches: 15, exactHits: 5, super8Score: '85%', badge: '🔮 科技神谕' },
     { rank: 4, name: 'David_KL', techIQ: 830, correctLaunches: 14, exactHits: 4, super8Score: '81%', badge: '🔮 科技使者' },
     { rank: 362, name: 'R.ON (您)', techIQ: 811, correctLaunches: 12, exactHits: 4, super8Score: '78%', badge: '🚀 科技大师', isUser: true },
+  ],
+  crypto: [
+    { rank: 1, name: 'MacroNakamoto', cryptoIQ: 896, correctCalls: 34, milestoneHits: 12, weeklyAcc: '88%', streak: 14, badge: '🌟 加密神谕' },
+    { rank: 2, name: 'HodlStrategist', cryptoIQ: 874, correctCalls: 31, milestoneHits: 10, weeklyAcc: '84%', streak: 10, badge: '👑 盘口先知' },
+    { rank: 3, name: 'SingaporeWhale', cryptoIQ: 852, correctCalls: 28, milestoneHits: 9, weeklyAcc: '81%', streak: 8, badge: '🔮 市场大师' },
+    { rank: 4, name: 'CyberAlpha_MY', cryptoIQ: 835, correctCalls: 26, milestoneHits: 8, weeklyAcc: '78%', streak: 7, badge: '🔮 市场使者' },
+    { rank: 412, name: 'R.ON (您)', cryptoIQ: 796, correctCalls: 24, milestoneHits: 8, weeklyAcc: '75%', streak: 6, badge: '⚡ 加密专家', isUser: true },
   ],
 };
 
@@ -688,10 +790,18 @@ export const MOCK_POOL_HISTORY: PoolHistoryMonth[] = [
 // Mock Notifications
 export const MOCK_NOTIFICATIONS: NotificationItem[] = [
   {
+    id: 'notif-crypto',
+    icon: '📈',
+    title: 'BTC 10万美元突破推演 (November Challenge) 正式开启！28,421 位玩家已参与。',
+    time: '刚刚',
+    read: false,
+    type: 'crypto',
+  },
+  {
     id: 'notif-000',
     icon: '📱',
     title: '10月智能手机发布观象台上线！推演 OPPO、vivo、Xiaomi 正式发布档期。',
-    time: '刚刚',
+    time: '10分钟前',
     read: false,
     type: 'tech',
   },

@@ -26,7 +26,8 @@ import {
   Activity,
   Calendar,
   Radio,
-  Smartphone
+  Smartphone,
+  LineChart
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -40,11 +41,12 @@ export const DashboardView: React.FC = () => {
     addF1Prediction,
     addHorseRacingPrediction,
     addTechPrediction,
+    addCryptoPrediction,
     showToast 
   } = useDemo();
 
-  // Quick Prediction Station Active Tab (4 categories)
-  const [stationTab, setStationTab] = useState<'NUMBER' | 'F1' | 'RACING' | 'TECH'>('NUMBER');
+  // Quick Prediction Station Active Tab (5 categories)
+  const [stationTab, setStationTab] = useState<'NUMBER' | 'F1' | 'RACING' | 'TECH' | 'CRYPTO'>('NUMBER');
 
   // Number Quick State
   const [quickNums, setQuickNums] = useState<number[]>([7, 18, 23, 36, 41]);
@@ -66,6 +68,11 @@ export const DashboardView: React.FC = () => {
   const [quickTechDate, setQuickTechDate] = useState('OCT 15–21');
   const [isLockingTech, setIsLockingTech] = useState(false);
   const [techLocked, setTechLocked] = useState(false);
+
+  // Crypto Quick State
+  const [quickCryptoCall, setQuickCryptoCall] = useState<'YES' | 'NO'>('YES');
+  const [isLockingCrypto, setIsLockingCrypto] = useState(false);
+  const [cryptoLocked, setCryptoLocked] = useState(false);
 
   const handleToggleNum = (n: number) => {
     if (numLocked) return;
@@ -122,6 +129,17 @@ export const DashboardView: React.FC = () => {
     }, 1000);
   };
 
+  const handleQuickLockCrypto = async () => {
+    if (isLockingCrypto || cryptoLocked) return;
+    setIsLockingCrypto(true);
+    setTimeout(async () => {
+      await addCryptoPrediction(`BTC 10万美元里程碑推演: 【${quickCryptoCall}】(目标 $100,000)`, '加密市场极速推演');
+      setIsLockingCrypto(false);
+      setCryptoLocked(true);
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 }, colors: ['#F59E0B', '#00FF66', '#00E5FF'] });
+    }, 1000);
+  };
+
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-12 font-sans">
       
@@ -141,7 +159,7 @@ export const DashboardView: React.FC = () => {
             下午好，{user.name}。
           </h2>
           <p className="text-xs font-mono text-slate-200 mt-0.5">
-            全网可验证超级预测网络 · 香港六合彩数字基本盘 + F1 赛车 + 香港赛马日 + 科技新品发布
+            全网可验证超级预测网络 · 香港六合彩数字基本盘 + F1 赛车 + 香港赛马日 + 科技发布 + 加密市场
           </p>
         </div>
 
@@ -167,7 +185,7 @@ export const DashboardView: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Compact 4 KPI Overview Grid (High Contrast Text) */}
+      {/* 2. Compact 4 KPI Overview Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 font-mono text-xs">
         
         {/* KPI 1: Prediction IQ */}
@@ -183,7 +201,7 @@ export const DashboardView: React.FC = () => {
             {user.predictionIQ}
           </div>
           <div className="text-xs text-slate-200 flex justify-between">
-            <span>F1: {user.f1IQ} · 赛马: {user.racingIQ} · 科技: {user.techIQ}</span>
+            <span>F1: {user.f1IQ} · 赛马: {user.racingIQ} · 科技: {user.techIQ} · 加密: {user.cryptoIQ}</span>
             <span className="text-lime-400 font-bold">▲ +14</span>
           </div>
         </div>
@@ -244,7 +262,7 @@ export const DashboardView: React.FC = () => {
 
       </div>
 
-      {/* 3. CORE ACTION CENTER: Interactive Quick Prediction Hub (Tabs: Number / F1 / Horse Racing / Tech) */}
+      {/* 3. CORE ACTION CENTER: Interactive Quick Prediction Hub (Tabs: Number / F1 / Horse Racing / Tech / Crypto) */}
       <div className="bg-surface-100/95 border-2 border-lime-400/50 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-glass-card space-y-6">
         
         {/* Hub Header & Mode Tabs */}
@@ -255,11 +273,11 @@ export const DashboardView: React.FC = () => {
                 QUICK PREDICTION STATION // 极速推演站
               </span>
               <span className="px-2 py-0.5 rounded text-[10px] bg-surface-200 text-slate-200 font-bold">
-                支持 4 大品类一键锁票
+                支持 5 大品类一键锁票
               </span>
             </div>
             <h3 className="font-display font-black text-xl text-white">
-              今日重点预测赛事与发布会
+              今日重点预测赛事、发布会与行情
             </h3>
           </div>
 
@@ -267,7 +285,7 @@ export const DashboardView: React.FC = () => {
           <div className="flex flex-wrap bg-surface-200 p-1 rounded-2xl border border-white/15 gap-1">
             <button
               onClick={() => setStationTab('NUMBER')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+              className={`px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
                 stationTab === 'NUMBER' ? 'bg-lime-400 text-black shadow-glow-lime' : 'text-slate-200 hover:text-white'
               }`}
             >
@@ -277,7 +295,7 @@ export const DashboardView: React.FC = () => {
 
             <button
               onClick={() => setStationTab('F1')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+              className={`px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
                 stationTab === 'F1' ? 'bg-cyber-amber text-black shadow-sm' : 'text-slate-200 hover:text-white'
               }`}
             >
@@ -287,7 +305,7 @@ export const DashboardView: React.FC = () => {
 
             <button
               onClick={() => setStationTab('RACING')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+              className={`px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
                 stationTab === 'RACING' ? 'bg-emerald-500 text-black shadow-sm' : 'text-slate-200 hover:text-white'
               }`}
             >
@@ -297,12 +315,22 @@ export const DashboardView: React.FC = () => {
 
             <button
               onClick={() => setStationTab('TECH')}
-              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+              className={`px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
                 stationTab === 'TECH' ? 'bg-cyan-400 text-black shadow-sm' : 'text-slate-200 hover:text-white'
               }`}
             >
               <Smartphone className="w-3.5 h-3.5" />
-              <span>📱 10月科技发布 (New)</span>
+              <span>📱 10月科技发布</span>
+            </button>
+
+            <button
+              onClick={() => setStationTab('CRYPTO')}
+              className={`px-3 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 text-xs ${
+                stationTab === 'CRYPTO' ? 'bg-amber-400 text-black shadow-sm font-black' : 'text-slate-200 hover:text-white'
+              }`}
+            >
+              <LineChart className="w-3.5 h-3.5" />
+              <span>📈 加密市场 (Crypto)</span>
             </button>
           </div>
         </div>
@@ -570,9 +598,82 @@ export const DashboardView: React.FC = () => {
           </div>
         )}
 
+        {/* Tab 5: Crypto Market Quick Card (Section 28) */}
+        {stationTab === 'CRYPTO' && (
+          <div className="space-y-4 font-mono text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-200">
+              <span>BTC 10万美元里程碑挑战 · 11月突破推演：</span>
+              <span className="text-amber-300 font-bold">目标 $100,000 · CMC 现货公价结算</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                disabled={cryptoLocked}
+                onClick={() => setQuickCryptoCall('YES')}
+                className={`p-4 rounded-xl border text-left transition-all ${
+                  quickCryptoCall === 'YES'
+                    ? 'bg-lime-400 text-black font-black border-lime-400 shadow-sm'
+                    : 'bg-surface-200 text-slate-200 border-white/10 hover:border-white/25'
+                }`}
+              >
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-bold block">YES (11月底前触及 $100K)</span>
+                  <span className={`text-xs font-black ${quickCryptoCall === 'YES' ? 'text-black' : 'text-lime-400'}`}>64% 支持</span>
+                </div>
+                <span className={`text-xs block mt-1 ${quickCryptoCall === 'YES' ? 'text-black/90' : 'text-slate-300'}`}>当前现货 $77,422.50 · 距目标 +29.2%</span>
+              </button>
+
+              <button
+                disabled={cryptoLocked}
+                onClick={() => setQuickCryptoCall('NO')}
+                className={`p-4 rounded-xl border text-left transition-all ${
+                  quickCryptoCall === 'NO'
+                    ? 'bg-red-500 text-white font-black border-red-500 shadow-sm'
+                    : 'bg-surface-200 text-slate-200 border-white/10 hover:border-white/25'
+                }`}
+              >
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-bold block">NO (未能触及 $100K)</span>
+                  <span className={`text-xs font-black ${quickCryptoCall === 'NO' ? 'text-white' : 'text-red-400'}`}>36% 支持</span>
+                </div>
+                <span className={`text-xs block mt-1 ${quickCryptoCall === 'NO' ? 'text-white/90' : 'text-slate-300'}`}>11月30日 23:59:59 UTC 前未触及 10 万美元</span>
+              </button>
+            </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div>
+                <span className="text-slate-300 font-medium">当前选定推演：</span>
+                <span className="text-amber-300 font-bold ml-1">BTC $100K ➔ 【{quickCryptoCall}】</span>
+                <span className="text-xs text-slate-300 block mt-0.5">奖励：<strong className="text-lime-400">+500 XP</strong> · Crypto IQ +18 · 消耗 100 ⚡</span>
+              </div>
+
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <button
+                  onClick={() => navigate('/app/events/crypto')}
+                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-slate-200 hover:text-white border border-white/15 font-bold"
+                >
+                  进入加密推演专页与 SUPER 8 →
+                </button>
+
+                <button
+                  onClick={handleQuickLockCrypto}
+                  disabled={isLockingCrypto || cryptoLocked}
+                  className={`flex-1 sm:flex-initial px-6 py-2.5 rounded-xl font-bold uppercase transition-all flex items-center justify-center gap-1.5 ${
+                    cryptoLocked
+                      ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40'
+                      : 'bg-cyber-amber hover:bg-amber-400 text-black shadow-sm font-black'
+                  }`}
+                >
+                  {cryptoLocked ? <span>加密推演已封存 ✓</span> : <span>锁定加密推演</span>}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
 
-      {/* NEW PREDICTION CARD: October Smartphone Watch Prompt */}
+      {/* TECH WATCH PROMPT CARD */}
       <div className="p-6 sm:p-7 rounded-3xl bg-[#0A0F19] border-2 border-cyan-500/50 backdrop-blur-xl shadow-[0_0_40px_rgba(0,229,255,0.15)] flex flex-col lg:flex-row items-center justify-between gap-6 overflow-hidden relative font-mono text-xs">
         <div className="flex items-center gap-5 w-full lg:w-auto">
           <div className="w-16 h-16 rounded-2xl bg-cyan-400/20 border-2 border-cyan-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(0,229,255,0.3)] flex-shrink-0 text-cyan-400">
@@ -581,7 +682,7 @@ export const DashboardView: React.FC = () => {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <span className="px-3 py-0.5 rounded text-xs font-black bg-cyan-400 text-black uppercase flex items-center gap-1">
-                <span>🚀 NEW PREDICTION // 全新科技品类上线</span>
+                <span>🚀 NEW // 科技新品发布</span>
               </span>
               <span className="text-xs text-cyan-200 font-bold">10月智能手机发布观象台</span>
             </div>
@@ -598,7 +699,38 @@ export const DashboardView: React.FC = () => {
           onClick={() => navigate('/app/events/tech-october-2026')}
           className="w-full lg:w-auto px-6 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(0,229,255,0.4)] flex-shrink-0"
         >
-          <span>继续科技推演 (CONTINUE TECH PREDICTIONS)</span>
+          <span>继续科技推演 (CONTINUE TECH)</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* MARKET WATCH PROMPT CARD (Section 28) */}
+      <div className="p-6 sm:p-7 rounded-3xl bg-[#0F141F] border-2 border-cyber-amber/50 backdrop-blur-xl shadow-[0_0_40px_rgba(245,158,11,0.15)] flex flex-col lg:flex-row items-center justify-between gap-6 overflow-hidden relative font-mono text-xs">
+        <div className="flex items-center gap-5 w-full lg:w-auto">
+          <div className="w-16 h-16 rounded-2xl bg-cyber-amber/20 border-2 border-cyber-amber flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(245,158,11,0.3)] flex-shrink-0 text-cyber-amber">
+            📈
+          </div>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-0.5 rounded text-xs font-black bg-cyber-amber text-black uppercase flex items-center gap-1">
+                <span>🔥 MARKET WATCH // 加密市场大关推演</span>
+              </span>
+              <span className="text-xs text-amber-300 font-bold">BTC NOVEMBER 2026</span>
+            </div>
+            <h3 className="font-display font-black text-xl sm:text-2xl text-white">
+              WILL BITCOIN HIT $100,000 BEFORE NOVEMBER ENDS?
+            </h3>
+            <p className="text-xs text-slate-200">
+              全网群体共识：<strong className="text-lime-400">YES 64%</strong> / <strong className="text-red-400">NO 36%</strong> · Crypto IQ: <strong className="text-amber-300">{user.cryptoIQ}</strong> · 全球加密排名: <strong className="text-white">#{user.globalCryptoRank}</strong>
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => navigate('/app/events/crypto')}
+          className="w-full lg:w-auto px-6 py-3.5 rounded-xl bg-cyber-amber hover:bg-amber-400 text-black font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(245,158,11,0.4)] flex-shrink-0"
+        >
+          <span>MAKE YOUR CALL // 立即推演</span>
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
@@ -703,55 +835,65 @@ export const DashboardView: React.FC = () => {
 
       </div>
 
-      {/* 5. 4 Specialist Skills Overview & Daily Mission Progress */}
+      {/* 5. 5 Specialist Skills Overview & Daily Mission Progress */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch font-mono text-xs">
         
-        {/* Left 7 Cols: Specialist Skills */}
+        {/* Left 7 Cols: 5 Specialist Skills */}
         <div className="lg:col-span-7 p-6 rounded-3xl bg-surface-100/90 border border-white/15 backdrop-blur-xl space-y-4 shadow-glass-card">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
             <span className="font-bold text-white text-sm">多品类专属技能智商 (SPECIALIST SKILLS)</span>
             <span className="text-slate-300 text-xs">去中心化专业声誉</span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
             <div 
               onClick={() => navigate('/app/iq')}
-              className="p-3.5 rounded-2xl bg-surface-200 border border-lime-400/30 text-center cursor-pointer hover:border-lime-400"
+              className="p-3 rounded-2xl bg-surface-200 border border-lime-400/30 text-center cursor-pointer hover:border-lime-400"
             >
               <Target className="w-4 h-4 text-lime-400 mx-auto mb-1" />
-              <span className="text-xs text-slate-300 block font-medium">数字预测</span>
-              <span className="font-black text-lg text-lime-300 mt-0.5 block">{user.predictionIQ}</span>
-              <span className="text-xs text-slate-300 block mt-0.5">胜率 60%</span>
+              <span className="text-[11px] text-slate-300 block font-medium">数字预测</span>
+              <span className="font-black text-base text-lime-300 mt-0.5 block">{user.predictionIQ}</span>
+              <span className="text-[10px] text-slate-300 block mt-0.5">胜率 60%</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/f1-malaysia-2026')}
-              className="p-3.5 rounded-2xl bg-surface-200 border border-cyber-amber/30 text-center cursor-pointer hover:border-cyber-amber"
+              className="p-3 rounded-2xl bg-surface-200 border border-cyber-amber/30 text-center cursor-pointer hover:border-cyber-amber"
             >
               <Flag className="w-4 h-4 text-cyber-amber mx-auto mb-1" />
-              <span className="text-xs text-slate-300 block font-medium">F1 赛车</span>
-              <span className="font-black text-lg text-cyber-amber mt-0.5 block">{user.f1IQ}</span>
-              <span className="text-xs text-slate-300 block mt-0.5">全马 #{user.f1RankMalaysia}</span>
+              <span className="text-[11px] text-slate-300 block font-medium">F1 赛车</span>
+              <span className="font-black text-base text-cyber-amber mt-0.5 block">{user.f1IQ}</span>
+              <span className="text-[10px] text-slate-300 block mt-0.5">全马 #{user.f1RankMalaysia}</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/hk-racing')}
-              className="p-3.5 rounded-2xl bg-surface-200 border border-emerald-500/30 text-center cursor-pointer hover:border-emerald-500"
+              className="p-3 rounded-2xl bg-surface-200 border border-emerald-500/30 text-center cursor-pointer hover:border-emerald-500"
             >
               <Flame className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
-              <span className="text-xs text-slate-300 block font-medium">香港赛马</span>
-              <span className="font-black text-lg text-emerald-400 mt-0.5 block">{user.racingIQ}</span>
-              <span className="text-xs text-slate-300 block mt-0.5">沙田 #{user.racingRankShaTin}</span>
+              <span className="text-[11px] text-slate-300 block font-medium">香港赛马</span>
+              <span className="font-black text-base text-emerald-400 mt-0.5 block">{user.racingIQ}</span>
+              <span className="text-[10px] text-slate-300 block mt-0.5">沙田 #{user.racingRankShaTin}</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/tech-october-2026')}
-              className="p-3.5 rounded-2xl bg-surface-200 border border-cyan-400/40 text-center cursor-pointer hover:border-cyan-400 shadow-sm"
+              className="p-3 rounded-2xl bg-surface-200 border border-cyan-400/40 text-center cursor-pointer hover:border-cyan-400 shadow-sm"
             >
               <Smartphone className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
-              <span className="text-xs text-slate-300 block font-medium">科技发布</span>
-              <span className="font-black text-lg text-cyan-300 mt-0.5 block">{user.techIQ}</span>
-              <span className="text-xs text-slate-300 block mt-0.5">全球 #{user.globalTechRank}</span>
+              <span className="text-[11px] text-slate-300 block font-medium">科技发布</span>
+              <span className="font-black text-base text-cyan-300 mt-0.5 block">{user.techIQ}</span>
+              <span className="text-[10px] text-slate-300 block mt-0.5">全球 #{user.globalTechRank}</span>
+            </div>
+
+            <div 
+              onClick={() => navigate('/app/events/crypto')}
+              className="p-3 rounded-2xl bg-surface-200 border border-amber-400/40 text-center cursor-pointer hover:border-amber-400 shadow-sm"
+            >
+              <LineChart className="w-4 h-4 text-amber-400 mx-auto mb-1" />
+              <span className="text-[11px] text-slate-300 block font-medium">加密市场</span>
+              <span className="font-black text-base text-amber-300 mt-0.5 block">{user.cryptoIQ}</span>
+              <span className="text-[10px] text-slate-300 block mt-0.5">全球 #{user.globalCryptoRank}</span>
             </div>
           </div>
         </div>
@@ -761,7 +903,7 @@ export const DashboardView: React.FC = () => {
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <span className="font-bold text-white text-sm">今日任务与晋级进度</span>
-              <span className="text-lime-400 font-bold text-xs">达成 3 / 4 项</span>
+              <span className="text-lime-400 font-bold text-xs">达成 4 / 4 项</span>
             </div>
 
             <div className="space-y-2 mt-3">
@@ -774,8 +916,8 @@ export const DashboardView: React.FC = () => {
                 <span className="text-lime-400 font-bold">已达成 ✓</span>
               </div>
               <div className="flex justify-between items-center p-2.5 rounded-xl bg-surface-200 text-xs">
-                <span className="text-slate-100 font-medium">3. 晋级【神谕至尊 (20份)】</span>
-                <span className="text-cyber-blue font-bold">72% 进行中</span>
+                <span className="text-slate-100 font-medium">3. 参与 BTC $100K 里程碑推演</span>
+                <span className="text-lime-400 font-bold">已达成 ✓</span>
               </div>
             </div>
           </div>

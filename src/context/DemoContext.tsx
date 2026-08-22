@@ -32,6 +32,7 @@ interface DemoContextType {
     f1IQ: number;
     racingIQ: number;
     techIQ: number;
+    cryptoIQ: number;
     racingRankShaTin: number;
     racingRankGlobal: number;
     racingWinAccuracy: string;
@@ -43,8 +44,11 @@ interface DemoContextType {
     f1RankGlobal: number;
     f1Accuracy: number;
     globalTechRank: number;
+    globalCryptoRank: number;
     techStreak: number;
+    cryptoStreak: number;
     techAccuracy: number;
+    cryptoAccuracy: number;
     globalRank: number;
     rankDelta: number;
     activeCommunity: number;
@@ -76,6 +80,7 @@ interface DemoContextType {
   addF1Prediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
   addHorseRacingPrediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
   addTechPrediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
+  addCryptoPrediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
   
   // Toast system
   toast: { message: string; type: 'success' | 'info' | 'warning' } | null;
@@ -127,6 +132,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     f1IQ: 824,
     racingIQ: 768,
     techIQ: 811,
+    cryptoIQ: 796,
     racingRankShaTin: 184,
     racingRankGlobal: 742,
     racingWinAccuracy: '31.2%',
@@ -138,8 +144,11 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     f1RankGlobal: 841,
     f1Accuracy: 74,
     globalTechRank: 362,
+    globalCryptoRank: 412,
     techStreak: 5,
+    cryptoStreak: 6,
     techAccuracy: 74,
+    cryptoAccuracy: 72,
     globalRank: 1284,
     rankDelta: 324,
     activeCommunity: 1248,
@@ -393,6 +402,43 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return newRound;
   };
 
+  // Add Crypto prediction (Ref BTC $100K & Market Events)
+  const addCryptoPrediction = async (selectionText: string, gameMode: string = 'NOVEMBER CRYPTO SUPER 8'): Promise<PredictionHistoryRound> => {
+    const mockHash = `0xC829F${Math.random().toString(16).slice(2)}${Math.random().toString(16).slice(2)}`;
+    const mockBlock = 28484910 + predictionRounds.length;
+
+    setUser((prev) => ({
+      ...prev,
+      predictionEnergy: Math.max(0, prev.predictionEnergy - 100),
+    }));
+
+    const newRound: PredictionHistoryRound = {
+      id: `rnd-crypto-${Date.now()}`,
+      gameCategory: 'CRYPTO',
+      roundId: `BTC-100K-NOV26-${Math.floor(Math.random()*800+100)}`,
+      eventTitle: 'BTC 10万美元里程碑与11月行情推演',
+      referenceSource: 'CoinMarketCap BTC/USD & Approved Market Oracle (客观现货公价)',
+      drawDate: '2026-11-30 23:59',
+      closingTime: '2026-11-30 23:00',
+      userSelectionText: selectionText,
+      officialResultText: '等待 11月30日 23:59 UTC 权威客观现货定盘',
+      hits: 0,
+      score: '已在链上盖戳封存 · 等待 11月30日 定盘',
+      xpGained: 500,
+      iqDelta: 0,
+      rewardUSDT: 50.0,
+      hash: mockHash,
+      blockNumber: mockBlock,
+      status: 'SEALED',
+      gameMode: gameMode,
+      accuracyRate: '等待定盘',
+    };
+
+    setPredictionRounds((prev) => [newRound, ...prev]);
+    showToast(`加密市场事件推演已在区块链盖戳封存！参考全网客观现货公价结算。`, 'success');
+    return newRound;
+  };
+
   return (
     <DemoContext.Provider
       value={{
@@ -413,6 +459,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addF1Prediction,
         addHorseRacingPrediction,
         addTechPrediction,
+        addCryptoPrediction,
         toast,
         showToast,
         isTourActive,

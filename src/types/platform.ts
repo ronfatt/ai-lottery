@@ -1,7 +1,7 @@
 export type MemberRank = 'scout' | 'analyst' | 'strategist' | 'oracle' | 'oracle_master' | 'oracle_elite';
 export type MemberRankType = MemberRank;
 export type MembershipTier = 'FREE' | 'PRO' | 'ELITE';
-export type GameCategory = 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH' | 'FOOTBALL' | 'ESPORTS' | 'GLOBAL_EVENT';
+export type GameCategory = 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH' | 'CRYPTO' | 'FOOTBALL' | 'ESPORTS' | 'GLOBAL_EVENT';
 
 export interface UserProfile {
   id: string;
@@ -16,10 +16,12 @@ export interface UserProfile {
   f1IQ: number;
   racingIQ: number;
   techIQ: number;
+  cryptoIQ: number;
   globalRank: number;
   f1RankMalaysia: number;
   racingRankShaTin: number;
   globalTechRank: number;
+  globalCryptoRank: number;
   rankDelta: number;
   activeCommunity: number;
   directReferrals: number;
@@ -35,6 +37,8 @@ export interface UserProfile {
   f1Accuracy: number;
   racingTop3Accuracy: string;
   techAccuracy: number;
+  cryptoAccuracy: number;
+  cryptoStreak: number;
   seasonPoints: number;
   seasonLevel: number;
 }
@@ -59,6 +63,7 @@ export interface NetworkMember {
   f1IQ: number;
   racingIQ?: number;
   techIQ?: number;
+  cryptoIQ?: number;
   seasonPoints: number;
 }
 
@@ -122,6 +127,23 @@ export interface TechPredictionMonth {
   verificationRule: string;
 }
 
+export interface CryptoPredictionEvent {
+  id: string;
+  asset: string;
+  title: string;
+  eventType: 'PRICE_MILESTONE' | 'MONTHLY_CLOSE' | 'RELATIVE_PERFORMANCE' | 'PRICE_DIRECTION' | 'VOLATILITY' | 'OFFICIAL_EVENT';
+  targetPrice?: number;
+  currentReferencePrice: number;
+  startDate: string;
+  settlementDate: string;
+  referenceSource: string;
+  selectionOptions: string[];
+  communitySelectionRates: { [key: string]: number };
+  status: 'OPEN' | 'IN_PROGRESS' | 'VERIFIED' | 'SEALED';
+  officialResult?: string;
+  predictionHash?: string;
+}
+
 export interface WalletTransaction {
   id: string;
   date: string;
@@ -149,7 +171,7 @@ export interface NotificationItem {
   title: string;
   time: string;
   read: boolean;
-  type: 'system' | 'reward' | 'member' | 'f1' | 'racing' | 'tech';
+  type: 'system' | 'reward' | 'member' | 'f1' | 'racing' | 'tech' | 'crypto';
 }
 
 export interface RankLevelInfo {

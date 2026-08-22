@@ -23,7 +23,8 @@ import {
   Sparkles,
   Globe,
   Flame,
-  Smartphone
+  Smartphone,
+  LineChart
 } from 'lucide-react';
 
 export const AppSidebar: React.FC = () => {
@@ -43,6 +44,7 @@ export const AppSidebar: React.FC = () => {
         { label: 'F1 赛车预测 ⭐', path: '/app/events/f1-malaysia-2026', icon: Flag, highlightTag: '⭐ 推荐' },
         { label: '香港赛马预测 🔥', path: '/app/events/hk-racing', icon: Flame, highlightTag: '🔥 热门' },
         { label: '科技新品发布 🚀', path: '/app/events/tech-october-2026', icon: Smartphone, highlightTag: '🚀 NEW' },
+        { label: '加密市场推演 🔥', path: '/app/events/crypto', icon: LineChart, highlightTag: '🔥 行情' },
         { label: '我的预测记录', path: '/app/predictions', icon: History },
         { label: '预测游戏大厅', path: '/app/games', icon: Gamepad2 },
       ],

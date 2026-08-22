@@ -25,8 +25,8 @@ export const InvestorTour: React.FC = () => {
     },
     {
       step: 3,
-      title: '03 多维预测技能智商体系 (Specialist Skills & IQ)',
-      highlight: '综合 IQ 782 · F1 IQ 824 · Racing IQ 768 · Tech IQ 811',
+      title: '03 五维预测技能智商体系 (5 Specialist Skills & IQ)',
+      highlight: '综合 IQ 782 · F1 824 · 赛马 768 · 科技 811 · 加密 796',
       desc: '用户留存的核心是声誉与智商指数，而非短期赌博输赢。平台通过专属技能智商认证用户的专业直觉与推演实力，建立去中心化声誉网络。',
       actionHint: '点击【下一步】查看纯净的 USDT 钱包与清算模型。',
     },
@@ -55,28 +55,28 @@ export const InvestorTour: React.FC = () => {
       step: 7,
       title: '07 热门体育拓展：香港赛马日推演 (Horse Racing)',
       highlight: '🔥 热门体育 · 沙田/跑马地 RACE DAY SUPER 8',
-      desc: '基于公开赛马赛果参考，推演头马独赢、前三名次、骑师战术对抗、档位步速与全日 SUPER 8。完全摆脱博彩盘口，专注数据推演竞技。',
-      actionHint: '点击【下一步】检视重磅全新上线的科技新品发布推演！',
+      desc: '基于公开赛马赛果参考，推演头马独赢、前三名次、骑师对抗与全日 SUPER 8。完全摆脱博彩盘口，专注数据推演竞技。',
+      actionHint: '点击【下一步】检视科技新品发布推演！',
     },
     {
       step: 8,
       title: '08 全新突破品类：10月科技新品发布推演 (Tech Launch)',
       highlight: '🚀 NEW CATEGORY · October Smartphone Watch',
-      desc: '推演各大科技巨头发布周期与精确开幕日期。仅以官方新闻稿与发布会为结算依据，证明 ORACLE 预测万物客观事实的超强延展能力！',
-      actionHint: '点击【下一步】查看通用预测引擎架构。',
+      desc: '推演各大科技巨头发布周期与精确开幕日期。仅以官方新闻稿与发布会为结算依据，证明 ORACLE 预测客观事实的超强延展能力！',
+      actionHint: '点击【下一步】检视重磅上线的加密市场事件推演！',
     },
     {
       step: 9,
-      title: '09 全品类超级预测应用矩阵 (Multi-Event Prediction Engine)',
-      highlight: 'DIFFERENT EVENTS. ONE PREDICTION ENGINE.',
-      desc: '同一个底层去中心化预测引擎，无缝赋能数字、F1、赛马、科技新品、足球、电竞、文娱与全球大事件，构建全球统一的可验证预测基础设施。',
-      actionHint: '点击【下一步】查看 ORACLE 49 的全球愿景。',
+      title: '09 全新市场品类：加密市场大关推演 (Crypto Prediction)',
+      highlight: '🔥 MARKET / CRYPTO · BTC $100K November Challenge',
+      desc: '推演 BTC 10万美元里程碑、月度收盘区间、BTC vs ETH 收益率与监管大事件。客观公价结算，零杜绝杠杆合约争议！',
+      actionHint: '点击【下一步】查看通用预测引擎架构与全球愿景。',
     },
     {
       step: 10,
-      title: '10 全球预测生态宏伟愿景 (Global Prediction Vision)',
-      highlight: 'CALL THE LAUNCH BEFORE THE BRAND DOES.',
-      desc: '投资人请记住：数字预测是起点，科技与全球事实预测是星辰大海。我们正在构建全球最大的去中心化可验证预测超级应用！',
+      title: '10 全球预测生态宏伟愿景 (Universal Engine Vision)',
+      highlight: 'DIFFERENT EVENTS. ONE PREDICTION ENGINE.',
+      desc: '同一个底层去中心化预测引擎，赋能数字、F1、赛马、科技新品、加密行情与全球大事件。让市场预期转化为不可篡改的预测声誉！',
       actionHint: '恭喜！您已完整检视 ORACLE 49 预测超级应用全景体系。',
     },
   ];
@@ -102,7 +102,7 @@ export const InvestorTour: React.FC = () => {
 
           <button
             onClick={endTour}
-            className="p-1.5 rounded-lg bg-surface-200 text-metal-400 hover:text-white transition-colors"
+            className="p-1.5 rounded-lg bg-surface-200 text-slate-300 hover:text-white transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -113,23 +113,23 @@ export const InvestorTour: React.FC = () => {
           <h4 className="font-display font-black text-lg text-white">
             {current.title}
           </h4>
-          <div className="inline-block px-2.5 py-0.5 rounded-md bg-lime-400/20 text-lime-400 font-mono text-xs font-bold border border-lime-400/30">
+          <div className="inline-block px-2.5 py-0.5 rounded-md bg-lime-400/20 text-lime-300 font-mono text-xs font-bold border border-lime-400/30">
             {current.highlight}
           </div>
-          <p className="text-xs font-mono text-metal-200 leading-relaxed pt-1">
+          <p className="text-xs font-mono text-slate-200 leading-relaxed pt-1">
             {current.desc}
           </p>
         </div>
 
         {/* Action Controls */}
         <div className="flex items-center justify-between pt-3 border-t border-white/10 text-xs font-mono">
-          <span className="text-[11px] text-metal-400 truncate max-w-[200px]">{current.actionHint}</span>
+          <span className="text-[11px] text-slate-300 truncate max-w-[200px]">{current.actionHint}</span>
 
           <div className="flex items-center gap-2">
             {tourStep > 1 && (
               <button
                 onClick={prevTourStep}
-                className="px-3 py-1.5 rounded-lg bg-surface-200 text-metal-300 hover:text-white border border-white/10 flex items-center gap-1"
+                className="px-3 py-1.5 rounded-lg bg-surface-200 text-slate-200 hover:text-white border border-white/15 flex items-center gap-1 font-bold"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>上一步</span>
@@ -138,7 +138,7 @@ export const InvestorTour: React.FC = () => {
 
             <button
               onClick={nextTourStep}
-              className="px-4 py-1.5 rounded-lg bg-lime-400 text-black font-bold uppercase tracking-wider hover:bg-lime-300 transition-all flex items-center gap-1.5 shadow-glow-lime"
+              className="px-4 py-1.5 rounded-lg bg-lime-400 text-black font-black uppercase tracking-wider hover:bg-lime-300 transition-all flex items-center gap-1.5 shadow-glow-lime"
             >
               <span>{tourStep === 10 ? '完成导览' : '下一步'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
