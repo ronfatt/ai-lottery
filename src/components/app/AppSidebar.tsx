@@ -22,7 +22,8 @@ import {
   LogOut, 
   Sparkles,
   Globe,
-  Flame
+  Flame,
+  Smartphone
 } from 'lucide-react';
 
 export const AppSidebar: React.FC = () => {
@@ -41,6 +42,7 @@ export const AppSidebar: React.FC = () => {
         { label: '数字预测 (核心基本盘)', path: '/app/predict', icon: Target, isPrimary: true },
         { label: 'F1 赛车预测 ⭐', path: '/app/events/f1-malaysia-2026', icon: Flag, highlightTag: '⭐ 推荐' },
         { label: '香港赛马预测 🔥', path: '/app/events/hk-racing', icon: Flame, highlightTag: '🔥 热门' },
+        { label: '科技新品发布 🚀', path: '/app/events/tech-october-2026', icon: Smartphone, highlightTag: '🚀 NEW' },
         { label: '我的预测记录', path: '/app/predictions', icon: History },
         { label: '预测游戏大厅', path: '/app/games', icon: Gamepad2 },
       ],
@@ -138,6 +140,8 @@ export const AppSidebar: React.FC = () => {
                         ? 'bg-lime-400 text-black font-bold shadow-glow-lime'
                         : item.highlight
                         ? 'text-lime-400 hover:bg-lime-400/10'
+                        : item.highlightTag?.includes('🚀')
+                        ? 'text-cyan-400 hover:bg-cyan-400/10'
                         : item.highlightTag?.includes('🔥')
                         ? 'text-emerald-400 hover:bg-emerald-500/10'
                         : item.highlightTag
@@ -149,6 +153,7 @@ export const AppSidebar: React.FC = () => {
                       <Icon className={`w-4 h-4 ${
                         isActive ? 'text-black' : 
                         item.highlight ? 'text-lime-400' : 
+                        item.highlightTag?.includes('🚀') ? 'text-cyan-400' :
                         item.highlightTag?.includes('🔥') ? 'text-emerald-400' :
                         item.highlightTag ? 'text-cyber-amber' : 'text-metal-400'
                       }`} />
@@ -157,7 +162,9 @@ export const AppSidebar: React.FC = () => {
 
                     {item.highlightTag && !isActive && (
                       <span className={`px-1.5 py-0.2 rounded text-[8px] font-bold border ${
-                        item.highlightTag.includes('🔥')
+                        item.highlightTag.includes('🚀')
+                          ? 'bg-cyan-400/20 text-cyan-300 border-cyan-400/30'
+                          : item.highlightTag.includes('🔥')
                           ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
                           : 'bg-cyber-amber/20 text-cyber-amber border-cyber-amber/30'
                       }`}>
@@ -182,7 +189,7 @@ export const AppSidebar: React.FC = () => {
         {/* Investor Tour Trigger */}
         <button
           onClick={startTour}
-          className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-lime-400/20 via-emerald-400/20 to-cyber-blue/20 border border-lime-400/40 text-lime-400 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-glow-lime/10"
+          className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-lime-400/20 via-cyan-400/20 to-cyber-blue/20 border border-lime-400/40 text-lime-400 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-glow-lime/10"
         >
           <Sparkles className="w-3.5 h-3.5 text-lime-400" />
           <span>10 步超级平台导览 (TOUR)</span>

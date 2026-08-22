@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useDemo } from '../../../context/DemoContext';
 import { RANK_LADDER } from '../../../data/mockData';
-import { MemberRankType } from '../../../types/platform';
+import { MemberRank } from '../../../types/platform';
 import { TrendingUp, Crown, CheckCircle2, ChevronRight, Lock, Sparkles, Award } from 'lucide-react';
 
 export const RankingView: React.FC = () => {
   const { user } = useDemo();
-  const [selectedRank, setSelectedRank] = useState<MemberRankType>('oracle_master');
+  const [selectedRank, setSelectedRank] = useState<MemberRank>('oracle_master');
 
   const selectedRankInfo = RANK_LADDER.find((r) => r.rank === selectedRank) || RANK_LADDER[4];
 

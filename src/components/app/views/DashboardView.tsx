@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDemo } from '../../../context/DemoContext';
-import { MOCK_HORSE_RUNNERS } from '../../../data/mockData';
+import { MOCK_HORSE_RUNNERS, MOCK_TECH_BRANDS } from '../../../data/mockData';
 import { 
   Trophy, 
   Users, 
@@ -25,7 +25,8 @@ import {
   ArrowUpRight,
   Activity,
   Calendar,
-  Radio
+  Radio,
+  Smartphone
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -38,11 +39,12 @@ export const DashboardView: React.FC = () => {
     addNewPrediction,
     addF1Prediction,
     addHorseRacingPrediction,
+    addTechPrediction,
     showToast 
   } = useDemo();
 
-  // Quick Prediction Station Active Tab
-  const [stationTab, setStationTab] = useState<'NUMBER' | 'F1' | 'RACING'>('NUMBER');
+  // Quick Prediction Station Active Tab (4 categories)
+  const [stationTab, setStationTab] = useState<'NUMBER' | 'F1' | 'RACING' | 'TECH'>('NUMBER');
 
   // Number Quick State
   const [quickNums, setQuickNums] = useState<number[]>([7, 18, 23, 36, 41]);
@@ -58,6 +60,12 @@ export const DashboardView: React.FC = () => {
   const [quickHorse, setQuickHorse] = useState(MOCK_HORSE_RUNNERS[0]); // #4 Golden Ace
   const [isLockingRacing, setIsLockingRacing] = useState(false);
   const [racingLocked, setRacingLocked] = useState(false);
+
+  // Tech Quick State
+  const [quickBrand, setQuickBrand] = useState('OPPO');
+  const [quickTechDate, setQuickTechDate] = useState('OCT 15–21');
+  const [isLockingTech, setIsLockingTech] = useState(false);
+  const [techLocked, setTechLocked] = useState(false);
 
   const handleToggleNum = (n: number) => {
     if (numLocked) return;
@@ -103,6 +111,17 @@ export const DashboardView: React.FC = () => {
     }, 1000);
   };
 
+  const handleQuickLockTech = async () => {
+    if (isLockingTech || techLocked) return;
+    setIsLockingTech(true);
+    setTimeout(async () => {
+      await addTechPrediction(`${quickBrand} 10月发布窗口推演: ${quickTechDate}`, '科技发布极速推演');
+      setIsLockingTech(false);
+      setTechLocked(true);
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 }, colors: ['#00E5FF', '#00FF66'] });
+    }, 1000);
+  };
+
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-12 font-sans">
       
@@ -122,7 +141,7 @@ export const DashboardView: React.FC = () => {
             下午好，{user.name}。
           </h2>
           <p className="text-xs font-mono text-metal-300">
-            全网可验证超级预测网络 · 香港六合彩数字基本盘 + F1 赛车 + 香港赛马日
+            全网可验证超级预测网络 · 香港六合彩数字基本盘 + F1 赛车 + 香港赛马日 + 科技新品发布
           </p>
         </div>
 
@@ -164,7 +183,7 @@ export const DashboardView: React.FC = () => {
             {user.predictionIQ}
           </div>
           <div className="text-[10px] text-metal-300 flex justify-between">
-            <span>F1: {user.f1IQ} · 赛马: {user.racingIQ}</span>
+            <span>F1: {user.f1IQ} · 赛马: {user.racingIQ} · Tech: {user.techIQ}</span>
             <span className="text-lime-400">▲ +14</span>
           </div>
         </div>
@@ -225,7 +244,7 @@ export const DashboardView: React.FC = () => {
 
       </div>
 
-      {/* 3. CORE ACTION CENTER: Interactive Quick Prediction Hub (Tabs: Number / F1 / Horse Racing) */}
+      {/* 3. CORE ACTION CENTER: Interactive Quick Prediction Hub (Tabs: Number / F1 / Horse Racing / Tech) */}
       <div className="bg-surface-100/95 border-2 border-lime-400/50 rounded-3xl p-6 sm:p-8 backdrop-blur-xl shadow-glass-card space-y-6">
         
         {/* Hub Header & Mode Tabs */}
@@ -236,19 +255,19 @@ export const DashboardView: React.FC = () => {
                 QUICK PREDICTION STATION // 极速推演站
               </span>
               <span className="px-2 py-0.2 rounded text-[9px] bg-surface-200 text-metal-300">
-                支持 3 大热门品类一键锁票
+                支持 4 大品类一键锁票
               </span>
             </div>
             <h3 className="font-display font-black text-xl text-white">
-              今日重点预测赛事
+              今日重点预测赛事与发布会
             </h3>
           </div>
 
           {/* Tab Switcher */}
-          <div className="flex bg-surface-200 p-1 rounded-2xl border border-white/10">
+          <div className="flex flex-wrap bg-surface-200 p-1 rounded-2xl border border-white/10 gap-1">
             <button
               onClick={() => setStationTab('NUMBER')}
-              className={`px-4 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
                 stationTab === 'NUMBER' ? 'bg-lime-400 text-black shadow-glow-lime' : 'text-metal-300 hover:text-white'
               }`}
             >
@@ -258,22 +277,32 @@ export const DashboardView: React.FC = () => {
 
             <button
               onClick={() => setStationTab('F1')}
-              className={`px-4 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
                 stationTab === 'F1' ? 'bg-cyber-amber text-black shadow-sm' : 'text-metal-300 hover:text-white'
               }`}
             >
               <Flag className="w-3.5 h-3.5" />
-              <span>🏎️ F1 雪邦 2026</span>
+              <span>🏎️ F1 雪邦</span>
             </button>
 
             <button
               onClick={() => setStationTab('RACING')}
-              className={`px-4 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
                 stationTab === 'RACING' ? 'bg-emerald-500 text-black shadow-sm' : 'text-metal-300 hover:text-white'
               }`}
             >
               <Flame className="w-3.5 h-3.5" />
               <span>🏇 香港赛马日</span>
+            </button>
+
+            <button
+              onClick={() => setStationTab('TECH')}
+              className={`px-3.5 py-2 rounded-xl font-bold transition-all flex items-center gap-1.5 ${
+                stationTab === 'TECH' ? 'bg-cyan-400 text-black shadow-sm' : 'text-metal-300 hover:text-white'
+              }`}
+            >
+              <Smartphone className="w-3.5 h-3.5" />
+              <span>📱 10月科技发布 (New)</span>
             </button>
           </div>
         </div>
@@ -481,6 +510,97 @@ export const DashboardView: React.FC = () => {
           </div>
         )}
 
+        {/* Tab 4: Tech Launch Quick Card (Section 28) */}
+        {stationTab === 'TECH' && (
+          <div className="space-y-4 font-mono text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-metal-300">
+              <span>10月智能手机发布观象台 · 品牌发布周期推演：</span>
+              <span className="text-cyan-400 font-bold">12 大全球品牌 · 官方发布会/新闻稿核验</span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {['OPPO', 'vivo', 'Xiaomi', 'HONOR'].map((b) => (
+                <button
+                  key={b}
+                  disabled={techLocked}
+                  onClick={() => setQuickBrand(b)}
+                  className={`p-3 rounded-xl border text-left transition-all ${
+                    quickBrand === b
+                      ? 'bg-cyan-400 text-black font-black border-cyan-400 shadow-sm'
+                      : 'bg-surface-200 text-metal-200 border-white/5 hover:border-white/20'
+                  }`}
+                >
+                  <span className="text-xs font-bold block">{b}</span>
+                  <span className={`text-[10px] block ${quickBrand === b ? 'text-black/80' : 'text-metal-400'}`}>10月发布推演</span>
+                  <span className={`text-[9px] block mt-1 font-bold ${quickBrand === b ? 'text-black' : 'text-cyan-300'}`}>
+                    OCT 15–21 窗口
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div>
+                <span className="text-metal-400">当前选定品牌与窗口：</span>
+                <span className="text-cyan-400 font-bold ml-1">{quickBrand} ({quickTechDate})</span>
+                <span className="text-[10px] text-metal-400 block">奖励：+400 XP · Tech IQ +14 · 消耗 110 ⚡</span>
+              </div>
+
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <button
+                  onClick={() => navigate('/app/events/tech-october-2026')}
+                  className="px-4 py-2.5 rounded-xl bg-surface-200 text-metal-200 hover:text-white border border-white/10"
+                >
+                  进入 10月科技专属日历与 SUPER 8 →
+                </button>
+
+                <button
+                  onClick={handleQuickLockTech}
+                  disabled={isLockingTech || techLocked}
+                  className={`flex-1 sm:flex-initial px-6 py-2.5 rounded-xl font-bold uppercase transition-all flex items-center justify-center gap-1.5 ${
+                    techLocked
+                      ? 'bg-cyan-400/20 text-cyan-300 border border-cyan-400/40'
+                      : 'bg-cyan-400 hover:bg-cyan-300 text-black shadow-sm'
+                  }`}
+                >
+                  {techLocked ? <span>科技推演已封存 ✓</span> : <span>锁定科技推演</span>}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+      </div>
+
+      {/* NEW PREDICTION CARD: October Smartphone Watch Prompt (Section 28) */}
+      <div className="p-6 sm:p-7 rounded-3xl bg-[#0A0F19] border-2 border-cyan-500/50 backdrop-blur-xl shadow-[0_0_40px_rgba(0,229,255,0.15)] flex flex-col lg:flex-row items-center justify-between gap-6 overflow-hidden relative font-mono text-xs">
+        <div className="flex items-center gap-5 w-full lg:w-auto">
+          <div className="w-16 h-16 rounded-2xl bg-cyan-400/20 border-2 border-cyan-400 flex items-center justify-center text-3xl shadow-[0_0_20px_rgba(0,229,255,0.3)] flex-shrink-0 text-cyan-400">
+            📱
+          </div>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-black bg-cyan-400 text-black uppercase flex items-center gap-1">
+                <span>🚀 NEW PREDICTION // 全新科技品类上线</span>
+              </span>
+              <span className="text-xs text-cyan-300 font-bold">10月智能手机发布观象台</span>
+            </div>
+            <h3 className="font-display font-black text-xl sm:text-2xl text-white">
+              OCTOBER SMARTPHONE WATCH 2026
+            </h3>
+            <p className="text-xs text-metal-300">
+              已完成：<strong className="text-cyan-400">6 / 8</strong> Super Calls · Tech IQ: <strong className="text-cyan-400">{user.techIQ}</strong> · 全球科技排名: <strong className="text-white">#{user.globalTechRank}</strong>
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => navigate('/app/events/tech-october-2026')}
+          className="w-full lg:w-auto px-6 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(0,229,255,0.4)] flex-shrink-0"
+        >
+          <span>继续科技推演 (CONTINUE TECH PREDICTIONS)</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
       </div>
 
       {/* 4. Streamlined 2-Column Financial & Pool Control Center */}
@@ -583,45 +703,55 @@ export const DashboardView: React.FC = () => {
 
       </div>
 
-      {/* 5. 3 Specialist Skills Radar & Daily Mission Progress */}
+      {/* 5. 4 Specialist Skills Overview & Daily Mission Progress */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch font-mono text-xs">
         
-        {/* Left 7 Cols: Specialist Skills Trio */}
+        {/* Left 7 Cols: Specialist Skills Trio + Tech */}
         <div className="lg:col-span-7 p-6 rounded-3xl bg-surface-100/90 border border-white/15 backdrop-blur-xl space-y-4 shadow-glass-card">
           <div className="flex items-center justify-between pb-3 border-b border-white/10">
-            <span className="font-bold text-white text-sm">多品类技能智商概览 (SPECIALIST SKILLS)</span>
+            <span className="font-bold text-white text-sm">多品类专属技能智商 (SPECIALIST SKILLS)</span>
             <span className="text-metal-400 text-[10px]">去中心化专业声誉</span>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div 
               onClick={() => navigate('/app/iq')}
-              className="p-3.5 rounded-2xl bg-surface-200 border border-lime-400/30 text-center cursor-pointer hover:border-lime-400"
+              className="p-3 rounded-2xl bg-surface-200 border border-lime-400/30 text-center cursor-pointer hover:border-lime-400"
             >
               <Target className="w-4 h-4 text-lime-400 mx-auto mb-1" />
-              <span className="text-[10px] text-metal-400 block">数字预测 IQ</span>
-              <span className="font-black text-xl text-lime-400">{user.predictionIQ}</span>
-              <span className="text-[9px] text-metal-400 block mt-0.5">胜率 60.0%</span>
+              <span className="text-[10px] text-metal-400 block">数字预测</span>
+              <span className="font-black text-lg text-lime-400">{user.predictionIQ}</span>
+              <span className="text-[9px] text-metal-400 block mt-0.5">胜率 60%</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/f1-malaysia-2026')}
-              className="p-3.5 rounded-2xl bg-surface-200 border border-cyber-amber/30 text-center cursor-pointer hover:border-cyber-amber"
+              className="p-3 rounded-2xl bg-surface-200 border border-cyber-amber/30 text-center cursor-pointer hover:border-cyber-amber"
             >
               <Flag className="w-4 h-4 text-cyber-amber mx-auto mb-1" />
-              <span className="text-[10px] text-metal-400 block">F1 赛车 IQ</span>
-              <span className="font-black text-xl text-cyber-amber">{user.f1IQ}</span>
+              <span className="text-[10px] text-metal-400 block">F1 赛车</span>
+              <span className="font-black text-lg text-cyber-amber">{user.f1IQ}</span>
               <span className="text-[9px] text-metal-400 block mt-0.5">全马 #{user.f1RankMalaysia}</span>
             </div>
 
             <div 
               onClick={() => navigate('/app/events/hk-racing')}
-              className="p-3.5 rounded-2xl bg-surface-200 border border-emerald-500/30 text-center cursor-pointer hover:border-emerald-500"
+              className="p-3 rounded-2xl bg-surface-200 border border-emerald-500/30 text-center cursor-pointer hover:border-emerald-500"
             >
               <Flame className="w-4 h-4 text-emerald-400 mx-auto mb-1" />
-              <span className="text-[10px] text-metal-400 block">赛马专项 IQ</span>
-              <span className="font-black text-xl text-emerald-400">{user.racingIQ}</span>
+              <span className="text-[10px] text-metal-400 block">香港赛马</span>
+              <span className="font-black text-lg text-emerald-400">{user.racingIQ}</span>
               <span className="text-[9px] text-metal-400 block mt-0.5">沙田 #{user.racingRankShaTin}</span>
+            </div>
+
+            <div 
+              onClick={() => navigate('/app/events/tech-october-2026')}
+              className="p-3 rounded-2xl bg-surface-200 border border-cyan-400/40 text-center cursor-pointer hover:border-cyan-400 shadow-sm"
+            >
+              <Smartphone className="w-4 h-4 text-cyan-400 mx-auto mb-1" />
+              <span className="text-[10px] text-metal-400 block">科技发布</span>
+              <span className="font-black text-lg text-cyan-400">{user.techIQ}</span>
+              <span className="text-[9px] text-metal-400 block mt-0.5">全球 #{user.globalTechRank}</span>
             </div>
           </div>
         </div>
@@ -631,7 +761,7 @@ export const DashboardView: React.FC = () => {
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <span className="font-bold text-white text-sm">今日任务与晋级进度</span>
-              <span className="text-lime-400 font-bold text-[10px]">达成 2 / 3 项</span>
+              <span className="text-lime-400 font-bold text-[10px]">达成 3 / 4 项</span>
             </div>
 
             <div className="space-y-2 mt-3">
@@ -640,7 +770,7 @@ export const DashboardView: React.FC = () => {
                 <span className="text-lime-400 font-bold">已达成 ✓</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-xl bg-surface-200">
-                <span className="text-metal-200">2. 参与香港赛马日推演</span>
+                <span className="text-metal-200">2. 参与 10月科技发布推演</span>
                 <span className="text-lime-400 font-bold">已达成 ✓</span>
               </div>
               <div className="flex justify-between items-center p-2 rounded-xl bg-surface-200">

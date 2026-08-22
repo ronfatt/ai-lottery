@@ -15,14 +15,15 @@ import {
   Filter,
   Flag,
   Target,
-  Flame
+  Flame,
+  Smartphone
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const PredictionsView: React.FC = () => {
   const { predictionRounds } = useDemo();
   const [searchTerm, setSearchTerm] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'NUMBER' | 'F1' | 'HORSE_RACING'>('ALL');
+  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH'>('ALL');
   const [selectedRound, setSelectedRound] = useState<PredictionHistoryRound | null>(null);
 
   const filtered = predictionRounds.filter((r) => {
@@ -47,13 +48,13 @@ export const PredictionsView: React.FC = () => {
             我的历史预测与全账本核验
           </h2>
           <p className="text-xs font-mono text-metal-300 mt-1">
-            支持香港六合彩数字预测、F1 雪邦赛车与香港赛马日推演 · 密码学确定性存证
+            支持香港六合彩数字预测、F1 雪邦赛车、香港赛马日与 10月科技新品发布 · 密码学确定性存证
           </p>
         </div>
 
         {/* Filter & Search */}
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-xs">
-          <div className="flex bg-surface-100 p-1 rounded-xl border border-white/10">
+          <div className="flex flex-wrap bg-surface-100 p-1 rounded-xl border border-white/10 gap-1">
             <button
               onClick={() => setCategoryFilter('ALL')}
               className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'ALL' ? 'bg-lime-400 text-black' : 'text-metal-400'}`}
@@ -78,6 +79,12 @@ export const PredictionsView: React.FC = () => {
             >
               香港赛马
             </button>
+            <button
+              onClick={() => setCategoryFilter('TECH')}
+              className={`px-3 py-1 rounded-lg font-bold ${categoryFilter === 'TECH' ? 'bg-cyan-400 text-black' : 'text-metal-400'}`}
+            >
+              科技新品
+            </button>
           </div>
 
           <div className="relative flex-1 sm:w-56">
@@ -86,7 +93,7 @@ export const PredictionsView: React.FC = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="搜索期数 / 赛事..."
+              placeholder="搜索期数 / 赛事 / 品牌..."
               className="w-full bg-surface-100 border border-white/10 rounded-xl py-2 pl-9 pr-3 text-xs font-mono text-white focus:outline-none focus:border-lime-400"
             />
           </div>
@@ -100,7 +107,7 @@ export const PredictionsView: React.FC = () => {
             <thead className="bg-surface-200/90 text-metal-400 text-[10px] uppercase border-b border-white/10">
               <tr>
                 <th className="py-3.5 px-4">品类</th>
-                <th className="py-3.5 px-4">期数 / 赛事</th>
+                <th className="py-3.5 px-4">期数 / 赛事 / 品牌</th>
                 <th className="py-3.5 px-4">推演模式</th>
                 <th className="py-3.5 px-4">用户推演选择</th>
                 <th className="py-3.5 px-4">官方开奖 / 成绩参考</th>
@@ -125,9 +132,13 @@ export const PredictionsView: React.FC = () => {
                       <span className="px-2 py-0.5 rounded text-[9px] bg-cyber-amber/20 text-cyber-amber border border-cyber-amber/30">
                         F1
                       </span>
-                    ) : (
+                    ) : item.gameCategory === 'HORSE_RACING' ? (
                       <span className="px-2 py-0.5 rounded text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                         赛马
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded text-[9px] bg-cyan-400/20 text-cyan-300 border border-cyan-400/30">
+                        科技
                       </span>
                     )}
                   </td>
@@ -226,7 +237,7 @@ export const PredictionsView: React.FC = () => {
                     <span className="text-white font-bold text-xs">
                       {selectedRound.officialNumbers 
                         ? `[${selectedRound.officialNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}] + 特别号 ${selectedRound.specialNumber}`
-                        : selectedRound.officialResultText || '等待开奖'}
+                        : selectedRound.officialResultText || '等待开奖/公布'}
                     </span>
                   </div>
                 </div>

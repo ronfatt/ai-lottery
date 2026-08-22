@@ -1,35 +1,34 @@
 import React from 'react';
 import { useDemo } from '../../../context/DemoContext';
-import { Target, Flag, Lock, ArrowRight, Sparkles, Trophy, Globe, TrendingUp, Film, Gamepad2, Flame, CloudSun, Swords } from 'lucide-react';
+import { Target, Flag, ArrowRight, Sparkles, Trophy, Globe, Smartphone, Flame, CloudSun, Swords, Film, TrendingUp } from 'lucide-react';
 
 export const GamesHubView: React.FC = () => {
   const { navigate } = useDemo();
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto pb-12">
+    <div className="space-y-8 max-w-7xl mx-auto pb-12 font-sans">
       
       {/* Header */}
       <div className="pb-4 border-b border-white/10 space-y-1">
         <div className="flex items-center gap-2 text-xs font-mono text-lime-400 font-bold">
-          <Gamepad2 className="w-4 h-4" />
-          <span>PREDICTION SUPER APP // 预测超级应用矩阵</span>
+          <Sparkles className="w-4 h-4" />
+          <span>PREDICTION SUPER APP MATRIX // 全品类可验证预测超级应用矩阵</span>
         </div>
         <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
-          全品类可验证预测游戏中心 (GAMES HUB)
+          全品类预测游戏中心 (GAMES HUB)
         </h2>
         <p className="text-xs font-mono text-metal-300">
-          以香港六合彩公开摇号为核心基本盘，无缝延展至 F1 赛车、香港赛马日、全球顶级体育与大事件。
+          以香港六合彩数字预测为核心基本盘，无缝延展至 F1 赛车、香港赛马日、科技新品发布会及全球大事件。
         </p>
       </div>
 
-      {/* 3 Primary Active Game Cards (Core, Featured, Trending) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* 4 Primary Game Cards Grid (Core, Featured, Trending, New) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         {/* Card 1: CORE GAME - ORACLE 49 Number Prediction */}
         <div className="rounded-3xl bg-surface-100/95 border-2 border-lime-400 backdrop-blur-2xl shadow-glow-lime/20 flex flex-col justify-between overflow-hidden group">
           
-          {/* Top Visual Image */}
-          <div className="h-44 w-full relative overflow-hidden bg-surface-200">
+          <div className="h-40 w-full relative overflow-hidden bg-surface-200">
             <img 
               src="/images/oracle_matrix_nexus.jpg" 
               alt="ORACLE 49 Quantum Numbers Matrix" 
@@ -48,36 +47,33 @@ export const GamesHubView: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+          <div className="p-5 space-y-3 flex-1 flex flex-col justify-between font-mono text-xs">
             <div className="space-y-2">
-              <h3 className="font-display font-black text-xl text-white">
+              <h3 className="font-display font-black text-lg text-white">
                 ORACLE 49 数字预测
               </h3>
-
-              <p className="text-xs font-mono text-metal-200 leading-relaxed">
-                基于<strong>香港六合彩公开摇号数据</strong>（6正码 + 1特别号码）进行形态与数字预测，支持 SUPER CALL 8合1超级推演卡。
+              <p className="text-[11px] text-metal-200 leading-relaxed">
+                基于<strong>香港六合彩公开摇号</strong>（6正码 + 1特别号）进行形态与数字预测，支持 8合1 SUPER CALL。
               </p>
-
-              <div className="p-2.5 rounded-xl bg-surface-200/80 border border-white/5 font-mono text-[11px] text-metal-300">
-                参考：香港六合彩公开摇号 (HK Mark Six Reference)
+              <div className="p-2 rounded-xl bg-surface-200/80 border border-white/5 text-[10px] text-metal-300">
+                参考：香港六合彩公开摇号客观数据
               </div>
             </div>
 
             <button
               onClick={() => navigate('/app/predict')}
-              className="w-full py-3.5 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-mono text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-glow-lime"
+              className="w-full py-3 rounded-xl bg-lime-400 hover:bg-lime-300 text-black font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-glow-lime"
             >
               <span>立即体验 (PLAY NOW)</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
         {/* Card 2: FEATURED - F1 PREDICTION */}
-        <div className="rounded-3xl bg-surface-100/95 border-2 border-cyber-amber/60 backdrop-blur-2xl shadow-[0_0_50px_rgba(245,158,11,0.2)] flex flex-col justify-between overflow-hidden group">
+        <div className="rounded-3xl bg-surface-100/95 border-2 border-cyber-amber/60 backdrop-blur-2xl shadow-[0_0_40px_rgba(245,158,11,0.2)] flex flex-col justify-between overflow-hidden group">
           
-          {/* Top Visual Image */}
-          <div className="h-44 w-full relative overflow-hidden bg-surface-200">
+          <div className="h-40 w-full relative overflow-hidden bg-surface-200">
             <img 
               src="/images/f1_team_cars.jpg" 
               alt="F1 Team Cars Sepang Pit Straight" 
@@ -96,36 +92,33 @@ export const GamesHubView: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+          <div className="p-5 space-y-3 flex-1 flex flex-col justify-between font-mono text-xs">
             <div className="space-y-2">
-              <h3 className="font-display font-black text-xl text-white">
-                F1 赛车极速预测 (F1 PREDICTION)
+              <h3 className="font-display font-black text-lg text-white">
+                F1 赛车极速预测
               </h3>
-
-              <p className="text-xs font-mono text-metal-200 leading-relaxed">
+              <p className="text-[11px] text-metal-200 leading-relaxed">
                 预测分站冠军、车队胜出、领奖台前三、周六杆位与雪邦热带雨战等多达 10 项遥测指标。
               </p>
-
-              <div className="p-2.5 rounded-xl bg-surface-200/80 border border-white/5 font-mono text-[11px] text-metal-300">
-                首发：2026 F1 马来西亚雪邦大奖赛 (SEPANG)
+              <div className="p-2 rounded-xl bg-surface-200/80 border border-white/5 text-[10px] text-metal-300">
+                首发：2026 F1 马来西亚雪邦大奖赛
               </div>
             </div>
 
             <button
               onClick={() => navigate('/app/events/f1-malaysia-2026')}
-              className="w-full py-3.5 rounded-xl bg-cyber-amber hover:bg-amber-400 text-black font-mono text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-[0_0_30px_rgba(245,158,11,0.4)]"
+              className="w-full py-3 rounded-xl bg-cyber-amber hover:bg-amber-400 text-black font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-sm"
             >
               <span>进入赛事 (JOIN EVENT)</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
 
         {/* Card 3: TRENDING SPORTS - HONG KONG HORSE RACING */}
-        <div className="rounded-3xl bg-surface-100/95 border-2 border-emerald-500/60 backdrop-blur-2xl shadow-[0_0_50px_rgba(16,185,129,0.2)] flex flex-col justify-between overflow-hidden group">
+        <div className="rounded-3xl bg-surface-100/95 border-2 border-emerald-500/60 backdrop-blur-2xl shadow-[0_0_40px_rgba(16,185,129,0.2)] flex flex-col justify-between overflow-hidden group">
           
-          {/* Top Visual Image */}
-          <div className="h-44 w-full relative overflow-hidden bg-surface-200">
+          <div className="h-40 w-full relative overflow-hidden bg-surface-200">
             <img 
               src="/images/hk_racing_banner.jpg" 
               alt="Hong Kong Horse Racing Night Track" 
@@ -144,27 +137,70 @@ export const GamesHubView: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+          <div className="p-5 space-y-3 flex-1 flex flex-col justify-between font-mono text-xs">
             <div className="space-y-2">
-              <h3 className="font-display font-black text-xl text-white">
-                香港赛马日推演 (HK HORSE RACING)
+              <h3 className="font-display font-black text-lg text-white">
+                香港赛马日推演
               </h3>
-
-              <p className="text-xs font-mono text-metal-200 leading-relaxed">
+              <p className="text-[11px] text-metal-200 leading-relaxed">
                 基于公开可查的香港赛马赛果参考，推演头马独赢、前三名次、骑师战术对决与全日 SUPER 8。
               </p>
-
-              <div className="p-2.5 rounded-xl bg-surface-200/80 border border-white/5 font-mono text-[11px] text-metal-300">
-                数据源：香港赛马公开赛果参考 (中立事实源)
+              <div className="p-2 rounded-xl bg-surface-200/80 border border-white/5 text-[10px] text-metal-300">
+                参考：香港赛马公开赛果参考
               </div>
             </div>
 
             <button
               onClick={() => navigate('/app/events/hk-racing')}
-              className="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)]"
+              className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-sm"
             >
-              <span>进入赛马日 (ENTER RACE DAY)</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>进入赛马日 (ENTER RACE)</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Card 4: NEW CATEGORY - TECH LAUNCH PREDICTION (October Smartphone Watch) */}
+        <div className="rounded-3xl bg-surface-100/95 border-2 border-cyan-400 backdrop-blur-2xl shadow-[0_0_50px_rgba(0,229,255,0.3)] flex flex-col justify-between overflow-hidden group">
+          
+          <div className="h-40 w-full relative overflow-hidden bg-surface-200">
+            <img 
+              src="/images/tech_launch_banner.jpg" 
+              alt="October Smartphone Watch 2026 Keynote Stage" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/50 to-transparent" />
+            <div className="absolute top-3 left-3">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black bg-cyan-400 text-black uppercase shadow-sm flex items-center gap-1">
+                <span>🚀 NEW</span>
+              </span>
+            </div>
+            <div className="absolute bottom-2 right-3">
+              <span className="text-[10px] font-mono text-cyan-300 font-bold bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm border border-cyan-500/30">
+                12 大科技品牌
+              </span>
+            </div>
+          </div>
+
+          <div className="p-5 space-y-3 flex-1 flex flex-col justify-between font-mono text-xs">
+            <div className="space-y-2">
+              <h3 className="font-display font-black text-lg text-white">
+                10月科技发布观象台
+              </h3>
+              <p className="text-[11px] text-metal-200 leading-relaxed">
+                推演哪些智能手机品牌将在 10 月正式发布新机、具体发布日期与谁先官宣。
+              </p>
+              <div className="p-2 rounded-xl bg-surface-200/80 border border-cyan-500/20 text-[10px] text-cyan-300">
+                核验：官方新闻稿 / 发布会公告
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate('/app/events/tech-october-2026')}
+              className="w-full py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-[0_0_30px_rgba(0,229,255,0.4)]"
+            >
+              <span>进入科技观象台 (ENTER TECH)</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>

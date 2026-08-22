@@ -1,34 +1,64 @@
-export type MemberRankType = 
-  | 'scout'          // 见习先锋 (Scout)
-  | 'analyst'        // 数据分析师 (Analyst)
-  | 'strategist'     // 战略操盘手 (Strategist)
-  | 'oracle'         // 神谕使者 (Oracle)
-  | 'oracle_master'   // 神谕大师 (Oracle Master)
-  | 'oracle_elite';   // 神谕至尊 (Oracle Elite)
+export type MemberRank = 'scout' | 'analyst' | 'strategist' | 'oracle' | 'oracle_master' | 'oracle_elite';
+export type MemberRankType = MemberRank;
+export type MembershipTier = 'FREE' | 'PRO' | 'ELITE';
+export type GameCategory = 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH' | 'FOOTBALL' | 'ESPORTS' | 'GLOBAL_EVENT';
 
-export type MembershipTier = 'FREE' | 'PRO' | 'ELITE' | 'BRAND';
-
-export type GameCategory = 'NUMBER' | 'F1' | 'HORSE_RACING' | 'FOOTBALL' | 'ESPORTS' | 'MARKET' | 'CULTURE' | 'WORLD';
+export interface UserProfile {
+  id: string;
+  name: string;
+  avatar: string;
+  email: string;
+  inviteCode: string;
+  rank: MemberRank;
+  rankTitle: string;
+  membership: MembershipTier;
+  predictionIQ: number;
+  f1IQ: number;
+  racingIQ: number;
+  techIQ: number;
+  globalRank: number;
+  f1RankMalaysia: number;
+  racingRankShaTin: number;
+  globalTechRank: number;
+  rankDelta: number;
+  activeCommunity: number;
+  directReferrals: number;
+  secondaryReferrals: number;
+  communityRetentionRate: number;
+  monthlyRewardsUSDT: number;
+  walletBalanceUSDT: number;
+  pendingRewardsUSDT: number;
+  lifetimeRewardsUSDT: number;
+  predictionEnergy: number;
+  maxEnergy: number;
+  streak: number;
+  f1Accuracy: number;
+  racingTop3Accuracy: string;
+  techAccuracy: number;
+  seasonPoints: number;
+  seasonLevel: number;
+}
 
 export interface NetworkMember {
   id: string;
   name: string;
   avatar: string;
   email?: string;
-  rank: MemberRankType;
+  rank: MemberRank;
   rankTitle: string;
   membership: MembershipTier;
   directCount: number;
   communityCount: number;
-  retention: number; // e.g. 71%
-  activeStatus: 'ACTIVE' | 'INACTIVE';
+  retention: number;
+  activeStatus: 'ACTIVE' | 'IDLE' | 'AT_RISK';
   joinDate: string;
   monthlyCommissionUSDT: number;
-  level: 1 | 2 | 3;
+  level: 1 | 2;
   parentId?: string;
   predictionIQ: number;
-  f1IQ?: number;
+  f1IQ: number;
   racingIQ?: number;
+  techIQ?: number;
   seasonPoints: number;
 }
 
@@ -37,7 +67,7 @@ export interface PredictionHistoryRound {
   gameCategory: GameCategory;
   roundId: string;
   eventTitle: string;
-  referenceSource: string; // e.g. "香港六合彩公开摇号数据参考" or "香港赛马公开赛果参考" or "F1 官方排位/正赛结果"
+  referenceSource: string;
   drawDate: string;
   closingTime: string;
   selectedNumbers?: number[];
@@ -52,7 +82,7 @@ export interface PredictionHistoryRound {
   rewardUSDT?: number;
   hash: string;
   blockNumber: number;
-  status: 'VERIFIED' | 'SEALED' | 'PENDING';
+  status: 'VERIFIED' | 'PENDING' | 'SEALED';
   gameMode: string;
   accuracyRate?: string;
 }
@@ -64,20 +94,43 @@ export interface HorseRunner {
   trainer: string;
   barrier: number;
   form: string;
-  communityPickRate: number; // e.g. 28%
+  communityPickRate: number;
   silkColor: string;
   tag?: string;
+}
+
+export interface TechBrand {
+  id: string;
+  name: string;
+  logoText: string;
+  country: string;
+  communityPickRate: number;
+  rumouredModels?: string;
+  verifiedLaunchDate?: string;
+  status: 'UNCONFIRMED' | 'RUMOURED' | 'OFFICIAL_VERIFIED';
+  tag?: string;
+}
+
+export interface TechPredictionMonth {
+  year: number;
+  month: string;
+  title: string;
+  trackedBrands: TechBrand[];
+  totalPredictions: number;
+  totalPlayers: number;
+  status: 'OPEN' | 'IN_PROGRESS' | 'SETTLED';
+  verificationRule: string;
 }
 
 export interface WalletTransaction {
   id: string;
   date: string;
-  type: 'REFERRAL' | 'POOL' | 'CAMPAIGN' | 'CREDIT' | 'SUBSCRIPTION';
+  type: 'REFERRAL' | 'POOL' | 'RANK_BONUS' | 'CAMPAIGN' | 'CREDIT';
   typeLabel: string;
   description: string;
   amount: number;
   currency: 'USDT' | 'OC';
-  status: 'COMPLETED' | 'ESTIMATED' | 'PENDING';
+  status: 'COMPLETED' | 'PROCESSING';
   txHash?: string;
 }
 
@@ -87,7 +140,7 @@ export interface PoolHistoryMonth {
   yourShares: number;
   shareValueUSDT: number;
   rewardEarnedUSDT: number;
-  status: 'SETTLED' | 'ACTIVE';
+  status: 'SETTLED' | 'ESTIMATED';
 }
 
 export interface NotificationItem {
@@ -96,11 +149,11 @@ export interface NotificationItem {
   title: string;
   time: string;
   read: boolean;
-  type: 'streak' | 'rank' | 'pool' | 'member' | 'system' | 'f1' | 'racing';
+  type: 'system' | 'reward' | 'member' | 'f1' | 'racing' | 'tech';
 }
 
 export interface RankLevelInfo {
-  rank: MemberRankType;
+  rank: MemberRank;
   title: string;
   enTitle: string;
   icon: string;

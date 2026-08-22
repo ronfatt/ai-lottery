@@ -5,7 +5,9 @@ import {
   PoolHistoryMonth, 
   NotificationItem,
   RankLevelInfo,
-  HorseRunner
+  HorseRunner,
+  TechBrand,
+  TechPredictionMonth
 } from '../types/platform';
 
 // Exact 6-Tier Member Rank Ladder
@@ -183,6 +185,134 @@ export const MOCK_HORSE_RUNNERS: HorseRunner[] = [
   },
 ];
 
+// Mock Tech Launch Brands (October Smartphone Watch - DEMO DATA)
+export const MOCK_TECH_BRANDS: TechBrand[] = [
+  {
+    id: 'brand-oppo',
+    name: 'OPPO',
+    logoText: 'OPPO',
+    country: 'CN',
+    communityPickRate: 64,
+    rumouredModels: 'Find X8 系列 / 天玑 9400 旗舰',
+    status: 'RUMOURED',
+    tag: '🔥 最受期待 (64%)',
+  },
+  {
+    id: 'brand-vivo',
+    name: 'vivo',
+    logoText: 'vivo',
+    country: 'CN',
+    communityPickRate: 52,
+    rumouredModels: 'X200 系列 / 蔡司影像旗舰',
+    status: 'RUMOURED',
+    tag: '⚡ 极速升温 (52%)',
+  },
+  {
+    id: 'brand-xiaomi',
+    name: 'Xiaomi (小米)',
+    logoText: 'MI',
+    country: 'CN',
+    communityPickRate: 47,
+    rumouredModels: 'Xiaomi 15 系列 / 首发骁龙 8 Gen4',
+    status: 'RUMOURED',
+    tag: '🚀 热门候选 (47%)',
+  },
+  {
+    id: 'brand-honor',
+    name: 'HONOR (荣耀)',
+    logoText: 'HONOR',
+    country: 'CN',
+    communityPickRate: 38,
+    rumouredModels: 'Magic 7 系列 / AI 智能体',
+    status: 'RUMOURED',
+  },
+  {
+    id: 'brand-oneplus',
+    name: 'OnePlus (一加)',
+    logoText: '1+',
+    country: 'CN',
+    communityPickRate: 31,
+    rumouredModels: 'OnePlus 13 性能旗舰',
+    status: 'RUMOURED',
+    tag: '📈 增速第一 (+12%)',
+  },
+  {
+    id: 'brand-samsung',
+    name: 'Samsung (三星)',
+    logoText: 'SAMSUNG',
+    country: 'KR',
+    communityPickRate: 26,
+    rumouredModels: 'Galaxy Z Fold Special / FE 系列',
+    status: 'UNCONFIRMED',
+  },
+  {
+    id: 'brand-realme',
+    name: 'realme (真我)',
+    logoText: 'realme',
+    country: 'CN',
+    communityPickRate: 19,
+    rumouredModels: 'GT 7 Pro 潜望长焦旗舰',
+    status: 'UNCONFIRMED',
+  },
+  {
+    id: 'brand-google',
+    name: 'Google (谷歌)',
+    logoText: 'Google',
+    country: 'US',
+    communityPickRate: 14,
+    rumouredModels: 'Pixel 系列配件与专项更新',
+    status: 'UNCONFIRMED',
+  },
+  {
+    id: 'brand-nothing',
+    name: 'Nothing',
+    logoText: 'NOTHING',
+    country: 'UK',
+    communityPickRate: 11,
+    rumouredModels: 'Community Edition 概念机',
+    status: 'UNCONFIRMED',
+  },
+  {
+    id: 'brand-motorola',
+    name: 'Motorola (摩托罗拉)',
+    logoText: 'MOTO',
+    country: 'US',
+    communityPickRate: 8,
+    rumouredModels: 'Razr 50 折叠扩展版',
+    status: 'UNCONFIRMED',
+  },
+  {
+    id: 'brand-asus',
+    name: 'ASUS (华硕)',
+    logoText: 'ROG',
+    country: 'TW',
+    communityPickRate: 5,
+    rumouredModels: 'ROG Phone 9 极客电竞版',
+    status: 'UNCONFIRMED',
+  },
+  {
+    id: 'brand-other',
+    name: 'Other (其他品牌)',
+    logoText: 'OTHER',
+    country: 'GLOBAL',
+    communityPickRate: 3,
+    rumouredModels: '海外小众品牌独立发布',
+    status: 'UNCONFIRMED',
+  },
+];
+
+// Mock Tech Month Instance (Reusable Data Model)
+export const MOCK_OCTOBER_TECH_DATA: TechPredictionMonth = {
+  year: 2026,
+  month: 'OCTOBER',
+  title: '2026年 10月 全球智能手机秋季发布会观象台',
+  trackedBrands: MOCK_TECH_BRANDS,
+  totalPredictions: 84219,
+  totalPlayers: 23481,
+  status: 'OPEN',
+  verificationRule: '仅以官方新闻稿 (Newsroom)、官网公告、官方发布会或官方社交蓝V认证公告为准。传闻、渲染图及认证入网不计入结果。',
+};
+
 // Mock Network Members under R.ON
 export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
   {
@@ -203,6 +333,7 @@ export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
     predictionIQ: 812,
     f1IQ: 790,
     racingIQ: 745,
+    techIQ: 830,
     seasonPoints: 18450,
   },
   {
@@ -223,6 +354,7 @@ export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
     predictionIQ: 845,
     f1IQ: 860,
     racingIQ: 820,
+    techIQ: 795,
     seasonPoints: 21200,
   },
   {
@@ -243,6 +375,7 @@ export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
     predictionIQ: 760,
     f1IQ: 730,
     racingIQ: 710,
+    techIQ: 805,
     seasonPoints: 12400,
   },
   {
@@ -263,6 +396,7 @@ export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
     predictionIQ: 792,
     f1IQ: 810,
     racingIQ: 775,
+    techIQ: 760,
     seasonPoints: 14800,
   },
   {
@@ -283,6 +417,7 @@ export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
     predictionIQ: 740,
     f1IQ: 715,
     racingIQ: 850,
+    techIQ: 840,
     seasonPoints: 9200,
   },
   {
@@ -303,12 +438,34 @@ export const MOCK_NETWORK_MEMBERS: NetworkMember[] = [
     predictionIQ: 718,
     f1IQ: 690,
     racingIQ: 680,
+    techIQ: 720,
     seasonPoints: 8100,
   },
 ];
 
 // Mock Multi-Game Prediction History
 export const MOCK_PREDICTION_ROUNDS: PredictionHistoryRound[] = [
+  {
+    id: 'rnd-tech-001',
+    gameCategory: 'TECH',
+    roundId: 'TECH-OCT26-01',
+    eventTitle: '10月智能手机发布观象台 · 品牌发布周期推演',
+    referenceSource: 'OPPO 官方全球新闻中心 (Official Newsroom)',
+    drawDate: '2026-10-18 19:00',
+    closingTime: '2026-10-01 00:00',
+    userSelectionText: 'OPPO 发布窗口: OCT 15–21 (精确推演 10月18日)',
+    officialResultText: '官方发布日期: 2026年10月18日 (EXACT HIT ✓)',
+    hits: 1,
+    score: '精确命中 (EXACT CALL) ✓',
+    xpGained: 800,
+    iqDelta: 18,
+    rewardUSDT: 35.0,
+    hash: '0xA791C9284756A1029384756C192837465F0918273645A0192837465B01928374',
+    blockNumber: 28484120,
+    status: 'VERIFIED',
+    gameMode: '发布日窗口与精确日期',
+    accuracyRate: '100% 精确命中',
+  },
   {
     id: 'rnd-hr-001',
     gameCategory: 'HORSE_RACING',
@@ -422,10 +579,28 @@ export const MOCK_LEADERBOARDS = {
     { rank: 3, name: 'Amy_Singapore', points: 31200, level: 31, rewards: '1,500 USDT' },
     { rank: 27, name: 'R.ON (您)', points: 26870, level: 27, rewards: '500 USDT', isUser: true },
   ],
+  tech: [
+    { rank: 1, name: 'SiliconGuru', techIQ: 882, correctLaunches: 18, exactHits: 7, super8Score: '92%', badge: '⚡ 极客先知' },
+    { rank: 2, name: 'TechProphet_SG', techIQ: 864, correctLaunches: 16, exactHits: 6, super8Score: '88%', badge: '👑 科技大师' },
+    { rank: 3, name: 'Sophia_HK', techIQ: 840, correctLaunches: 15, exactHits: 5, super8Score: '85%', badge: '🔮 科技神谕' },
+    { rank: 4, name: 'David_KL', techIQ: 830, correctLaunches: 14, exactHits: 4, super8Score: '81%', badge: '🔮 科技使者' },
+    { rank: 362, name: 'R.ON (您)', techIQ: 811, correctLaunches: 12, exactHits: 4, super8Score: '78%', badge: '🚀 科技大师', isUser: true },
+  ],
 };
 
 // Mock USDT Transactions
 export const MOCK_WALLET_TRANSACTIONS: WalletTransaction[] = [
+  {
+    id: 'tx-000',
+    date: '2026-08-22 17:30',
+    type: 'CAMPAIGN',
+    typeLabel: '科技专项',
+    description: '10月智能手机发布观象台 精确推演奖金发放',
+    amount: 35.00,
+    currency: 'USDT',
+    status: 'COMPLETED',
+    txHash: '0x9948...1029',
+  },
   {
     id: 'tx-001',
     date: '2026-08-22 14:15',
@@ -513,10 +688,18 @@ export const MOCK_POOL_HISTORY: PoolHistoryMonth[] = [
 // Mock Notifications
 export const MOCK_NOTIFICATIONS: NotificationItem[] = [
   {
+    id: 'notif-000',
+    icon: '📱',
+    title: '10月智能手机发布观象台上线！推演 OPPO、vivo、Xiaomi 正式发布档期。',
+    time: '刚刚',
+    read: false,
+    type: 'tech',
+  },
+  {
     id: 'notif-001',
     icon: '🏇',
     title: '香港沙田赛马日 Race 6 即将开赛！您的【#4 金牌王牌】已在链上盖戳封存。',
-    time: '5分钟前',
+    time: '15分钟前',
     read: false,
     type: 'racing',
   },
@@ -524,7 +707,7 @@ export const MOCK_NOTIFICATIONS: NotificationItem[] = [
     id: 'notif-002',
     icon: '🏎️',
     title: 'F1 雪邦大奖赛【雪邦 SUPER 10】奖池已达 50,000 USDT！',
-    time: '25分钟前',
+    time: '35分钟前',
     read: false,
     type: 'f1',
   },
@@ -535,13 +718,5 @@ export const MOCK_NOTIFICATIONS: NotificationItem[] = [
     time: '1小时前',
     read: false,
     type: 'member',
-  },
-  {
-    id: 'notif-004',
-    icon: '⚡',
-    title: '今日预测能量已全额恢复至 720 / 1000 ⚡。',
-    time: '4小时前',
-    read: true,
-    type: 'system',
   },
 ];

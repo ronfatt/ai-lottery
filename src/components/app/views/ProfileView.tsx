@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDemo } from '../../../context/DemoContext';
-import { User, Trophy, Award, ShieldCheck, Sparkles, Flame, CheckCircle2, Target, Flag, Gauge } from 'lucide-react';
+import { User, Trophy, Award, ShieldCheck, Sparkles, Flame, CheckCircle2, Target, Flag, Smartphone } from 'lucide-react';
 
 export const ProfileView: React.FC = () => {
   const { user } = useDemo();
@@ -8,10 +8,12 @@ export const ProfileView: React.FC = () => {
   const badges = [
     { title: '创世先驱玩家 (Founding Player)', desc: '第一批加入 ORACLE 49 主网的先驱者', icon: '🌟', unlocked: true },
     { title: '神谕大师称号 (Oracle Master)', desc: '成功培育 2 组以上神谕使者团队', icon: '👑', unlocked: true },
-    { title: '极限连胜狂人 (Hot Streak)', desc: '达成 6 场以上高置信度连续命中', icon: '🔥', unlocked: true },
     { title: '雪邦围场行家 (Sepang Master)', desc: 'F1 赛车预测智商突破 820 分', icon: '🏎️', unlocked: true },
     { title: '沙田赛道专家 (Sha Tin Expert)', desc: '香港赛马日前三命中率突破 58%', icon: '🏇', unlocked: true },
-    { title: '全球 5% 精英 (Top 5% Elite)', desc: '位列全球综合 Prediction IQ 前 5% 梯队', icon: '🎯', unlocked: true },
+    { title: '科技先知大师 (October Oracle)', desc: '10月智能手机发布精确命中与 Super 8 达成', icon: '📱', unlocked: true },
+    { title: '单日精准狙击手 (Date Sniper)', desc: '发布会单日推演精准零误差命中', icon: '🎯', unlocked: true },
+    { title: '极限连胜狂人 (Hot Streak)', desc: '达成 6 场以上高置信度连续命中', icon: '🔥', unlocked: true },
+    { title: '全球 5% 精英 (Top 5% Elite)', desc: '位列全球综合 Prediction IQ 前 5% 梯队', icon: '🪐', unlocked: true },
   ];
 
   return (
@@ -27,7 +29,7 @@ export const ProfileView: React.FC = () => {
           个人声誉主页与多品类专属技能 (SPECIALIST SKILLS)
         </h2>
         <p className="text-xs font-mono text-metal-300">
-          链上不可篡改的声誉履历 · 记录数字预测、F1 赛车与赛马日专项技能智商
+          链上不可篡改的声誉履历 · 记录数字预测、F1 赛车、赛马日与科技新品发布专属智商
         </p>
       </div>
 
@@ -64,16 +66,16 @@ export const ProfileView: React.FC = () => {
           </div>
         </div>
 
-        {/* Specialist Skills 3 Categories Grid (Section 32) */}
+        {/* Specialist Skills 4 Categories Grid (Section 25) */}
         <div className="space-y-4">
           <div className="flex items-center justify-between pb-2 border-b border-white/10 font-mono text-xs">
             <span className="text-metal-400 uppercase tracking-widest font-bold">
               SPECIALIST SKILLS // 多品类细分技能智商
             </span>
-            <span className="text-lime-400 font-bold">多维专业直觉认证</span>
+            <span className="text-lime-400 font-bold">全景去中心化专业直觉认证</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
             
             {/* Number Prediction */}
             <div className="p-5 rounded-2xl bg-surface-200/90 border border-lime-400/40 space-y-2">
@@ -90,7 +92,7 @@ export const ProfileView: React.FC = () => {
                 {user.predictionIQ} <span className="text-xs text-metal-400 font-normal">IQ</span>
               </div>
               <span className="text-[11px] text-metal-300 block">
-                参考：香港六合彩公开摇号 · 胜率 60.0%
+                香港六合彩公开摇号参考 · 胜率 60.0%
               </span>
             </div>
 
@@ -132,16 +134,35 @@ export const ProfileView: React.FC = () => {
               </span>
             </div>
 
+            {/* Tech Launch */}
+            <div className="p-5 rounded-2xl bg-surface-200/90 border border-cyan-400/50 space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Smartphone className="w-4 h-4 text-cyan-400" />
+                  <span className="font-bold text-white text-sm">科技发布 (Tech)</span>
+                </div>
+                <span className="px-2 py-0.5 rounded text-[9px] bg-cyan-400/20 text-cyan-300 font-bold">
+                  全新科技
+                </span>
+              </div>
+              <div className="font-black text-3xl text-cyan-400 my-1">
+                {user.techIQ} <span className="text-xs text-metal-400 font-normal">Tech IQ</span>
+              </div>
+              <span className="text-[11px] text-metal-300 block">
+                全球科技 #{user.globalTechRank} · 精确命中 4 次
+              </span>
+            </div>
+
           </div>
         </div>
 
-        {/* Soulbound Badges Showcase */}
+        {/* Soulbound Badges Showcase (Section 26) */}
         <div className="space-y-4 pt-2">
           <h4 className="font-display font-black text-lg text-white">
             灵魂绑定成就勋章 (SOULBOUND BADGES)
           </h4>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
             {badges.map((b) => (
               <div
                 key={b.title}

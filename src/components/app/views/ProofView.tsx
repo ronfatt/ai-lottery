@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
 import { useDemo } from '../../../context/DemoContext';
-import { ShieldCheck, Search, CheckCircle2, Lock, Cpu, Sparkles, ExternalLink, Target, Flag, Flame } from 'lucide-react';
+import { ShieldCheck, Search, CheckCircle2, Lock, Cpu, Sparkles, ExternalLink, Target, Flag, Flame, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const ProofView: React.FC = () => {
-  const [selectedProofType, setSelectedProofType] = useState<'NUMBER' | 'F1' | 'HORSE_RACING'>('HORSE_RACING');
-  const [queryHash, setQueryHash] = useState('0x89A2F41D8B928E10938CBA391054AA9287BCAE19384756A1029384756C192837');
+  const [selectedProofType, setSelectedProofType] = useState<'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH'>('TECH');
+  const [queryHash, setQueryHash] = useState('0xA791C9284756A1029384756C192837465F0918273645A0192837465B01928374');
   const [isVerifying, setIsVerifying] = useState(false);
 
   const proofPresets = {
+    TECH: {
+      type: 'TECH',
+      event: '10月智能手机发布观象台 (October Smartphone Watch)',
+      venue: '全球官方新闻中心 / 发布会 (Official Newsroom)',
+      race: 'OPPO Find X8 系列全球首发',
+      selection: '推演: OPPO 官方发布窗口 OCT 15–21 (精确 10月18日)',
+      timestamp: '28 SEP 2026 20:18:24 MYT',
+      hash: '0xA791C9284756A1029384756C192837465F0918273645A0192837465B01928374',
+      block: 28484120,
+      resultRef: 'OPPO 官方全球新闻中心 (Official Brand Newsroom 公报)',
+      status: 'OFFICIAL LAUNCH VERIFIED ✓',
+      modified: 'NO (不可篡改)',
+      xpGained: '+800 XP (EXACT HIT)',
+    },
     HORSE_RACING: {
       type: 'HORSE_RACING',
       event: '香港沙田赛马日 (HK Racing · Sha Tin)',
@@ -53,9 +67,9 @@ export const ProofView: React.FC = () => {
     },
   };
 
-  const [verifyResult, setVerifyResult] = useState<any>(proofPresets.HORSE_RACING);
+  const [verifyResult, setVerifyResult] = useState<any>(proofPresets.TECH);
 
-  const handleSelectPreset = (key: 'NUMBER' | 'F1' | 'HORSE_RACING') => {
+  const handleSelectPreset = (key: 'NUMBER' | 'F1' | 'HORSE_RACING' | 'TECH') => {
     setSelectedProofType(key);
     const p = proofPresets[key];
     setQueryHash(p.hash);
@@ -84,12 +98,22 @@ export const ProofView: React.FC = () => {
           VERIFY EVERYTHING. 验证一切多品类存证
         </h2>
         <p className="text-xs font-mono text-metal-300">
-          全面支持数字预测、F1 赛车与香港赛马日推演 · 基于 SHA-256 承诺哈希与 Merkle 树全量可溯
+          全面支持数字预测、F1 赛车、香港赛马日与 10月科技新品发布 · 基于 SHA-256 承诺哈希全量可溯
         </p>
       </div>
 
       {/* Preset Category Switcher */}
       <div className="flex flex-wrap gap-2 font-mono text-xs">
+        <button
+          onClick={() => handleSelectPreset('TECH')}
+          className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
+            selectedProofType === 'TECH' ? 'bg-cyan-400 text-black shadow-[0_0_20px_rgba(0,229,255,0.4)]' : 'bg-surface-100 text-metal-300 border border-white/10'
+          }`}
+        >
+          <Smartphone className="w-3.5 h-3.5" />
+          <span>科技新品发布存证 (Tech Launch)</span>
+        </button>
+
         <button
           onClick={() => handleSelectPreset('HORSE_RACING')}
           className={`px-4 py-2.5 rounded-xl font-bold flex items-center gap-2 transition-all ${
@@ -134,7 +158,7 @@ export const ProofView: React.FC = () => {
                 type="text"
                 value={queryHash}
                 onChange={(e) => setQueryHash(e.target.value)}
-                placeholder="0x89A2F..."
+                placeholder="0xA791C..."
                 className="w-full bg-surface-200 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-xs font-mono text-white focus:outline-none focus:border-lime-400 select-all"
               />
             </div>
@@ -160,7 +184,7 @@ export const ProofView: React.FC = () => {
         </form>
       </div>
 
-      {/* Verification Result Receipt Card (Section 33) */}
+      {/* Verification Result Receipt Card */}
       {verifyResult && (
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -190,7 +214,7 @@ export const ProofView: React.FC = () => {
           {/* Details Table */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
             <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">赛事场地 / 场次</span>
+              <span className="text-metal-400 text-[10px] block uppercase">发布会场地 / 场次</span>
               <span className="text-white font-bold text-sm">
                 {verifyResult.venue} · {verifyResult.race}
               </span>
@@ -198,11 +222,11 @@ export const ProofView: React.FC = () => {
 
             <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
               <span className="text-metal-400 text-[10px] block uppercase">用户锁票推演选择</span>
-              <span className="text-lime-400 font-bold text-sm">{verifyResult.selection}</span>
+              <span className="text-cyan-400 font-bold text-sm">{verifyResult.selection}</span>
             </div>
 
             <div className="p-4 rounded-xl bg-surface-200 border border-white/5 space-y-1">
-              <span className="text-metal-400 text-[10px] block uppercase">客观公共数据源参考</span>
+              <span className="text-metal-400 text-[10px] block uppercase">客观官方事实源 (OFFICIAL SOURCE)</span>
               <span className="text-metal-200 font-medium text-xs">{verifyResult.resultRef}</span>
             </div>
 

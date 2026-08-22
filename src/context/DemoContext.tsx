@@ -31,6 +31,7 @@ interface DemoContextType {
     predictionIQ: number;
     f1IQ: number;
     racingIQ: number;
+    techIQ: number;
     racingRankShaTin: number;
     racingRankGlobal: number;
     racingWinAccuracy: string;
@@ -41,6 +42,9 @@ interface DemoContextType {
     f1RankMalaysia: number;
     f1RankGlobal: number;
     f1Accuracy: number;
+    globalTechRank: number;
+    techStreak: number;
+    techAccuracy: number;
     globalRank: number;
     rankDelta: number;
     activeCommunity: number;
@@ -71,6 +75,7 @@ interface DemoContextType {
   addNewPrediction: (numbers: number[], gameMode?: string) => Promise<PredictionHistoryRound>;
   addF1Prediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
   addHorseRacingPrediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
+  addTechPrediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
   
   // Toast system
   toast: { message: string; type: 'success' | 'info' | 'warning' } | null;
@@ -121,6 +126,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     predictionIQ: 782,
     f1IQ: 824,
     racingIQ: 768,
+    techIQ: 811,
     racingRankShaTin: 184,
     racingRankGlobal: 742,
     racingWinAccuracy: '31.2%',
@@ -131,6 +137,9 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     f1RankMalaysia: 122,
     f1RankGlobal: 841,
     f1Accuracy: 74,
+    globalTechRank: 362,
+    techStreak: 5,
+    techAccuracy: 74,
     globalRank: 1284,
     rankDelta: 324,
     activeCommunity: 1248,
@@ -185,7 +194,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       else if (next === 5) setCurrentPath('/app/pool');
       else if (next === 6) setCurrentPath('/app/events/f1-malaysia-2026');
       else if (next === 7) setCurrentPath('/app/events/hk-racing');
-      else if (next === 8) setCurrentPath('/app/referral');
+      else if (next === 8) setCurrentPath('/app/events/tech-october-2026');
       else if (next === 9) setCurrentPath('/app/games');
       else if (next === 10) setCurrentPath('/app');
     } else {
@@ -204,7 +213,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       else if (prev === 5) setCurrentPath('/app/pool');
       else if (prev === 6) setCurrentPath('/app/events/f1-malaysia-2026');
       else if (prev === 7) setCurrentPath('/app/events/hk-racing');
-      else if (prev === 8) setCurrentPath('/app/referral');
+      else if (prev === 8) setCurrentPath('/app/events/tech-october-2026');
       else if (prev === 9) setCurrentPath('/app/games');
       else if (prev === 10) setCurrentPath('/app');
     }
@@ -347,6 +356,43 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return newRound;
   };
 
+  // Add Tech prediction (Ref October Smartphone Watch 2026)
+  const addTechPrediction = async (selectionText: string, gameMode: string = 'OCTOBER TECH SUPER 8'): Promise<PredictionHistoryRound> => {
+    const mockHash = `0xA791C${Math.random().toString(16).slice(2)}${Math.random().toString(16).slice(2)}`;
+    const mockBlock = 28484120 + predictionRounds.length;
+
+    setUser((prev) => ({
+      ...prev,
+      predictionEnergy: Math.max(0, prev.predictionEnergy - 110),
+    }));
+
+    const newRound: PredictionHistoryRound = {
+      id: `rnd-tech-${Date.now()}`,
+      gameCategory: 'TECH',
+      roundId: `TECH-OCT26-${Math.floor(Math.random()*800+100)}`,
+      eventTitle: '10月智能手机发布观象台 · 官方发布会推演',
+      referenceSource: '官方品牌全球新闻中心 (Official Brand Newsroom)',
+      drawDate: '2026-10-31 23:59',
+      closingTime: '2026-10-01 00:00',
+      userSelectionText: selectionText,
+      officialResultText: '等待各品牌官方新闻稿/发布会宣布',
+      hits: 0,
+      score: '已在链上盖戳封存 · 等待官方公布',
+      xpGained: 400,
+      iqDelta: 0,
+      rewardUSDT: 35.0,
+      hash: mockHash,
+      blockNumber: mockBlock,
+      status: 'SEALED',
+      gameMode: gameMode,
+      accuracyRate: '等待公布',
+    };
+
+    setPredictionRounds((prev) => [newRound, ...prev]);
+    showToast(`科技新品发布预测已在区块链盖戳封存！通过客观官方事实源核验。`, 'success');
+    return newRound;
+  };
+
   return (
     <DemoContext.Provider
       value={{
@@ -366,6 +412,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addNewPrediction,
         addF1Prediction,
         addHorseRacingPrediction,
+        addTechPrediction,
         toast,
         showToast,
         isTourActive,
