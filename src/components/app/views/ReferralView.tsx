@@ -11,7 +11,8 @@ import {
   TrendingUp, 
   Coins, 
   Users,
-  ShieldCheck
+  ShieldCheck,
+  PieChart
 } from 'lucide-react';
 
 export const ReferralView: React.FC = () => {
@@ -28,12 +29,12 @@ export const ReferralView: React.FC = () => {
   };
 
   const referralActivities = [
-    { member: 'David (大卫)', plan: 'ELITE 至尊版', date: '2026-08-12', status: 'ACTIVE', comm: 'RM 19.80', type: '直推 20%' },
-    { member: 'Amy (艾米)', plan: 'ELITE 至尊版', date: '2026-08-14', status: 'ACTIVE', comm: 'RM 19.80', type: '直推 20%' },
-    { member: 'Jason (杰森)', plan: 'PRO 专业版', date: '2026-08-15', status: 'ACTIVE', comm: 'RM 5.80', type: '直推 20%' },
-    { member: 'Alex88 (阿莱克斯)', plan: 'PRO 专业版', date: '2026-08-16', status: 'ACTIVE', comm: 'RM 1.45', type: '间推 5%' },
-    { member: 'Valkyrie (女武神)', plan: 'ELITE 至尊版', date: '2026-08-18', status: 'ACTIVE', comm: 'RM 4.95', type: '间推 5%' },
-    { member: 'Ken (阿肯)', plan: 'PRO 专业版', date: '2026-08-19', status: 'ACTIVE', comm: 'RM 5.80', type: '直推 20%' },
+    { member: 'David (大卫)', plan: 'ELITE 至尊 (30 USDT)', date: '2026-08-12', status: 'ACTIVE', comm: '+6.00 USDT', type: '直推 20%' },
+    { member: 'Amy (艾米)', plan: 'ELITE 至尊 (30 USDT)', date: '2026-08-14', status: 'ACTIVE', comm: '+6.00 USDT', type: '直推 20%' },
+    { member: 'Jason (杰森)', plan: 'PRO 专业 (10 USDT)', date: '2026-08-15', status: 'ACTIVE', comm: '+2.00 USDT', type: '直推 20%' },
+    { member: 'Alex88 (阿莱克斯)', plan: 'PRO 专业 (10 USDT)', date: '2026-08-16', status: 'ACTIVE', comm: '+0.50 USDT', type: '间推 5%' },
+    { member: 'Valkyrie (女武神)', plan: 'ELITE 至尊 (30 USDT)', date: '2026-08-18', status: 'ACTIVE', comm: '+1.50 USDT', type: '间推 5%' },
+    { member: 'Ken (阿肯)', plan: 'PRO 专业 (10 USDT)', date: '2026-08-19', status: 'ACTIVE', comm: '+2.00 USDT', type: '直推 20%' },
   ];
 
   return (
@@ -46,7 +47,7 @@ export const ReferralView: React.FC = () => {
           <span>REFERRAL CENTER // 推荐裂变中心</span>
         </div>
         <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
-          会员推荐与生态分润
+          会员推荐与生态 USDT 分润
         </h2>
         <p className="text-xs font-mono text-metal-300">
           基于真实会员订阅的持续月度分润体系 · 一级直推 20% + 二级间推辅导奖 5%
@@ -102,7 +103,7 @@ export const ReferralView: React.FC = () => {
 
       </div>
 
-      {/* 4 Metric Cards */}
+      {/* 4 Metric Cards in USDT */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-xs">
         <div className="p-4 rounded-2xl bg-surface-100/90 border border-white/10">
           <span className="text-[10px] text-metal-400 block uppercase">活跃直推成员</span>
@@ -118,56 +119,140 @@ export const ReferralView: React.FC = () => {
 
         <div className="p-4 rounded-2xl bg-surface-100/90 border border-white/10">
           <span className="text-[10px] text-metal-400 block uppercase">本月直推佣金 (20%)</span>
-          <span className="text-2xl font-black text-lime-400 my-1 block">RM 1,140.20</span>
+          <span className="text-2xl font-black text-lime-400 my-1 block">1,140.20 USDT</span>
           <span className="text-[10px] text-lime-400">持续按月结算</span>
         </div>
 
         <div className="p-4 rounded-2xl bg-surface-100/90 border border-white/10">
           <span className="text-[10px] text-metal-400 block uppercase">二级辅导津贴 (5%)</span>
-          <span className="text-2xl font-black text-cyber-violet my-1 block">RM 340.40</span>
+          <span className="text-2xl font-black text-cyber-violet my-1 block">340.40 USDT</span>
           <span className="text-[10px] text-metal-400">178 位间接成员</span>
         </div>
       </div>
 
-      {/* How It Works Logic Cards */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-surface-100/90 border border-white/15 backdrop-blur-xl space-y-4">
-        <h3 className="font-display font-black text-lg text-white">
-          分润运行机制 (HOW IT WORKS)
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
-          <div className="p-5 rounded-2xl bg-surface-200/80 border border-lime-400/30 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-white text-sm">一级直推会员分润 (Direct Referral)</span>
-              <span className="px-2 py-0.5 rounded bg-lime-400 text-black font-black text-xs">20% 比例</span>
+      {/* Membership Pricing & Clear USDT Commission Models */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
+        
+        {/* PRO Tier */}
+        <div className="p-6 rounded-3xl bg-surface-100/90 border border-lime-400/40 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div>
+              <span className="font-bold text-white text-base">PRO 专业会员</span>
+              <span className="text-[10px] text-metal-400 block">无限预测 · 高阶数据 · 专属私域联赛</span>
             </div>
-            <p className="text-metal-300 leading-relaxed text-[11px]">
-              每当您直接推荐的好友开通或续费 PRO (RM 19.90/月) 或 ELITE 会员，您将即时获得 20% 月度佣金分成。
-            </p>
+            <div className="text-right">
+              <span className="font-black text-xl text-lime-400">10 USDT</span>
+              <span className="text-[10px] text-metal-400 block">/ 月</span>
+            </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-surface-200/80 border border-cyber-blue/30 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-white text-sm">二级社群辅导奖 (L2 Community Support)</span>
-              <span className="px-2 py-0.5 rounded bg-cyber-blue text-black font-black text-xs">5% 比例</span>
+          <div className="space-y-2">
+            <div className="p-3 rounded-xl bg-surface-200 border border-white/5 flex items-center justify-between">
+              <span className="text-metal-300">一级直推分润 (20%):</span>
+              <span className="font-bold text-lime-400 text-sm">2.00 USDT / 单</span>
             </div>
-            <p className="text-metal-300 leading-relaxed text-[11px]">
-              当下级成员继续拓展直推时，作为组织导师，您将额外获得二级成员付费金额的 5% 持续月度管理补贴。
-            </p>
+            <div className="p-3 rounded-xl bg-surface-200 border border-white/5 flex items-center justify-between">
+              <span className="text-metal-300">二级辅导津贴 (5%):</span>
+              <span className="font-bold text-cyber-blue text-sm">0.50 USDT / 单</span>
+            </div>
           </div>
         </div>
 
-        <div className="p-3 rounded-xl bg-surface-50 border border-white/5 text-[11px] font-mono text-metal-400">
-          • 合规说明：所有佣金仅产生于真实有效付费会员订阅交易，非资金盘拉人头奖励。
+        {/* ELITE Tier */}
+        <div className="p-6 rounded-3xl bg-surface-100/90 border border-cyber-violet/50 space-y-4">
+          <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div>
+              <span className="font-bold text-white text-base">ELITE 至尊会员</span>
+              <span className="text-[10px] text-metal-400 block">创作者工具 · 组织深度分析 · 品牌活动优先席位</span>
+            </div>
+            <div className="text-right">
+              <span className="font-black text-xl text-cyber-violet">30 USDT</span>
+              <span className="text-[10px] text-metal-400 block">/ 月</span>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="p-3 rounded-xl bg-surface-200 border border-white/5 flex items-center justify-between">
+              <span className="text-metal-300">一级直推分润 (20%):</span>
+              <span className="font-bold text-lime-400 text-sm">6.00 USDT / 单</span>
+            </div>
+            <div className="p-3 rounded-xl bg-surface-200 border border-white/5 flex items-center justify-between">
+              <span className="text-metal-300">二级辅导津贴 (5%):</span>
+              <span className="font-bold text-cyber-blue text-sm">1.50 USDT / 单</span>
+            </div>
+          </div>
         </div>
+
       </div>
 
-      {/* Recent Referral Activity Table */}
-      <div className="bg-surface-100/90 border border-white/15 rounded-3xl overflow-hidden backdrop-blur-xl shadow-glass-card p-6 space-y-4">
+      {/* Revenue Distribution per 100 USDT */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-surface-100/90 border border-white/15 backdrop-blur-xl space-y-6 font-mono text-xs">
+        
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-white/10 gap-4">
+          <div>
+            <h3 className="font-display font-black text-lg text-white">
+              平台百元营收健康分流模型 (PER 100 USDT NET REVENUE)
+            </h3>
+            <p className="text-xs text-metal-300">确保平台长期稳健盈利 · 整体社群分润封顶 ≤ 40%</p>
+          </div>
+
+          <span className="px-3 py-1 rounded-xl bg-lime-400 text-black font-black text-xs">
+            TOTAL PAYOUT CAP ≤ 40%
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 text-center">
+          <div className="p-3.5 rounded-2xl bg-surface-200 border border-white/5">
+            <span className="text-metal-400 text-[10px] block uppercase">一级直推佣金</span>
+            <span className="font-black text-base text-white my-1 block">20 USDT</span>
+            <span className="text-[9px] text-lime-400">20% 比例</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-surface-200 border border-white/5">
+            <span className="text-metal-400 text-[10px] block uppercase">二级间推辅导</span>
+            <span className="font-black text-base text-white my-1 block">5 USDT</span>
+            <span className="text-[9px] text-cyber-blue">5% 比例</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-surface-200 border border-white/5">
+            <span className="text-metal-400 text-[10px] block uppercase">全球社群分红</span>
+            <span className="font-black text-base text-lime-400 my-1 block">5 USDT</span>
+            <span className="text-[9px] text-lime-400">5% 分红池</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-surface-200 border border-white/5">
+            <span className="text-metal-400 text-[10px] block uppercase">卓越绩效分红</span>
+            <span className="font-black text-base text-cyber-blue my-1 block">3 USDT</span>
+            <span className="text-[9px] text-cyber-blue">3% 绩效池</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-surface-200 border border-white/5">
+            <span className="text-metal-400 text-[10px] block uppercase">创作者分红</span>
+            <span className="font-black text-base text-cyber-violet my-1 block">2 USDT</span>
+            <span className="text-[9px] text-cyber-violet">2% 创作者池</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-surface-200 border border-white/5">
+            <span className="text-metal-400 text-[10px] block uppercase">赛季赛事奖金</span>
+            <span className="font-black text-base text-cyber-amber my-1 block">5 USDT</span>
+            <span className="text-[9px] text-cyber-amber">5% 活动池</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-lime-400/15 border border-lime-400/50">
+            <span className="text-lime-400 text-[10px] block uppercase font-bold">平台净留存</span>
+            <span className="font-black text-base text-lime-400 my-1 block">60 USDT</span>
+            <span className="text-[9px] text-lime-400 font-bold">60% 平台毛利</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Recent Referral Activity Table in USDT */}
+      <div className="bg-surface-100/90 border border-white/15 rounded-3xl overflow-hidden backdrop-blur-xl shadow-glass-card p-6 space-y-4 font-mono text-xs">
         <h3 className="font-display font-black text-lg text-white">近期推荐收益明细 (RECENT ACTIVITY)</h3>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left font-mono text-xs">
+          <table className="w-full text-left">
             <thead className="bg-surface-200/60 text-metal-400 text-[10px] uppercase border-b border-white/5">
               <tr>
                 <th className="py-3 px-4">成员名称</th>
@@ -175,7 +260,7 @@ export const ReferralView: React.FC = () => {
                 <th className="py-3 px-4">分润类型</th>
                 <th className="py-3 px-4">交易时间</th>
                 <th className="py-3 px-4">会员状态</th>
-                <th className="py-3 px-4 text-right">获得佣金</th>
+                <th className="py-3 px-4 text-right">获得佣金 (USDT)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5 text-metal-200">

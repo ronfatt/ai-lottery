@@ -22,7 +22,7 @@ export const SponsoredCampaign: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-white/10 text-xs font-mono text-cyber-amber">
             <Flag className="w-3.5 h-3.5" />
-            <span>企业级品牌营销引擎</span>
+            <span>企业级品牌营销引擎 · 拓展首发赛事</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase leading-tight">
@@ -33,11 +33,11 @@ export const SponsoredCampaign: React.FC = () => {
           </h2>
 
           <p className="text-metal-200 text-sm sm:text-base">
-            品牌赞助方出资设立真实奖品与资金奖池，玩家带来极高频的用户活跃与社交裂变，ORACLE 49 则提供底层可验证的预测基础设施。
+            品牌赞助方出资设立真实奖品与 USDT 资金奖池，玩家带来极高频的用户活跃与社交裂变，ORACLE 49 则提供底层可验证的预测基础设施。
           </p>
         </div>
 
-        {/* Big F1 Motorsport UI Showcase Card */}
+        {/* Big F1 Motorsport UI Showcase Card (F1 Malaysia Sepang 2026) */}
         <div className="max-w-5xl mx-auto bg-[#0A0E17]/95 border-2 border-cyber-amber/40 rounded-3xl p-6 sm:p-10 backdrop-blur-2xl shadow-[0_0_50px_rgba(245,158,11,0.15)] relative overflow-hidden">
           
           {/* Top Carbon Header */}
@@ -48,16 +48,16 @@ export const SponsoredCampaign: React.FC = () => {
               </div>
               <div>
                 <span className="text-[10px] font-mono text-cyber-amber font-bold uppercase tracking-widest block">
-                  品牌官方赞助联合企划
+                  ⭐ 特色推荐赛事企划 (FEATURED EVENT)
                 </span>
                 <h3 className="font-display font-black text-xl sm:text-2xl text-white">
-                  F1 意大利蒙扎大奖赛 · 官方预测周
+                  2026 F1 马来西亚雪邦大奖赛 (SEPANG) · 官方预测周
                 </h3>
               </div>
             </div>
 
             <div className="px-3 py-1.5 rounded-xl bg-cyber-amber/15 border border-cyber-amber/40 text-cyber-amber font-mono text-xs font-bold">
-              赞助总奖池：$25,000 美金 + VIP 围场观赛通行证
+              赞助总奖池：50,000 USDT + VIP 围场观赛通行证
             </div>
           </div>
 
@@ -65,7 +65,7 @@ export const SponsoredCampaign: React.FC = () => {
           <div className="my-8 space-y-4">
             <div className="text-center space-y-1">
               <span className="text-xs font-mono text-metal-400 uppercase tracking-widest">
-                本期官方竞猜题目
+                雪邦大奖赛排位与正赛重点推演
               </span>
               <h4 className="font-display font-black text-2xl sm:text-3xl text-white">
                 谁将在周六排位赛中夺得杆位 (POLE POSITION)？

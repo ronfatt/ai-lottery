@@ -22,8 +22,8 @@ interface AppHeaderProps {
 export const AppHeader: React.FC<AppHeaderProps> = ({ pageTitle }) => {
   const { 
     user, 
-    globalPoolAmount, 
-    poolGrowthToday, 
+    globalPoolAmountUSDT, 
+    poolGrowthTodayUSDT, 
     notifications, 
     markAllNotificationsAsRead, 
     logout, 
@@ -49,10 +49,10 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ pageTitle }) => {
         </span>
       </div>
 
-      {/* Right: Live Tickers, Energy, Wallet, Notifications, Avatar */}
+      {/* Right: Live Tickers, Energy, USDT Wallet, Notifications, Avatar */}
       <div className="flex items-center gap-2 sm:gap-4">
         
-        {/* Live Pool Ticker Pill (Very High Visibility for Investors) */}
+        {/* Live Pool Ticker Pill (USDT) */}
         <div 
           onClick={() => navigate('/app/pool')}
           className="hidden md:flex items-center gap-2.5 px-3.5 py-1.5 rounded-xl bg-surface-200/90 hover:bg-surface-300 border border-lime-400/40 cursor-pointer transition-all shadow-glow-lime/10 group"
@@ -64,11 +64,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ pageTitle }) => {
           </div>
           <div>
             <div className="text-[9px] font-mono text-metal-400 uppercase tracking-widest leading-none">
-              实时全球分红池
+              实时全球分红池 (USDT)
             </div>
             <div className="text-xs font-mono font-black text-lime-400 flex items-center gap-1">
-              <span>RM {globalPoolAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
-              <span className="text-[9px] text-lime-400/80 font-normal">(+RM {poolGrowthToday})</span>
+              <span>{globalPoolAmountUSDT.toLocaleString('en-US', { minimumFractionDigits: 2 })} USDT</span>
+              <span className="text-[9px] text-lime-400/80 font-normal">(+{poolGrowthTodayUSDT.toFixed(2)})</span>
             </div>
           </div>
         </div>
@@ -84,13 +84,13 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ pageTitle }) => {
           <span className="font-bold text-white">{user.predictionEnergy} / {user.maxEnergy} ⚡</span>
         </div>
 
-        {/* Reward Wallet Balance */}
+        {/* USDT Reward Wallet Balance */}
         <div 
           onClick={() => navigate('/app/wallet')}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-200/80 hover:bg-surface-300 border border-white/10 text-xs font-mono cursor-pointer transition-all"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-200/80 hover:bg-surface-300 border border-lime-400/30 text-xs font-mono cursor-pointer transition-all shadow-sm"
         >
           <Wallet className="w-3.5 h-3.5 text-lime-400" />
-          <span className="font-bold text-white">RM {user.walletBalance.toFixed(2)}</span>
+          <span className="font-bold text-white">{user.walletBalanceUSDT.toFixed(2)} USDT</span>
         </div>
 
         {/* Notification Bell */}
@@ -173,7 +173,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ pageTitle }) => {
             <div className="absolute right-0 top-12 w-56 rounded-2xl bg-[#0D1117] border border-white/15 shadow-2xl p-2 space-y-1 z-50 font-mono text-xs">
               <div className="p-3 border-b border-white/10">
                 <div className="font-bold text-white">{user.name}</div>
-                <div className="text-[10px] text-metal-400">Prediction IQ: {user.predictionIQ}</div>
+                <div className="text-[10px] text-metal-400">Prediction IQ: {user.predictionIQ} · F1 IQ: {user.f1IQ}</div>
                 <div className="text-[10px] text-lime-400">8 份全网分红资格</div>
               </div>
 
@@ -185,7 +185,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ pageTitle }) => {
                 className="w-full px-3 py-2 rounded-lg text-left text-lime-400 hover:bg-lime-400/10 flex items-center gap-2 font-bold"
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>开启投资人导览</span>
+                <span>开启 10 步投资人导览</span>
               </button>
 
               <button

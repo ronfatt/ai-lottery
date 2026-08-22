@@ -8,6 +8,8 @@ export type MemberRankType =
 
 export type MembershipTier = 'FREE' | 'PRO' | 'ELITE' | 'BRAND';
 
+export type GameCategory = 'NUMBER' | 'F1' | 'FOOTBALL' | 'MARKET' | 'CULTURE' | 'WORLD';
+
 export interface NetworkMember {
   id: string;
   name: string;
@@ -21,24 +23,32 @@ export interface NetworkMember {
   retention: number; // e.g. 71%
   activeStatus: 'ACTIVE' | 'INACTIVE';
   joinDate: string;
-  monthlyCommission: number;
+  monthlyCommissionUSDT: number;
   level: 1 | 2 | 3;
   parentId?: string;
   predictionIQ: number;
+  f1IQ?: number;
   seasonPoints: number;
 }
 
 export interface PredictionHistoryRound {
   id: string;
+  gameCategory: GameCategory;
   roundId: string;
+  eventTitle: string;
+  referenceSource: string; // e.g. "香港六合彩公开摇号数据参考" or "F1 官方排位/正赛结果"
   drawDate: string;
   closingTime: string;
-  selectedNumbers: number[];
+  selectedNumbers?: number[];
   officialNumbers?: number[];
+  specialNumber?: number;
+  userSelectionText?: string;
+  officialResultText?: string;
   hits: number;
   score: string;
   xpGained: number;
   iqDelta: number;
+  rewardUSDT?: number;
   hash: string;
   blockNumber: number;
   status: 'VERIFIED' | 'SEALED' | 'PENDING';
@@ -53,17 +63,17 @@ export interface WalletTransaction {
   typeLabel: string;
   description: string;
   amount: number;
-  currency: 'RM' | 'OC';
+  currency: 'USDT' | 'OC';
   status: 'COMPLETED' | 'ESTIMATED' | 'PENDING';
   txHash?: string;
 }
 
 export interface PoolHistoryMonth {
   month: string;
-  poolSize: number;
+  poolSizeUSDT: number;
   yourShares: number;
-  shareValue: number;
-  rewardEarned: number;
+  shareValueUSDT: number;
+  rewardEarnedUSDT: number;
   status: 'SETTLED' | 'ACTIVE';
 }
 
@@ -73,7 +83,7 @@ export interface NotificationItem {
   title: string;
   time: string;
   read: boolean;
-  type: 'streak' | 'rank' | 'pool' | 'member' | 'system';
+  type: 'streak' | 'rank' | 'pool' | 'member' | 'system' | 'f1';
 }
 
 export interface RankLevelInfo {
@@ -88,5 +98,5 @@ export interface RankLevelInfo {
   teamsRequired: string;
   benefits: string[];
   toolsUnlocked: string[];
-  exampleEarnings: string;
+  exampleEarningsUSDT: string;
 }

@@ -12,13 +12,13 @@ export const RewardsView: React.FC = () => {
       <div className="pb-4 border-b border-white/10 space-y-1">
         <div className="flex items-center gap-2 text-xs font-mono text-lime-400 font-bold">
           <Gift className="w-4 h-4" />
-          <span>REWARDS CENTER // 综合收益中心</span>
+          <span>REWARDS CENTER // 综合收益中心 (USDT)</span>
         </div>
         <h2 className="font-display font-black text-2xl sm:text-4xl text-white">
-          收益资产与多维奖励总览
+          USDT 收益资产与多维奖励总览
         </h2>
         <p className="text-xs font-mono text-metal-300">
-          涵盖直推佣金、全网分红、赛事奖金、通行证经验 (XP) 与闭环游戏积分
+          涵盖直推佣金、全网分红、F1 赛事奖金、通行证经验 (XP) 与闭环游戏积分
         </p>
       </div>
 
@@ -27,13 +27,13 @@ export const RewardsView: React.FC = () => {
         
         <div className="p-6 sm:p-8 rounded-3xl bg-surface-100/90 border-2 border-lime-400/50 backdrop-blur-xl shadow-glow-lime/20 space-y-3">
           <span className="text-[10px] font-mono text-lime-400 font-bold uppercase tracking-widest block">
-            可支配奖励余额 (AVAILABLE BALANCE)
+            可支配奖励余额 (AVAILABLE USDT)
           </span>
           <div className="font-mono font-black text-4xl sm:text-5xl text-white">
-            RM {user.walletBalance.toFixed(2)}
+            {user.walletBalanceUSDT.toFixed(2)} <span className="text-2xl text-lime-400">USDT</span>
           </div>
           <p className="text-xs font-mono text-metal-300">
-            可用于续订 PRO 会员、赞助私域联赛或提领至合规银行账户
+            可用于续订 PRO 会员、赞助私域联赛或提领至合规地址
           </p>
         </div>
 
@@ -42,7 +42,7 @@ export const RewardsView: React.FC = () => {
             8月周期预估结算中 (PENDING ESTIMATED)
           </span>
           <div className="font-mono font-black text-4xl sm:text-5xl text-cyber-blue">
-            RM {user.monthlyRewards.toFixed(2)}
+            {user.monthlyRewardsUSDT.toFixed(2)} <span className="text-2xl text-cyber-blue">USDT</span>
           </div>
           <p className="text-xs font-mono text-metal-300">
             将于 8月31日 24:00 智能合约清算完毕后自动结算入账
@@ -59,7 +59,7 @@ export const RewardsView: React.FC = () => {
             <span className="text-metal-400">会员直推佣金</span>
             <TrendingUp className="w-4 h-4 text-lime-400" />
           </div>
-          <div className="font-black text-xl text-white">RM 1,140.20</div>
+          <div className="font-black text-xl text-white">1,140.20 USDT</div>
           <span className="text-[10px] text-lime-400 block">50 位直推成员 20% 分润</span>
         </div>
 
@@ -68,16 +68,16 @@ export const RewardsView: React.FC = () => {
             <span className="text-metal-400">全网加权分红池</span>
             <Coins className="w-4 h-4 text-lime-400" />
           </div>
-          <div className="font-black text-xl text-lime-400">RM 1,162.00</div>
+          <div className="font-black text-xl text-lime-400">1,162.00 USDT</div>
           <span className="text-[10px] text-metal-400 block">持 11 份总 Shares 预估</span>
         </div>
 
         <div className="p-5 rounded-2xl bg-surface-100 border border-white/10 space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-metal-400">品牌赛事专项奖金</span>
+            <span className="text-metal-400">F1 品牌赛事专项奖</span>
             <Trophy className="w-4 h-4 text-cyber-amber" />
           </div>
-          <div className="font-black text-xl text-cyber-amber">RM 200.00</div>
+          <div className="font-black text-xl text-cyber-amber">200.00 USDT</div>
           <span className="text-[10px] text-metal-400 block">F1 蒙扎官方预测周 4 强</span>
         </div>
 

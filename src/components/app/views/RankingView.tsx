@@ -3,7 +3,6 @@ import { useDemo } from '../../../context/DemoContext';
 import { RANK_LADDER } from '../../../data/mockData';
 import { MemberRankType } from '../../../types/platform';
 import { TrendingUp, Crown, CheckCircle2, ChevronRight, Lock, Sparkles, Award } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export const RankingView: React.FC = () => {
   const { user } = useDemo();
@@ -60,7 +59,7 @@ export const RankingView: React.FC = () => {
         {/* Requirements Checklist */}
         <div className="space-y-2">
           <span className="text-xs font-mono text-metal-300 font-bold block">
-            晋升【神谕至尊 (Oracle Elite)】考核指标：
+            晋升【神谕至尊 (Oracle Elite · 20 份分红)】考核指标：
           </span>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
             <div className="p-3 rounded-xl bg-surface-200 border border-white/5 space-y-0.5">
@@ -77,7 +76,7 @@ export const RankingView: React.FC = () => {
             </div>
             <div className="p-3 rounded-xl bg-surface-200 border border-white/5 space-y-0.5">
               <span className="text-metal-400 text-[10px] block">留存率门槛</span>
-              <span className="font-bold text-lime-400">68% (达标 ≥65%) ✓</span>
+              <span className="font-bold text-lime-400">68% (达标 ≥70%) ✓</span>
             </div>
           </div>
         </div>
@@ -115,7 +114,7 @@ export const RankingView: React.FC = () => {
               </div>
 
               <div className="mt-2 pt-2 border-t border-white/5 text-[10px] text-lime-400 font-bold">
-                {r.shares > 0 ? `${r.shares} 份分红` : '无分红'}
+                {r.shares > 0 ? `${r.shares} 份分红` : '0 份分红'}
               </div>
             </button>
           );
@@ -133,7 +132,7 @@ export const RankingView: React.FC = () => {
                 {selectedRankInfo.title} ({selectedRankInfo.enTitle})
               </h3>
               <span className="text-lime-400 font-bold">
-                享 {selectedRankInfo.shares} 份全球分红池份额 · 参考月收益：{selectedRankInfo.exampleEarnings}
+                享 {selectedRankInfo.shares} 份全球分红池份额 · 参考月收益：{selectedRankInfo.exampleEarningsUSDT}
               </span>
             </div>
           </div>

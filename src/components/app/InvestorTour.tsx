@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useDemo } from '../../context/DemoContext';
-import { Sparkles, ArrowRight, ArrowLeft, X, CheckCircle2, Trophy, Compass, ShieldCheck } from 'lucide-react';
+import { Sparkles, ArrowRight, ArrowLeft, X, ShieldCheck } from 'lucide-react';
 
 export const InvestorTour: React.FC = () => {
   const { isTourActive, tourStep, nextTourStep, prevTourStep, endTour } = useDemo();
@@ -11,52 +11,73 @@ export const InvestorTour: React.FC = () => {
   const tourStepsData = [
     {
       step: 1,
-      title: '第一站：实时全球分红池 (Global Pool Ticker)',
-      highlight: 'RM 384,280 实时动态增长',
-      desc: '投资人请注意顶部与中部的实时全网分红池。每 5-10 秒由真实会员订阅费与赞助自动注资，R.ON 持有 8 份大师分红 (预估每月享 RM 631.12+)。',
-      actionHint: '点击【下一步】前往体验核心数字预测控制台。',
+      title: '第一站：核心基本盘 · 数字预测 (Core Number Prediction)',
+      highlight: 'ORACLE 49 主网核心玩法 · 60% 平台基石',
+      desc: '数字预测是 ORACLE 49 的立足之本与高频基础。我们绝不改变或削弱数字预测的根基，这是整个网络最高频的用户粘性来源。',
+      actionHint: '点击【下一步】查看客观公开的数据源机制。',
     },
     {
       step: 2,
-      title: '第二站：核心玩法与区块链封存 (Prediction Engine)',
-      highlight: '49 选 5 定向狙击 + SHA-256 哈希盖戳',
-      desc: '玩家选定 5 个号码后，点击锁定将在开奖前打上区块链不可篡改时间戳，彻底消除传统博彩的暗箱操作与事后篡改风险。',
-      actionHint: '点击【下一步】查看玩家留存的核心：Prediction IQ 智商声誉。',
+      title: '第二站：香港六合彩公开开奖参考 (Public Result Oracle)',
+      highlight: '客观不可操纵的公共数据源 (HK Mark Six)',
+      desc: '平台自身不产生也不改变开奖结果。所有 01-49 预测均锚定公开电视/官方摇号的真实世界结果，彻底消除传统博彩的黑箱做庄与算法暗箱。',
+      actionHint: '点击【下一步】体验选号封存与超级组合卡。',
     },
     {
       step: 3,
-      title: '第三站：预测智商与声誉档案 (Prediction IQ 782)',
-      highlight: '超越输赢的终身链上智商指数',
-      desc: '用户不再只是为了单次输赢，而是为了构建自己的全球排名 (#1,284) 与 5 枚灵魂绑定勋章，形成极高粘性与自豪感。',
-      actionHint: '点击【下一步】查看为什么用户会自发拓展 1,248 人社群。',
+      title: '第三站：01-49 选号与超级卡 (Lock Prediction & Super Call)',
+      highlight: '8 合 1 超级推演卡 + SHA-256 密码学时间戳',
+      desc: '支持 5 码定向猎手、焦点单码、奇偶天平、高低半区等 7 大玩法，更有一键【ORACLE 49 SUPER CALL】将 8 大预测维度合一在链上封存。',
+      actionHint: '点击【下一步】查看玩家留存的核心：Prediction IQ。',
     },
     {
       step: 4,
-      title: '第四站：社群裂变组织树 (My Network 1,248 人)',
-      highlight: '直推 50 人 · 间推 178 人 · 总社群 1,248 人',
-      desc: '直观的可视化组织节点树。健康留存率 68%，每个节点都为 R.ON 贡献持续的月度会员分润与分红池资格。',
-      actionHint: '点击【下一步】查看清晰的 20% + 5% 会员佣金模型。',
+      title: '第四站：多维预测智商体系 (Prediction IQ & F1 IQ)',
+      highlight: '综合 IQ 782 · F1 IQ 824 · 技能身份认证',
+      desc: '用户留存的核心是声誉与智商指数，而非短期赌博输赢。平台支持多品类细分智商认证，证明用户的专业直觉与推演实力。',
+      actionHint: '点击【下一步】查看纯净的 USDT 钱包与清算模型。',
     },
     {
       step: 5,
-      title: '第五站：推荐中心与持续收益 (Referral Economy)',
-      highlight: '直推 20% + L2 间推 5% 持续月度分润',
-      desc: '所有收益均来自于真实付费会员 (RM 19.90/月 PRO 或 ELITE) 的订阅分成，零本金盘，零对赌负和循环。',
-      actionHint: '点击【下一步】查看最令投资人兴奋的 3 大全球分红池。',
+      title: '第五站：纯净 USDT 资产钱包 (USDT Wallet)',
+      highlight: '1,842.60 USDT 可用余额 · 零代币合规体系',
+      desc: '全面采用 USDT 作为数字结算单位。不发行高波动空气币，不搞质押理财 (APY)，所有资金收益完全来源于真实付费会员与品牌赞助。',
+      actionHint: '点击【下一步】查看清晰的 20% + 5% 会员裂变体系。',
     },
     {
       step: 6,
-      title: '第六站：三大全球分红池与透明公式 (Pool Sharing)',
-      highlight: '社群池 (5%) + 绩效池 (3%) + 创作者池 (2%)',
-      desc: '总计 RM 384,280 分红池完全透明公式化拆解（每份 Shares = RM 78.88）。激励用户主动培育团队与提升预测技能。',
-      actionHint: '点击【下一步】检验数学终极信任：全账本区块链浏览器。',
+      title: '第六站：推荐佣金与会员晋升 (Referral & Ranking)',
+      highlight: 'PRO (10 USDT) 享 2 USDT · ELITE (30 USDT) 享 6 USDT',
+      desc: '直推 20% + L2 间推 5% 持续月度分润。辅以 6 阶晋级天梯（见习至神谕至尊 20 份分红），激励团队长期健康经营。',
+      actionHint: '点击【下一步】查看最令投资人兴奋的 3 大全球分红池。',
     },
     {
       step: 7,
-      title: '第七站：公开全账本区块链浏览器 (Proof Explorer)',
-      highlight: '默克尔树证明 · 9/9 预言机多签 · 不可篡改',
-      desc: '没有任何管理员能够更改过去。数学确定性与开源智能合约建立了坚不可摧的公信力护城河。',
-      actionHint: '恭喜！您已完整检视 ORACLE 49 的 7 大核心支柱。',
+      title: '第七站：三大全球分红池与透明公式 (Pool Sharing)',
+      highlight: '384,280 USDT 实时分红池 · 社群5% + 绩效3% + 创作者2%',
+      desc: '公式完全透明（单份 = 78.88 USDT）。用户通过培育健康组织与提高预测命中率获得更多 Shares，共享全网生态增长红利。',
+      actionHint: '点击【下一步】检视横向扩展的杀手级应用：F1 赛车预测。',
+    },
+    {
+      step: 8,
+      title: '第八站：特色推荐赛事 · 2026 F1 马来西亚雪邦 (F1 Prediction)',
+      highlight: '⭐ 特色赛事推荐 · 雪邦 SUPER 10 综合遥测',
+      desc: '验证了预测引擎的无限扩展性！从 49 数字无缝扩展至 F1 杆位、领奖台、安全车与雨战预测，打通顶级赛事与品牌赞助营销。',
+      actionHint: '点击【下一步】检验全账本区块链浏览器。',
+    },
+    {
+      step: 9,
+      title: '第九站：全账本区块链浏览器 (Proof Explorer)',
+      highlight: '默克尔树证明 · 9/9 节点多签 · 不可篡改',
+      desc: '没有任何管理员能够篡改过去。密码学确定性与开源智能合约构成了 ORACLE 49 坚不可摧的公信力护城河。',
+      actionHint: '点击【下一步】查看预测游戏大厅与全球生态远景。',
+    },
+    {
+      step: 10,
+      title: '第十站：全品类预测生态宇宙 (Expansion Ecosystem)',
+      highlight: '始于数字，延展至体育、市场、文娱与全球大事件',
+      desc: '投资人请记住：数字预测是起点，预测基础设施是平台。我们正在构建全球最大的可验证预测竞技网络！',
+      actionHint: '恭喜！您已完整检视 ORACLE 49 的 10 大核心产品支柱。',
     },
   ];
 
@@ -75,7 +96,7 @@ export const InvestorTour: React.FC = () => {
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-lime-400 animate-ping" />
             <span className="font-mono font-black text-xs text-lime-400 uppercase tracking-wider">
-              投资人专属演示导览 ({tourStep} / 7 步骤)
+              投资人全景导览 ({tourStep} / 10 步骤)
             </span>
           </div>
 
@@ -102,7 +123,7 @@ export const InvestorTour: React.FC = () => {
 
         {/* Action Controls */}
         <div className="flex items-center justify-between pt-3 border-t border-white/10 text-xs font-mono">
-          <span className="text-[11px] text-metal-400">{current.actionHint}</span>
+          <span className="text-[11px] text-metal-400 truncate max-w-[200px]">{current.actionHint}</span>
 
           <div className="flex items-center gap-2">
             {tourStep > 1 && (
@@ -119,7 +140,7 @@ export const InvestorTour: React.FC = () => {
               onClick={nextTourStep}
               className="px-4 py-1.5 rounded-lg bg-lime-400 text-black font-bold uppercase tracking-wider hover:bg-lime-300 transition-all flex items-center gap-1.5 shadow-glow-lime"
             >
-              <span>{tourStep === 7 ? '完成导览' : '下一步'}</span>
+              <span>{tourStep === 10 ? '完成导览' : '下一步'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

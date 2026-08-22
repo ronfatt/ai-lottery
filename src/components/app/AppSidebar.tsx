@@ -3,8 +3,9 @@ import { useDemo } from '../../context/DemoContext';
 import { 
   LayoutDashboard, 
   Target, 
+  Flag, 
+  Gamepad2, 
   History, 
-  Layers, 
   Trophy, 
   Award, 
   Crown, 
@@ -20,8 +21,8 @@ import {
   Settings, 
   LogOut, 
   Sparkles,
-  ArrowRight,
-  Globe
+  Globe,
+  Gauge
 } from 'lucide-react';
 
 export const AppSidebar: React.FC = () => {
@@ -29,28 +30,31 @@ export const AppSidebar: React.FC = () => {
 
   const navGroups = [
     {
-      label: '总览',
+      label: '总览 OVERVIEW',
       items: [
         { label: '控制台 (Dashboard)', path: '/app', icon: LayoutDashboard },
       ],
     },
     {
-      label: '游戏预测',
+      label: '预测玩法 PREDICT',
       items: [
-        { label: '立即预测 (Predict)', path: '/app/predict', icon: Target },
+        { label: '数字预测 (核心核心)', path: '/app/predict', icon: Target, isPrimary: true },
+        { label: 'F1 赛车预测 ⭐', path: '/app/events/f1-malaysia-2026', icon: Flag, highlightTag: '🔥 推荐' },
+        { label: '预测游戏大厅', path: '/app/games', icon: Gamepad2 },
         { label: '我的预测记录', path: '/app/predictions', icon: History },
       ],
     },
     {
-      label: '竞技声誉',
+      label: '竞技表现 PERFORMANCE',
       items: [
-        { label: '预测智商 (IQ)', path: '/app/iq', icon: Trophy },
+        { label: '综合预测智商 (IQ)', path: '/app/iq', icon: Trophy },
+        { label: 'F1 专属智商 (F1 IQ)', path: '/app/f1-iq', icon: Gauge },
         { label: '全球天梯榜', path: '/app/leaderboard', icon: Award },
-        { label: '季度通行证 (Season)', path: '/app/season', icon: Crown },
+        { label: '季度通行证 (Season 08)', path: '/app/season', icon: Crown },
       ],
     },
     {
-      label: '社群与分红',
+      label: '组织裂变 GROWTH',
       items: [
         { label: '我的组织网络 (Tree)', path: '/app/network', icon: Network },
         { label: '推荐中心 (Referral)', path: '/app/referral', icon: Share2 },
@@ -60,23 +64,23 @@ export const AppSidebar: React.FC = () => {
       ],
     },
     {
-      label: '收益资产',
+      label: '收益资产 ASSETS',
       items: [
-        { label: '收益中心 (Rewards)', path: '/app/rewards', icon: Gift },
-        { label: '奖金钱包 (Wallet)', path: '/app/wallet', icon: Wallet },
+        { label: 'USDT 奖金钱包', path: '/app/wallet', icon: Wallet, highlightUSDT: true },
+        { label: '收益明细 (Rewards)', path: '/app/rewards', icon: Gift },
       ],
     },
     {
-      label: '信任与验证',
+      label: '密码学信任 TRUST',
       items: [
         { label: '全账本区块链浏览器', path: '/app/proof', icon: ShieldCheck },
       ],
     },
     {
-      label: '账号',
+      label: '账户 ACCOUNT',
       items: [
         { label: '个人声誉主页', path: '/app/profile', icon: User },
-        { label: '设置与偏好', path: '/app/settings', icon: Settings },
+        { label: '系统设置与偏好', path: '/app/settings', icon: Settings },
       ],
     },
   ];
@@ -99,7 +103,7 @@ export const AppSidebar: React.FC = () => {
               ORACLE <span className="text-lime-400">49</span>
             </span>
             <span className="text-[9px] font-mono text-metal-400 tracking-wider">
-              会员控制系统 v1.0
+              可验证预测竞技网络
             </span>
           </div>
         </button>
@@ -114,14 +118,14 @@ export const AppSidebar: React.FC = () => {
       </div>
 
       {/* Navigation Links by Groups */}
-      <div className="p-3 space-y-5 flex-1 overflow-y-auto">
+      <div className="p-3 space-y-4 flex-1 overflow-y-auto">
         {navGroups.map((group) => (
           <div key={group.label} className="space-y-1">
-            <div className="px-3 text-[10px] font-mono font-bold text-metal-400 uppercase tracking-widest">
+            <div className="px-3 text-[9px] font-mono font-bold text-metal-400 uppercase tracking-widest">
               {group.label}
             </div>
             <div className="space-y-0.5">
-              {group.items.map((item) => {
+              {group.items.map((item: any) => {
                 const Icon = item.icon;
                 const isActive = currentPath === item.path;
 
@@ -134,13 +138,21 @@ export const AppSidebar: React.FC = () => {
                         ? 'bg-lime-400 text-black font-bold shadow-glow-lime'
                         : item.highlight
                         ? 'text-lime-400 hover:bg-lime-400/10'
+                        : item.highlightTag
+                        ? 'text-cyber-amber hover:bg-cyber-amber/10'
                         : 'text-metal-300 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-black' : item.highlight ? 'text-lime-400' : 'text-metal-400'}`} />
-                      <span>{item.label}</span>
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-black' : item.highlight ? 'text-lime-400' : item.highlightTag ? 'text-cyber-amber' : 'text-metal-400'}`} />
+                      <span className="truncate">{item.label}</span>
                     </div>
+
+                    {item.highlightTag && !isActive && (
+                      <span className="px-1.5 py-0.2 rounded text-[8px] font-bold bg-cyber-amber/20 text-cyber-amber border border-cyber-amber/30">
+                        {item.highlightTag}
+                      </span>
+                    )}
 
                     {item.highlight && !isActive && (
                       <span className="w-2 h-2 rounded-full bg-lime-400 animate-pulse" />
@@ -162,7 +174,7 @@ export const AppSidebar: React.FC = () => {
           className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-lime-400/20 via-cyber-blue/20 to-cyber-violet/20 border border-lime-400/40 text-lime-400 hover:text-white font-mono text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-glow-lime/10"
         >
           <Sparkles className="w-3.5 h-3.5 text-lime-400" />
-          <span>投资人演示导览 (TOUR)</span>
+          <span>10 步投资人全景导览 (TOUR)</span>
         </button>
 
         {/* Current Rank Status Widget */}
@@ -174,7 +186,7 @@ export const AppSidebar: React.FC = () => {
             <div className="flex items-center gap-1.5">
               <span className="text-base">👑</span>
               <div>
-                <span className="text-[10px] font-mono text-metal-400 block leading-none">当前等级</span>
+                <span className="text-[9px] font-mono text-metal-400 block leading-none">当前等级</span>
                 <span className="font-mono font-bold text-xs text-white">神谕大师 (8 份)</span>
               </div>
             </div>
@@ -196,7 +208,7 @@ export const AppSidebar: React.FC = () => {
         {/* Logout button */}
         <button
           onClick={logout}
-          className="w-full py-1.5 text-center font-mono text-[10px] text-metal-400 hover:text-red-400 flex items-center justify-center gap-1 transition-colors"
+          className="w-full py-1 text-center font-mono text-[10px] text-metal-400 hover:text-red-400 flex items-center justify-center gap-1 transition-colors"
         >
           <LogOut className="w-3 h-3" />
           <span>退出会员控制台</span>

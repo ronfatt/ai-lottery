@@ -214,7 +214,7 @@ export const NetworkView: React.FC = () => {
                   <td className="py-3.5 px-4">{m.directCount} 人</td>
                   <td className="py-3.5 px-4 font-bold text-cyber-blue">{m.communityCount} 人</td>
                   <td className="py-3.5 px-4 text-lime-400">{m.retention}%</td>
-                  <td className="py-3.5 px-4 font-bold text-white">RM {m.monthlyCommission.toFixed(2)}</td>
+                  <td className="py-3.5 px-4 font-bold text-white">{m.monthlyCommissionUSDT.toFixed(2)} USDT</td>
                   <td className="py-3.5 px-4">
                     <span className="flex items-center gap-1 text-[10px] text-lime-400 font-bold">
                       <span className="w-1.5 h-1.5 rounded-full bg-lime-400" />
@@ -276,7 +276,7 @@ export const NetworkView: React.FC = () => {
                 </div>
                 <div className="p-3 rounded-xl bg-surface-100 border border-white/5">
                   <span className="text-metal-400 text-[10px] block">为组织贡献月分润</span>
-                  <span className="font-bold text-lime-400 text-sm">RM {selectedMember.monthlyCommission.toFixed(2)}</span>
+                  <span className="font-bold text-lime-400 text-sm">{selectedMember.monthlyCommissionUSDT.toFixed(2)} USDT</span>
                 </div>
               </div>
 

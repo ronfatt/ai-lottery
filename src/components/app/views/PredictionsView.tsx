@@ -12,19 +12,25 @@ import {
   Clock, 
   Cpu, 
   Trophy,
-  Filter
+  Filter,
+  Flag,
+  Target
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const PredictionsView: React.FC = () => {
   const { predictionRounds } = useDemo();
   const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'NUMBER' | 'F1'>('ALL');
   const [selectedRound, setSelectedRound] = useState<PredictionHistoryRound | null>(null);
 
-  const filtered = predictionRounds.filter((r) => 
-    r.roundId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    r.gameMode.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filtered = predictionRounds.filter((r) => {
+    const matchesSearch = r.roundId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      r.gameMode.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      r.eventTitle.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCat = categoryFilter === 'ALL' || r.gameCategory === categoryFilter;
+    return matchesSearch && matchesCat;
+  });
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
@@ -40,20 +46,43 @@ export const PredictionsView: React.FC = () => {
             我的历史预测与链上核验
           </h2>
           <p className="text-xs font-mono text-metal-300 mt-1">
-            共计已验证 1,480 笔 · 历史可溯 · 点击任意记录查看底层密码学 Merkle 证明
+            支持香港六合彩公开摇号数字预测与 F1 雪邦赛车遥测记录 · 历史全量可溯
           </p>
         </div>
 
-        {/* Search */}
-        <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 text-metal-400 absolute left-3 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="搜索期数 / 玩法..."
-            className="w-full bg-surface-100 border border-white/10 rounded-xl py-2 pl-9 pr-4 text-xs font-mono text-white focus:outline-none focus:border-lime-400"
-          />
+        {/* Filter & Search */}
+        <div className="flex items-center gap-2 w-full sm:w-auto font-mono text-xs">
+          <div className="flex bg-surface-100 p-1 rounded-xl border border-white/10">
+            <button
+              onClick={() => setCategoryFilter('ALL')}
+              className={`px-3 py-1 rounded-lg ${categoryFilter === 'ALL' ? 'bg-lime-400 text-black font-bold' : 'text-metal-400'}`}
+            >
+              全部
+            </button>
+            <button
+              onClick={() => setCategoryFilter('NUMBER')}
+              className={`px-3 py-1 rounded-lg ${categoryFilter === 'NUMBER' ? 'bg-lime-400 text-black font-bold' : 'text-metal-400'}`}
+            >
+              数字预测
+            </button>
+            <button
+              onClick={() => setCategoryFilter('F1')}
+              className={`px-3 py-1 rounded-lg ${categoryFilter === 'F1' ? 'bg-cyber-amber text-black font-bold' : 'text-metal-400'}`}
+            >
+              F1 赛车
+            </button>
+          </div>
+
+          <div className="relative flex-1 sm:w-56">
+            <Search className="w-4 h-4 text-metal-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="搜索期数 / 赛事..."
+              className="w-full bg-surface-100 border border-white/10 rounded-xl py-2 pl-9 pr-3 text-xs font-mono text-white focus:outline-none focus:border-lime-400"
+            />
+          </div>
         </div>
       </div>
 
@@ -63,13 +92,13 @@ export const PredictionsView: React.FC = () => {
           <table className="w-full text-left font-mono text-xs">
             <thead className="bg-surface-200/90 text-metal-400 text-[10px] uppercase border-b border-white/10">
               <tr>
-                <th className="py-3.5 px-4">开奖期数</th>
-                <th className="py-3.5 px-4">预测模式</th>
-                <th className="py-3.5 px-4">锁票号码组合</th>
-                <th className="py-3.5 px-4">官方开奖结果</th>
+                <th className="py-3.5 px-4">类别</th>
+                <th className="py-3.5 px-4">期数 / 赛事</th>
+                <th className="py-3.5 px-4">模式</th>
+                <th className="py-3.5 px-4">用户推演选择</th>
+                <th className="py-3.5 px-4">官方开奖 / 成绩参考</th>
                 <th className="py-3.5 px-4">命中战绩</th>
-                <th className="py-3.5 px-4">获得经验</th>
-                <th className="py-3.5 px-4">存证状态</th>
+                <th className="py-3.5 px-4">状态</th>
                 <th className="py-3.5 px-4 text-right">操作</th>
               </tr>
             </thead>
@@ -80,6 +109,17 @@ export const PredictionsView: React.FC = () => {
                   onClick={() => setSelectedRound(item)}
                   className="hover:bg-white/5 cursor-pointer transition-colors"
                 >
+                  <td className="py-3.5 px-4 font-bold">
+                    {item.gameCategory === 'NUMBER' ? (
+                      <span className="px-2 py-0.5 rounded text-[9px] bg-lime-400/20 text-lime-400 border border-lime-400/30">
+                        数字
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded text-[9px] bg-cyber-amber/20 text-cyber-amber border border-cyber-amber/30">
+                        F1
+                      </span>
+                    )}
+                  </td>
                   <td className="py-3.5 px-4 font-bold text-white">
                     {item.roundId}
                   </td>
@@ -87,22 +127,26 @@ export const PredictionsView: React.FC = () => {
                     {item.gameMode}
                   </td>
                   <td className="py-3.5 px-4 font-bold text-lime-400">
-                    [{item.selectedNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]
+                    {item.selectedNumbers ? (
+                      <span>[{item.selectedNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]</span>
+                    ) : (
+                      <span className="text-cyber-amber truncate max-w-[200px] block">{item.userSelectionText}</span>
+                    )}
                   </td>
                   <td className="py-3.5 px-4 text-metal-300">
                     {item.officialNumbers ? (
-                      <span>[{item.officialNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]</span>
+                      <span>
+                        [{item.officialNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]
+                        {item.specialNumber && <span className="text-cyber-amber ml-1">+{item.specialNumber}</span>}
+                      </span>
                     ) : (
-                      <span className="text-metal-400">待摇号公开</span>
+                      <span className="text-metal-400">{item.officialResultText || '等待公开结果'}</span>
                     )}
                   </td>
                   <td className="py-3.5 px-4">
                     <span className="px-2 py-0.5 rounded text-[10px] bg-surface-200 text-white font-bold">
                       {item.score}
                     </span>
-                  </td>
-                  <td className="py-3.5 px-4 font-bold text-lime-400">
-                    +{item.xpGained} XP
                   </td>
                   <td className="py-3.5 px-4">
                     <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-lime-400/15 text-lime-400 border border-lime-400/30">
@@ -127,17 +171,17 @@ export const PredictionsView: React.FC = () => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-[#0D1117] border-2 border-lime-400/50 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl space-y-6 relative text-white"
+              className="bg-[#0D1117] border-2 border-lime-400/50 rounded-3xl p-6 sm:p-8 max-w-2xl w-full shadow-2xl space-y-6 relative text-white font-mono text-xs"
             >
               <div className="flex items-center justify-between pb-4 border-b border-white/10">
                 <div className="flex items-center gap-2.5">
                   <ShieldCheck className="w-5 h-5 text-lime-400" />
                   <div>
-                    <h3 className="font-display font-black text-xl">
-                      开奖期数 {selectedRound.roundId} 链上核验证明
+                    <h3 className="font-display font-black text-xl text-white">
+                      {selectedRound.roundId} 链上核验证明
                     </h3>
-                    <span className="text-[10px] font-mono text-metal-400">
-                      模式：{selectedRound.gameMode} · 封存时间：{selectedRound.closingTime}
+                    <span className="text-[10px] text-metal-400">
+                      {selectedRound.eventTitle}
                     </span>
                   </div>
                 </div>
@@ -150,36 +194,39 @@ export const PredictionsView: React.FC = () => {
                 </button>
               </div>
 
-              <div className="space-y-4 font-mono text-xs">
-                
-                {/* Numbers */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3.5 rounded-xl bg-surface-100 border border-white/5 space-y-1">
-                    <span className="text-metal-400 text-[10px] block">用户锁票号码</span>
-                    <span className="text-lime-400 font-bold text-sm">
-                      [{selectedRound.selectedNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]
-                    </span>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-surface-100 border border-white/5 space-y-1">
-                    <span className="text-metal-400 text-[10px] block">官方公开结果</span>
-                    <span className="text-white font-bold text-sm">
-                      {selectedRound.officialNumbers 
-                        ? `[${selectedRound.officialNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]`
-                        : '等待开奖'}
-                    </span>
-                  </div>
+              <div className="space-y-3">
+                <div className="p-3 rounded-xl bg-surface-100 border border-white/5 space-y-1">
+                  <span className="text-metal-400 text-[10px] block">客观公共数据源 (PUBLIC RESULT ORACLE)</span>
+                  <span className="text-white font-bold">{selectedRound.referenceSource}</span>
                 </div>
 
-                {/* SHA-256 Hash */}
+                {selectedRound.selectedNumbers && (
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3 rounded-xl bg-surface-100 border border-white/5 space-y-1">
+                      <span className="text-metal-400 text-[10px] block">用户锁票号码</span>
+                      <span className="text-lime-400 font-bold text-sm">
+                        [{selectedRound.selectedNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}]
+                      </span>
+                    </div>
+
+                    <div className="p-3 rounded-xl bg-surface-100 border border-white/5 space-y-1">
+                      <span className="text-metal-400 text-[10px] block">官方公开结果 (正码+特别号)</span>
+                      <span className="text-white font-bold text-sm">
+                        {selectedRound.officialNumbers 
+                          ? `[${selectedRound.officialNumbers.map((n) => (n < 10 ? `0${n}` : n)).join(' · ')}] + 特别号 ${selectedRound.specialNumber}`
+                          : '等待香港公开摇号'}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 <div className="p-3.5 rounded-xl bg-surface-100 border border-white/5 space-y-1">
                   <span className="text-metal-400 text-[10px] block uppercase">SHA-256 预测承诺存证哈希 (COMMIT HASH)</span>
-                  <span className="text-lime-400 break-all select-all font-mono">
+                  <span className="text-lime-400 break-all select-all font-bold text-xs">
                     {selectedRound.hash}
                   </span>
                 </div>
 
-                {/* Blockchain Info */}
                 <div className="grid grid-cols-3 gap-3 text-[11px]">
                   <div className="p-3 rounded-xl bg-surface-100 border border-white/5">
                     <span className="text-metal-400 block">区块高度</span>
@@ -193,25 +240,21 @@ export const PredictionsView: React.FC = () => {
 
                   <div className="p-3 rounded-xl bg-surface-100 border border-white/5">
                     <span className="text-metal-400 block">智商与声誉变动</span>
-                    <span className="text-cyber-blue font-bold">IQ +{selectedRound.iqDelta} (天梯 ↑)</span>
+                    <span className="text-cyber-blue font-bold">+{selectedRound.xpGained} XP</span>
                   </div>
                 </div>
-
               </div>
 
-              {/* Banner */}
-              <div className="p-4 rounded-xl bg-lime-400/10 border border-lime-400/30 text-xs font-mono text-center text-lime-400 font-bold">
+              <div className="p-3.5 rounded-xl bg-lime-400/10 border border-lime-400/30 text-center text-lime-400 font-bold">
                 没有任何管理员或中心化服务器能够篡改已封存的预测记录 (TAMPER-PROOF)
               </div>
 
-              <div>
-                <button
-                  onClick={() => setSelectedRound(null)}
-                  className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-mono text-xs font-bold"
-                >
-                  关闭存证详情
-                </button>
-              </div>
+              <button
+                onClick={() => setSelectedRound(null)}
+                className="w-full py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold"
+              >
+                关闭存证详情
+              </button>
             </motion.div>
           </div>
         )}

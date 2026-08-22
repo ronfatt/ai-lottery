@@ -10,6 +10,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Views
 import { DashboardView } from './views/DashboardView';
 import { PredictView } from './views/PredictView';
+import { F1PredictView } from './views/F1PredictView';
+import { F1IQView } from './views/F1IQView';
+import { GamesHubView } from './views/GamesHubView';
 import { PredictionsView } from './views/PredictionsView';
 import { PredictionIQView } from './views/PredictionIQView';
 import { LeaderboardView } from './views/LeaderboardView';
@@ -34,7 +37,13 @@ export const AppLayout: React.FC = () => {
       case '/app':
         return '会员控制台 (DASHBOARD)';
       case '/app/predict':
-        return '发起预测 (PREDICT NOW)';
+        return '数字预测 (NUMBER PREDICTION)';
+      case '/app/events/f1-malaysia-2026':
+        return '2026 F1 马来西亚雪邦预测 (F1 SEPANG 2026)';
+      case '/app/f1-iq':
+        return 'F1 专属预测智商 (F1 MOTORSPORT IQ)';
+      case '/app/games':
+        return '预测游戏大厅 (GAMES HUB)';
       case '/app/predictions':
         return '我的预测记录 (PREDICTIONS)';
       case '/app/iq':
@@ -52,11 +61,11 @@ export const AppLayout: React.FC = () => {
       case '/app/ranking':
         return '会员等级晋级 (RANK LADDER)';
       case '/app/pool':
-        return '全球分红池 (GLOBAL POOL)';
+        return '全球分红池 (GLOBAL USDT POOL)';
       case '/app/rewards':
         return '综合收益中心 (REWARDS)';
       case '/app/wallet':
-        return '奖金资产钱包 (WALLET)';
+        return 'USDT 奖金钱包 (USDT WALLET)';
       case '/app/proof':
         return '全账本区块链浏览器 (PROOF)';
       case '/app/profile':
@@ -73,6 +82,12 @@ export const AppLayout: React.FC = () => {
     switch (currentPath) {
       case '/app/predict':
         return <PredictView />;
+      case '/app/events/f1-malaysia-2026':
+        return <F1PredictView />;
+      case '/app/f1-iq':
+        return <F1IQView />;
+      case '/app/games':
+        return <GamesHubView />;
       case '/app/predictions':
         return <PredictionsView />;
       case '/app/iq':

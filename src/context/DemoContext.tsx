@@ -15,9 +15,9 @@ interface DemoContextType {
   loginAsRon: () => void;
   logout: () => void;
   
-  // Live Pool State
-  globalPoolAmount: number;
-  poolGrowthToday: number;
+  // Live Pool State in USDT
+  globalPoolAmountUSDT: number;
+  poolGrowthTodayUSDT: number;
   
   // User Profile
   user: {
@@ -29,6 +29,10 @@ interface DemoContextType {
     performanceShares: number;
     creatorShares: number;
     predictionIQ: number;
+    f1IQ: number;
+    f1RankMalaysia: number;
+    f1RankGlobal: number;
+    f1Accuracy: number;
     globalRank: number;
     rankDelta: number;
     activeCommunity: number;
@@ -37,15 +41,15 @@ interface DemoContextType {
     retention: number;
     predictionEnergy: number;
     maxEnergy: number;
-    walletBalance: number;
-    pendingRewards: number;
-    lifetimeRewards: number;
+    walletBalanceUSDT: number;
+    pendingRewardsUSDT: number;
+    lifetimeRewardsUSDT: number;
     oracleCredits: number;
     streak: number;
     bestStreak: number;
     seasonPoints: number;
     seasonLevel: number;
-    monthlyRewards: number;
+    monthlyRewardsUSDT: number;
   };
 
   // Datasets
@@ -57,12 +61,13 @@ interface DemoContextType {
 
   // Actions
   addNewPrediction: (numbers: number[], gameMode?: string) => Promise<PredictionHistoryRound>;
+  addF1Prediction: (selectionText: string, gameMode?: string) => Promise<PredictionHistoryRound>;
   
   // Toast system
   toast: { message: string; type: 'success' | 'info' | 'warning' } | null;
   showToast: (message: string, type?: 'success' | 'info' | 'warning') => void;
 
-  // Investor Presentation Tour
+  // 10-Step Investor Presentation Tour
   isTourActive: boolean;
   tourStep: number;
   startTour: () => void;
@@ -74,7 +79,6 @@ interface DemoContextType {
 const DemoContext = createContext<DemoContextType | undefined>(undefined);
 
 export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Navigation state (defaults to landing page '/')
   const [currentPath, setCurrentPath] = useState<string>(() => {
     return window.location.pathname.startsWith('/app') ? window.location.pathname : '/';
   });
@@ -83,20 +87,20 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return window.location.pathname.startsWith('/app');
   });
 
-  // Simulated Live Pool Ticker (Starts at RM 384,280 and increments realistically)
-  const [globalPoolAmount, setGlobalPoolAmount] = useState(384280.40);
-  const [poolGrowthToday, setPoolGrowthToday] = useState(420.00);
+  // Simulated Live Pool Ticker in USDT (Starts at 384,280 USDT)
+  const [globalPoolAmountUSDT, setGlobalPoolAmountUSDT] = useState(384280.00);
+  const [poolGrowthTodayUSDT, setPoolGrowthTodayUSDT] = useState(420.00);
 
   useEffect(() => {
     const timer = setInterval(() => {
       const delta = Math.floor(Math.random() * 18) + 4;
-      setGlobalPoolAmount((prev) => parseFloat((prev + delta).toFixed(2)));
-      setPoolGrowthToday((prev) => parseFloat((prev + delta).toFixed(2)));
+      setGlobalPoolAmountUSDT((prev) => parseFloat((prev + delta).toFixed(2)));
+      setPoolGrowthTodayUSDT((prev) => parseFloat((prev + delta).toFixed(2)));
     }, 6000);
     return () => clearInterval(timer);
   }, []);
 
-  // User State
+  // User State in USDT
   const [user, setUser] = useState({
     name: 'R.ON',
     title: '神谕大师 (Oracle Master)',
@@ -106,6 +110,10 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     performanceShares: 2,
     creatorShares: 1,
     predictionIQ: 782,
+    f1IQ: 824,
+    f1RankMalaysia: 122,
+    f1RankGlobal: 841,
+    f1Accuracy: 74,
     globalRank: 1284,
     rankDelta: 324,
     activeCommunity: 1248,
@@ -114,15 +122,15 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     retention: 68,
     predictionEnergy: 720,
     maxEnergy: 1000,
-    walletBalance: 2500.60,
-    pendingRewards: 342.00,
-    lifetimeRewards: 18420.80,
+    walletBalanceUSDT: 1842.60,
+    pendingRewardsUSDT: 342.00,
+    lifetimeRewardsUSDT: 18420.80,
     oracleCredits: 3840,
     streak: 6,
     bestStreak: 14,
     seasonPoints: 26870,
     seasonLevel: 27,
-    monthlyRewards: 2842.60,
+    monthlyRewardsUSDT: 2842.60,
   });
 
   const [networkMembers] = useState<NetworkMember[]>(MOCK_NETWORK_MEMBERS);
@@ -130,7 +138,6 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [walletTransactions] = useState<WalletTransaction[]>(MOCK_WALLET_TRANSACTIONS);
   const [notifications, setNotifications] = useState<NotificationItem[]>(MOCK_NOTIFICATIONS);
 
-  // Toast notification state
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'info' | 'warning' } | null>(null);
 
   const showToast = (message: string, type: 'success' | 'info' | 'warning' = 'success') => {
@@ -138,7 +145,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setTimeout(() => setToast(null), 3500);
   };
 
-  // Investor Tour Guide State
+  // 10-Step Investor Tour
   const [isTourActive, setIsTourActive] = useState(false);
   const [tourStep, setTourStep] = useState(1);
 
@@ -146,21 +153,23 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsTourActive(true);
     setTourStep(1);
     setCurrentPath('/app');
-    showToast('已开启投资人专属引导演示 (Investor Demo Tour)', 'info');
+    showToast('已开启 10 步投资人全景导览 (Investor Demo Tour)', 'info');
   };
 
   const nextTourStep = () => {
-    if (tourStep < 7) {
+    if (tourStep < 10) {
       const next = tourStep + 1;
       setTourStep(next);
-      // Automatically switch views matching the tour highlights
+      // Auto routing matching the 10 tour steps
       if (next === 1) setCurrentPath('/app');
-      else if (next === 2) setCurrentPath('/app/predict');
-      else if (next === 3) setCurrentPath('/app/iq');
-      else if (next === 4) setCurrentPath('/app/network');
-      else if (next === 5) setCurrentPath('/app/referral');
-      else if (next === 6) setCurrentPath('/app/pool');
-      else if (next === 7) setCurrentPath('/app/proof');
+      else if (next === 2 || next === 3) setCurrentPath('/app/predict');
+      else if (next === 4) setCurrentPath('/app/iq');
+      else if (next === 5) setCurrentPath('/app/wallet');
+      else if (next === 6) setCurrentPath('/app/referral');
+      else if (next === 7) setCurrentPath('/app/pool');
+      else if (next === 8) setCurrentPath('/app/events/f1-malaysia-2026');
+      else if (next === 9) setCurrentPath('/app/proof');
+      else if (next === 10) setCurrentPath('/app/games');
     } else {
       endTour();
     }
@@ -171,18 +180,20 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const prev = tourStep - 1;
       setTourStep(prev);
       if (prev === 1) setCurrentPath('/app');
-      else if (prev === 2) setCurrentPath('/app/predict');
-      else if (prev === 3) setCurrentPath('/app/iq');
-      else if (prev === 4) setCurrentPath('/app/network');
-      else if (prev === 5) setCurrentPath('/app/referral');
-      else if (prev === 6) setCurrentPath('/app/pool');
-      else if (prev === 7) setCurrentPath('/app/proof');
+      else if (prev === 2 || prev === 3) setCurrentPath('/app/predict');
+      else if (prev === 4) setCurrentPath('/app/iq');
+      else if (prev === 5) setCurrentPath('/app/wallet');
+      else if (prev === 6) setCurrentPath('/app/referral');
+      else if (prev === 7) setCurrentPath('/app/pool');
+      else if (prev === 8) setCurrentPath('/app/events/f1-malaysia-2026');
+      else if (prev === 9) setCurrentPath('/app/proof');
+      else if (prev === 10) setCurrentPath('/app/games');
     }
   };
 
   const endTour = () => {
     setIsTourActive(false);
-    showToast('演示引导结束，您可以自由浏览与体验任意功能。', 'info');
+    showToast('导览结束，可自由体验任意功能。', 'info');
   };
 
   const navigate = (path: string) => {
@@ -207,12 +218,11 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     showToast('所有通知已标记为已读');
   };
 
-  // Add new prediction round simulator
+  // Add new Number prediction (Ref HK Mark Six)
   const addNewPrediction = async (numbers: number[], gameMode: string = '数字猎手 (5码)'): Promise<PredictionHistoryRound> => {
     const mockHash = `0x${Math.random().toString(16).slice(2)}${Math.random().toString(16).slice(2)}`;
     const mockBlock = 28482914 + predictionRounds.length;
     
-    // deduct 100 energy
     setUser((prev) => ({
       ...prev,
       predictionEnergy: Math.max(0, prev.predictionEnergy - 100),
@@ -220,14 +230,17 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const newRound: PredictionHistoryRound = {
       id: `rnd-${Date.now()}`,
+      gameCategory: 'NUMBER',
       roundId: `#${260823 + predictionRounds.length}`,
-      drawDate: '2026-08-22 21:00 (封存待开奖)',
-      closingTime: '2026-08-22 20:50',
+      eventTitle: '香港六合彩公开开奖数据参考 · 01-49 数字预测',
+      referenceSource: '香港六合彩公开摇号数据参考 (HK Mark Six Result Reference)',
+      drawDate: '2026-08-22 21:30 (封存待开奖)',
+      closingTime: '2026-08-22 21:15',
       selectedNumbers: numbers,
       officialNumbers: undefined,
       hits: 0,
-      score: '已封存待开奖',
-      xpGained: 100, // Participation XP
+      score: '已在链上盖戳封存 · 等待香港公开摇号',
+      xpGained: 100,
       iqDelta: 0,
       hash: mockHash,
       blockNumber: mockBlock,
@@ -237,7 +250,44 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     setPredictionRounds((prev) => [newRound, ...prev]);
-    showToast(`预测已成功在区块链盖戳封存！消耗 100 ⚡ 预测能量。`, 'success');
+    showToast(`数字预测已成功在区块链盖戳封存！参考香港公开摇号数据。消耗 100 ⚡ 能量。`, 'success');
+    return newRound;
+  };
+
+  // Add F1 prediction (Ref Sepang 2026)
+  const addF1Prediction = async (selectionText: string, gameMode: string = '雪邦 SUPER 10'): Promise<PredictionHistoryRound> => {
+    const mockHash = `0xF1${Math.random().toString(16).slice(2)}${Math.random().toString(16).slice(2)}`;
+    const mockBlock = 28483100 + predictionRounds.length;
+
+    setUser((prev) => ({
+      ...prev,
+      predictionEnergy: Math.max(0, prev.predictionEnergy - 150),
+    }));
+
+    const newRound: PredictionHistoryRound = {
+      id: `rnd-f1-${Date.now()}`,
+      gameCategory: 'F1',
+      roundId: 'F1-MY-2026',
+      eventTitle: '2026 F1 马来西亚雪邦大奖赛 (SEPANG) 特色赛事',
+      referenceSource: 'FIA 官方雪邦排位与正赛遥测结果',
+      drawDate: '2026-10-04 15:00',
+      closingTime: '2026-10-04 14:45',
+      userSelectionText: selectionText,
+      officialResultText: '等待 10月4日 官方正赛成绩',
+      hits: 0,
+      score: '已在链上盖戳封存 · 等待正赛成绩',
+      xpGained: 200,
+      iqDelta: 0,
+      rewardUSDT: 50.0,
+      hash: mockHash,
+      blockNumber: mockBlock,
+      status: 'SEALED',
+      gameMode: gameMode,
+      accuracyRate: '等待结算',
+    };
+
+    setPredictionRounds((prev) => [newRound, ...prev]);
+    showToast(`F1 雪邦特色赛事预测已在链上封存！成功锁定 10 项遥测指标。`, 'success');
     return newRound;
   };
 
@@ -249,8 +299,8 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isAuthenticated,
         loginAsRon,
         logout,
-        globalPoolAmount,
-        poolGrowthToday,
+        globalPoolAmountUSDT,
+        poolGrowthTodayUSDT,
         user,
         networkMembers,
         predictionRounds,
@@ -258,6 +308,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         notifications,
         markAllNotificationsAsRead,
         addNewPrediction,
+        addF1Prediction,
         toast,
         showToast,
         isTourActive,

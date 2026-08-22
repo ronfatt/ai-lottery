@@ -6,11 +6,11 @@ export const BusinessModel: React.FC = () => {
     {
       name: 'FREE 基础版',
       tagline: '大众直觉预测玩家',
-      price: '¥0 / RM 0',
+      price: '0 USDT',
       period: '永久免费',
       highlight: false,
       features: [
-        '每日 3 笔免费公开预测额度',
+        '每日免费公开预测额度',
         '全球公共排行榜访问权限',
         '基础 Prediction IQ 个人主页',
         '标准赛季成就勋章解锁',
@@ -22,7 +22,7 @@ export const BusinessModel: React.FC = () => {
     {
       name: 'PRO 专业版',
       tagline: '严肃数据型竞技高手',
-      price: 'RM 19.90',
+      price: '10 USDT',
       period: '/ 每月',
       highlight: true,
       badge: '最受欢迎方案',
@@ -31,33 +31,33 @@ export const BusinessModel: React.FC = () => {
         '完整高级概率分析引擎',
         'Prediction AI 智能趋势推演辅助',
         '创建与管理专属好友私域联赛',
-        '全量历史开奖数据检索与回测',
+        '直推 20% (2 USDT) 分润资格',
         '专属金色认证标识与 IQ 闪光特效',
       ],
       cta: '升级至 PRO 专业版',
       buttonStyle: 'bg-lime-400 hover:bg-lime-300 text-black font-black shadow-glow-lime',
     },
     {
-      name: 'BRAND 品牌定制',
-      tagline: '企业级品牌营销活动',
-      price: '定制费用',
-      period: '/ 单场活动',
+      name: 'ELITE 至尊版',
+      tagline: '组织领袖与创作者专享',
+      price: '30 USDT',
+      period: '/ 每月',
       highlight: false,
       features: [
-        '品牌冠名预测锦标赛',
-        '自定义专属实物/现金奖池配置',
-        '极高社交裂变与品牌曝光',
-        'F1 与体育赛事联合冠名赛季',
-        'B2B 消费者情绪深度分析数据',
+        '包含 PRO 版全部特权',
+        '创作者私域联赛主办权 (2% 分红池)',
+        '直推 20% (6 USDT) + 间推 5% (1.5 USDT)',
+        'F1 与顶级赛事品牌联合预测优先席位',
+        '全网组织留存与深度分析工具',
         '专属企业级链上智能合约部署',
       ],
-      cta: '洽谈品牌合作',
-      buttonStyle: 'bg-cyber-blue hover:bg-cyber-blue/90 text-black font-bold shadow-glow-blue',
+      cta: '升级至 ELITE 至尊版',
+      buttonStyle: 'bg-cyber-violet hover:bg-cyber-violet/90 text-white font-bold shadow-glow-violet',
     },
   ];
 
   const revenueStreams = [
-    { title: 'B2C 会员订阅', desc: '高级玩家为 AI 辅助、无限预测与私域联赛支付的月度 PRO 订阅费' },
+    { title: 'B2C 会员订阅', desc: '高级玩家为 AI 辅助、无限预测与私域联赛支付的月度 PRO/ELITE 订阅费' },
     { title: '品牌赞助与广告', desc: '企业品牌为获取用户高频注意力赞助专属预测赛事与奖池' },
     { title: '营销活动平台费', desc: '为大型品牌、体育俱乐部定制专属预测活动收取的部署服务费' },
     { title: '市场情绪数据授权', desc: '基于去中心化群体预测沉淀的高价值商业概率与情绪数据资产' },
@@ -75,7 +75,7 @@ export const BusinessModel: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-100 border border-white/10 text-xs font-mono text-lime-400">
             <Zap className="w-3.5 h-3.5" />
-            <span>可持续平台商业化模型</span>
+            <span>可持续平台商业化模型 (USDT)</span>
           </div>
 
           <h2 className="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white uppercase leading-tight">
@@ -86,11 +86,11 @@ export const BusinessModel: React.FC = () => {
           </h2>
 
           <p className="text-metal-200 text-sm sm:text-base">
-            不同于依赖玩家输钱盈利的传统赌场，ORACLE 49 通过 <strong className="text-white">高价值 PRO 订阅、数据洞察以及企业品牌营销赞助</strong> 实现多方共赢的可持续商业闭环。
+            不同于依赖玩家输钱盈利的传统赌场，ORACLE 49 通过 <strong className="text-white">高价值 PRO/ELITE 订阅、数据洞察以及企业品牌营销赞助</strong> 实现多方共赢的可持续商业闭环。
           </p>
         </div>
 
-        {/* 3 Tier Pricing Cards */}
+        {/* 3 Tier Pricing Cards in USDT */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch mb-16">
           {tiers.map((tier) => (
             <div
