@@ -28,18 +28,6 @@ export const DashboardView: React.FC = () => {
   const [selectedNums, setSelectedNums] = useState<number[]>([7, 18, 23, 36, 41]);
   const [isLocking, setIsLocking] = useState(false);
   const [lockedSuccess, setLockedSuccess] = useState(false);
-  const [timeRange, setTimeRange] = useState<'7D' | '30D' | '90D' | '1Y'>('30D');
-
-  const growthData = [
-    { month: '1月', users: 180, revenue: 3800, rewards: 1200 },
-    { month: '2月', users: 340, revenue: 7200, rewards: 2400 },
-    { month: '3月', users: 510, revenue: 11400, rewards: 3900 },
-    { month: '4月', users: 720, revenue: 16800, rewards: 5800 },
-    { month: '5月', users: 890, revenue: 21500, rewards: 7400 },
-    { month: '6月', users: 1040, revenue: 26900, rewards: 9200 },
-    { month: '7月', users: 1160, revenue: 31200, rewards: 11400 },
-    { month: '8月 (今)', users: 1248, revenue: 34800, rewards: 13800 },
-  ];
 
   const handleToggleNumber = (n: number) => {
     if (lockedSuccess) return;
@@ -193,7 +181,7 @@ export const DashboardView: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         
         {/* Left 7 Cols: PRIMARY CORE GAME - NUMBER PREDICTION (60% Prominence) */}
-        <div className="lg:col-span-7 bg-surface-100/95 border-2 border-lime-400/60 rounded-3xl p-6 sm:p-7 backdrop-blur-xl shadow-glass-card space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-7 bg-surface-100/95 border-2 border-lime-400/60 rounded-3xl p-6 sm:p-7 backdrop-blur-xl shadow-glass-card space-y-4 flex flex-col justify-between relative overflow-hidden">
           
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
@@ -290,52 +278,57 @@ export const DashboardView: React.FC = () => {
 
         </div>
 
-        {/* Right 5 Cols: FEATURED EVENT - F1 MALAYSIA 2026 SEPANG (40% Prominence) */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-surface-100 via-surface-200 to-surface-100 border-2 border-cyber-amber/50 rounded-3xl p-6 sm:p-7 backdrop-blur-xl shadow-[0_0_50px_rgba(245,158,11,0.15)] flex flex-col justify-between space-y-4">
+        {/* Right 5 Cols: FEATURED EVENT - F1 MALAYSIA 2026 SEPANG (With Graphic Banner) */}
+        <div className="lg:col-span-5 bg-surface-100/95 border-2 border-cyber-amber/60 rounded-3xl overflow-hidden backdrop-blur-xl shadow-[0_0_50px_rgba(245,158,11,0.2)] flex flex-col justify-between group">
           
-          <div>
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-black bg-cyber-amber text-black uppercase flex items-center gap-1">
+          {/* F1 Visual Thumbnail Header */}
+          <div className="h-40 w-full relative overflow-hidden bg-surface-200">
+            <img 
+              src="/images/f1_sepang_banner.jpg" 
+              alt="F1 Sepang 2026" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/60 to-transparent" />
+            <div className="absolute top-3 left-3">
+              <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-black bg-cyber-amber text-black uppercase flex items-center gap-1 shadow-md">
                 <Flag className="w-3 h-3" />
-                <span>⭐ FEATURED EVENT // 特色推荐赛事</span>
-              </span>
-              <span className="text-[10px] font-mono text-cyber-amber font-bold">
-                50,000 USDT 奖池
+                <span>⭐ FEATURED EVENT</span>
               </span>
             </div>
-
-            <div className="my-3 space-y-1">
-              <h3 className="font-display font-black text-2xl text-white">
-                2026 F1 马来西亚雪邦大奖赛
-              </h3>
-              <p className="text-xs font-mono text-metal-300">
-                SEPANG MALAYSIA · 2026年10月02–04日
-              </p>
-            </div>
-
-            <p className="text-xs font-mono text-metal-200 leading-relaxed">
-              亚洲旗舰汽车运动重磅回归！推演正赛冠军、车队胜出、排位杆位、安全车与热带雨战等多达 10 项遥测指标。
-            </p>
-
-            <div className="mt-4 p-3 rounded-xl bg-surface-300/80 border border-white/5 font-mono text-xs space-y-1 text-metal-300">
-              <div className="flex justify-between">
-                <span>分站冠军首选：</span>
-                <span className="text-cyber-amber font-bold">维斯塔潘 (48% 支持率)</span>
-              </div>
-              <div className="flex justify-between">
-                <span>您的 F1 专属智商：</span>
-                <span className="text-white font-bold">{user.f1IQ} 分 (全马 #{user.f1RankMalaysia})</span>
-              </div>
+            <div className="absolute bottom-2 right-3 font-mono text-[10px] text-cyber-amber font-bold bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm border border-cyber-amber/30">
+              50,000 USDT 奖池
             </div>
           </div>
 
-          <button
-            onClick={() => navigate('/app/events/f1-malaysia-2026')}
-            className="w-full py-3.5 rounded-xl bg-cyber-amber hover:bg-amber-400 text-black font-mono text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(245,158,11,0.35)]"
-          >
-            <span>进入雪邦 SUPER 10 预测</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div className="space-y-2">
+              <h3 className="font-display font-black text-xl sm:text-2xl text-white">
+                2026 F1 马来西亚雪邦大奖赛
+              </h3>
+              <p className="text-xs font-mono text-metal-300">
+                SEPANG MALAYSIA · 2026年10月02–04日 正赛
+              </p>
+
+              <div className="p-3 rounded-xl bg-surface-200/80 border border-white/5 font-mono text-xs space-y-1 text-metal-300">
+                <div className="flex justify-between">
+                  <span>分站冠军首选：</span>
+                  <span className="text-cyber-amber font-bold">维斯塔潘 (48% 支持率)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>您的 F1 专属智商：</span>
+                  <span className="text-white font-bold">{user.f1IQ} 分 (全马 #{user.f1RankMalaysia})</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate('/app/events/f1-malaysia-2026')}
+              className="w-full py-3.5 rounded-xl bg-cyber-amber hover:bg-amber-400 text-black font-mono text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-[0_0_25px_rgba(245,158,11,0.35)]"
+            >
+              <span>进入雪邦 SUPER 10 预测</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
 
         </div>
 

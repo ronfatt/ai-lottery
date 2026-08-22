@@ -13,7 +13,9 @@ import {
   Gauge, 
   Timer, 
   ChevronRight,
-  Zap
+  Zap,
+  Radio,
+  Compass
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -31,20 +33,65 @@ export const F1PredictView: React.FC = () => {
   const [hasSafetyCar, setHasSafetyCar] = useState<'YES' | 'NO'>('YES');
   const [hasRain, setHasRain] = useState<'YES' | 'NO'>('YES');
   const [winningMargin, setWinningMargin] = useState('3–7 秒区间');
-  const [mclarenVsRedbull, setMclarenVsRedbull] = useState('红牛胜出');
-  const [ferrariVsMercedes, setFerrariVsMercedes] = useState('法拉利胜出');
+  const [activeDriverTab, setActiveDriverTab] = useState<'ALL' | 'REDBULL' | 'MCLAREN' | 'FERRARI' | 'MERCEDES'>('ALL');
 
   const [isLocking, setIsLocking] = useState(false);
   const [lockedSuccess, setLockedSuccess] = useState(false);
   const [sealedHash, setSealedHash] = useState('');
 
-  const driversList = [
-    { name: '维斯塔潘 (VERSTAPPEN)', team: '红牛车队', number: '01', color: '#00E5FF' },
-    { name: '诺里斯 (NORRIS)', team: '迈凯伦车队', number: '04', color: '#F59E0B' },
-    { name: '勒克莱尔 (LECLERC)', team: '法拉利车队', number: '16', color: '#F43F5E' },
-    { name: '拉塞尔 (RUSSELL)', team: '梅赛德斯车队', number: '63', color: '#00FF66' },
-    { name: '汉密尔顿 (HAMILTON)', team: '法拉利车队', number: '44', color: '#F43F5E' },
-    { name: '皮亚斯特里 (PIASTRI)', team: '迈凯伦车队', number: '81', color: '#F59E0B' },
+  const teamsData = [
+    {
+      id: 'REDBULL',
+      name: '红牛车队 (Oracle Red Bull)',
+      shortName: 'RED BULL',
+      badge: '🐂',
+      color: '#00E5FF',
+      borderClass: 'border-[#00E5FF]/60',
+      bgGlow: 'bg-[#00E5FF]/10',
+      drivers: [
+        { name: '维斯塔潘 (VERSTAPPEN)', number: '01', nationality: '🇳🇱 荷兰', odds: '48% 支持率' },
+        { name: '佩雷兹 (PEREZ)', number: '11', nationality: '🇲🇽 墨西哥', odds: '6% 支持率' }
+      ]
+    },
+    {
+      id: 'MCLAREN',
+      name: '迈凯伦车队 (McLaren F1)',
+      shortName: 'MCLAREN',
+      badge: '⚡',
+      color: '#F59E0B',
+      borderClass: 'border-[#F59E0B]/60',
+      bgGlow: 'bg-[#F59E0B]/10',
+      drivers: [
+        { name: '诺里斯 (NORRIS)', number: '04', nationality: '🇬🇧 英国', odds: '32% 支持率' },
+        { name: '皮亚斯特里 (PIASTRI)', number: '81', nationality: '🇦🇺 澳大利亚', odds: '12% 支持率' }
+      ]
+    },
+    {
+      id: 'FERRARI',
+      name: '法拉利车队 (Scuderia Ferrari)',
+      shortName: 'FERRARI',
+      badge: '🐎',
+      color: '#F43F5E',
+      borderClass: 'border-[#F43F5E]/60',
+      bgGlow: 'bg-[#F43F5E]/10',
+      drivers: [
+        { name: '勒克莱尔 (LECLERC)', number: '16', nationality: '🇲🇨 摩纳哥', odds: '14% 支持率' },
+        { name: '汉密尔顿 (HAMILTON)', number: '44', nationality: '🇬🇧 英国', odds: '9% 支持率' }
+      ]
+    },
+    {
+      id: 'MERCEDES',
+      name: '梅赛德斯车队 (Mercedes-AMG)',
+      shortName: 'MERCEDES',
+      badge: '⭐',
+      color: '#00FF66',
+      borderClass: 'border-[#00FF66]/60',
+      bgGlow: 'bg-[#00FF66]/10',
+      drivers: [
+        { name: '拉塞尔 (RUSSELL)', number: '63', nationality: '🇬🇧 英国', odds: '6% 支持率' },
+        { name: '安东内利 (ANTONELLI)', number: '12', nationality: '🇮🇹 意大利', odds: '3% 支持率' }
+      ]
+    },
   ];
 
   const handleLockSuper10 = async () => {
@@ -60,8 +107,8 @@ export const F1PredictView: React.FC = () => {
       setLockedSuccess(true);
 
       confetti({
-        particleCount: 60,
-        spread: 70,
+        particleCount: 70,
+        spread: 80,
         origin: { y: 0.7 },
         colors: ['#F59E0B', '#00FF66', '#00E5FF', '#F43F5E'],
       });
@@ -71,53 +118,116 @@ export const F1PredictView: React.FC = () => {
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       
-      {/* Event Hero Header */}
-      <div className="p-6 sm:p-10 rounded-3xl bg-gradient-to-r from-[#0C101A] via-[#15121E] to-[#0C101A] border-2 border-cyber-amber/50 backdrop-blur-2xl shadow-[0_0_60px_rgba(245,158,11,0.2)] relative overflow-hidden space-y-4">
+      {/* Visual Hero Banner with Generated Sepang Image */}
+      <div className="relative rounded-3xl overflow-hidden border-2 border-cyber-amber/60 shadow-[0_0_80px_rgba(245,158,11,0.25)] group">
         
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-white/10 gap-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-cyber-amber text-black font-black uppercase flex items-center gap-1 shadow-sm">
-                <Flag className="w-3 h-3" />
-                <span>⭐ FEATURED EVENT // 特色推荐赛事</span>
-              </span>
-              <span className="text-xs font-mono text-metal-300">
-                2026 赛季第 18 站 · 亚洲旗舰重磅回归
-              </span>
-            </div>
-            <h2 className="font-display font-black text-2xl sm:text-5xl text-white tracking-tight">
-              2026 F1 马来西亚雪邦大奖赛 (SEPANG)
-            </h2>
-            <p className="text-xs font-mono text-metal-200">
-              比赛日期：2026年10月02日 – 10月04日 · 官方排位与正赛遥测结果核验
-            </p>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-surface-200/90 border border-cyber-amber/40 text-right font-mono space-y-1">
-            <span className="text-[10px] text-cyber-amber uppercase font-bold block">
-              品牌赞助预测奖池
-            </span>
-            <span className="font-black text-2xl text-cyber-amber">
-              50,000 USDT
-            </span>
-            <span className="text-[10px] text-metal-400 block">+ VIP 围场观赛通行证</span>
-          </div>
+        {/* Background Image with Dark Vignette */}
+        <div className="h-72 sm:h-96 w-full relative overflow-hidden bg-surface-200">
+          <img 
+            src="/images/f1_sepang_banner.jpg" 
+            alt="F1 Malaysia Sepang 2026" 
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#06080B] via-[#06080B]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#06080B] via-[#06080B]/40 to-transparent" />
         </div>
 
-        {/* Support Statement */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 font-mono text-xs text-metal-300">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-lime-400" />
-            <span>ORACLE 49 预测引擎支持全球顶级汽车运动与遥测数据链上核验</span>
+        {/* Floating Content Over Image */}
+        <div className="absolute inset-0 p-6 sm:p-10 flex flex-col justify-between">
+          
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 rounded-full text-xs font-mono bg-cyber-amber text-black font-black uppercase flex items-center gap-1.5 shadow-lg">
+                <Flag className="w-3.5 h-3.5" />
+                <span>⭐ FEATURED EVENT // 特色推荐赛事</span>
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-black/60 backdrop-blur-md text-white border border-white/20">
+                雪邦国际赛道 (SEPANG CIRCUIT) · 5.543 KM
+              </span>
+            </div>
+
+            <div className="px-3.5 py-1 rounded-xl bg-black/70 backdrop-blur-md border border-cyber-amber/50 font-mono text-right">
+              <span className="text-[10px] text-cyber-amber uppercase font-bold block">赞助总奖池</span>
+              <span className="text-xl font-black text-white">50,000 USDT</span>
+            </div>
           </div>
-          <div className="text-lime-400 font-bold">
-            您的当前 F1 IQ: {user.f1IQ} 分 (全马排名 #{user.f1RankMalaysia})
+
+          <div className="space-y-2">
+            <h2 className="font-display font-black text-3xl sm:text-6xl text-white tracking-tight drop-shadow-2xl">
+              2026 F1 马来西亚雪邦大奖赛
+            </h2>
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-metal-200">
+              <span className="flex items-center gap-1 text-cyber-amber font-bold">
+                <Radio className="w-3.5 h-3.5 animate-pulse" />
+                2026年10月02日 – 10月04日 正赛
+              </span>
+              <span>• 56 圈极限极速推演</span>
+              <span className="text-lime-400 font-bold">• 您的当前 F1 IQ: {user.f1IQ} 分 (全马 #{user.f1RankMalaysia})</span>
+            </div>
           </div>
+
         </div>
 
       </div>
 
-      {/* Sepang Super 10 Combined Card Layout */}
+      {/* 4 Team Visual Livery Cards Row */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between font-mono text-xs text-metal-400">
+          <span className="uppercase tracking-widest font-bold">四大顶尖车队阵容与遥测支持率 (CONSTRUCTORS & DRIVERS)</span>
+          <span className="text-cyber-amber">点击快速锁定心仪车手</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
+          {teamsData.map((team) => (
+            <div 
+              key={team.id}
+              className={`p-4 rounded-2xl bg-surface-100/90 border-2 ${team.borderClass} backdrop-blur-xl space-y-3 shadow-glass-card`}
+            >
+              <div className="flex items-center justify-between pb-2 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{team.badge}</span>
+                  <span className="font-bold text-white text-xs">{team.shortName}</span>
+                </div>
+                <span className={`px-2 py-0.5 rounded text-[9px] font-bold ${team.bgGlow}`} style={{ color: team.color }}>
+                  主力争冠
+                </span>
+              </div>
+
+              <div className="space-y-2">
+                {team.drivers.map((d) => {
+                  const isSel = raceWinner === d.name;
+                  return (
+                    <button
+                      key={d.name}
+                      disabled={lockedSuccess}
+                      onClick={() => {
+                        setRaceWinner(d.name);
+                        setWinningTeam(team.name);
+                      }}
+                      className={`w-full p-2.5 rounded-xl border text-left flex items-center justify-between transition-all ${
+                        isSel
+                          ? 'bg-cyber-amber text-black font-black border-cyber-amber shadow-sm'
+                          : 'bg-surface-200/80 text-metal-200 border-white/5 hover:border-white/20'
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <span className={`font-bold text-[10px] ${isSel ? 'text-black' : 'text-metal-400'}`}>#{d.number}</span>
+                          <span className="font-bold text-xs truncate">{d.name.split(' ')[0]}</span>
+                        </div>
+                        <span className={`text-[9px] block ${isSel ? 'text-black/80' : 'text-metal-400'}`}>{d.nationality}</span>
+                      </div>
+                      <span className={`text-[10px] font-bold ${isSel ? 'text-black' : 'text-cyber-amber'}`}>{d.odds}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Sepang Super 10 Combined Card Layout with Cockpit Telemetry Visual */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Left 8 Cols: 10 F1 Prediction Dimensions */}
@@ -143,7 +253,14 @@ export const F1PredictView: React.FC = () => {
             <div className="space-y-2 p-4 rounded-2xl bg-surface-200/80 border border-white/5">
               <span className="text-white font-bold block text-sm">01. 正赛分站冠军归属 (RACE WINNER)</span>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {driversList.map((d) => (
+                {[
+                  { name: '维斯塔潘 (VERSTAPPEN)', team: '红牛车队', number: '01' },
+                  { name: '诺里斯 (NORRIS)', team: '迈凯伦车队', number: '04' },
+                  { name: '勒克莱尔 (LECLERC)', team: '法拉利车队', number: '16' },
+                  { name: '拉塞尔 (RUSSELL)', team: '梅赛德斯车队', number: '63' },
+                  { name: '汉密尔顿 (HAMILTON)', team: '法拉利车队', number: '44' },
+                  { name: '皮亚斯特里 (PIASTRI)', team: '迈凯伦车队', number: '81' },
+                ].map((d) => (
                   <button
                     key={d.name}
                     disabled={lockedSuccess}
@@ -165,7 +282,14 @@ export const F1PredictView: React.FC = () => {
             <div className="space-y-2 p-4 rounded-2xl bg-surface-200/80 border border-white/5">
               <span className="text-white font-bold block text-sm">02. 周六排位赛杆位 (POLE POSITION)</span>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                {driversList.map((d) => (
+                {[
+                  { name: '维斯塔潘 (VERSTAPPEN)', number: '01' },
+                  { name: '诺里斯 (NORRIS)', number: '04' },
+                  { name: '勒克莱尔 (LECLERC)', number: '16' },
+                  { name: '拉塞尔 (RUSSELL)', number: '63' },
+                  { name: '汉密尔顿 (HAMILTON)', number: '44' },
+                  { name: '皮亚斯特里 (PIASTRI)', number: '81' },
+                ].map((d) => (
                   <button
                     key={`pole-${d.name}`}
                     disabled={lockedSuccess}
@@ -234,7 +358,7 @@ export const F1PredictView: React.FC = () => {
               </div>
             </div>
 
-            {/* 4 & 5: Safety Car & Tropical Rain */}
+            {/* 4 & 5: Safety Car & Tropical Rain with Cockpit Photo Backdrop */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
               <div className="p-4 rounded-2xl bg-surface-200/80 border border-white/5 space-y-2">
@@ -313,10 +437,26 @@ export const F1PredictView: React.FC = () => {
 
         </div>
 
-        {/* Right 4 Cols: Telemetry Receipt Card */}
-        <div className="lg:col-span-4 bg-surface-100/90 border-2 border-cyber-amber/40 rounded-3xl p-6 backdrop-blur-xl shadow-glass-card space-y-6">
+        {/* Right 4 Cols: Telemetry Receipt Card with Cockpit Visual */}
+        <div className="lg:col-span-4 bg-surface-100/90 border-2 border-cyber-amber/40 rounded-3xl p-6 backdrop-blur-xl shadow-glass-card space-y-5">
           
-          <div className="pb-4 border-b border-white/10">
+          {/* Cockpit POV Thumbnail */}
+          <div className="rounded-2xl overflow-hidden border border-white/10 relative h-36">
+            <img 
+              src="/images/f1_driver_cockpit.jpg" 
+              alt="F1 Cockpit Telemetry" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+            <div className="absolute bottom-2 left-3 right-3 flex justify-between items-end font-mono text-[10px]">
+              <span className="text-cyber-amber font-bold flex items-center gap-1">
+                <Gauge className="w-3.5 h-3.5" /> 321 KM/H 遥测锁定
+              </span>
+              <span className="text-metal-300">雪邦 T1-T2 弯角</span>
+            </div>
+          </div>
+
+          <div className="pb-2 border-b border-white/10">
             <span className="text-[10px] font-mono text-cyber-amber uppercase tracking-wider font-bold block">
               F1 TELEMETRY SEAL // 遥测锁票凭证
             </span>
